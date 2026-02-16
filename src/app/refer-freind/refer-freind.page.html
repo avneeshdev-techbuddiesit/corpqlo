@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Refer a Friend</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col size="12">
+                <div class="refer_main">
+                    <img src="assets/image/refer/refer.png">
+                </div>
+            </ion-col>
+            <ion-col size="12">
+                <div class="refer_content">
+                    <div class="refer_text">
+                        <!-- <ion-text><span>Refer A friend</span> and Earn {{ServiceData?.data?.point}} Loyalty Points --vikas-->
+                        <!-- --------------vikas----------------- -->
+                        <p *ngIf="user_id_login"><span>{{user_pic}}</span><span>{{user_login_name}}</span></p>
+                        <p *ngIf="!user_id_login"><span>Hello, Guest</span></p>
+                        <!-- --------------------- -->
+                        <ion-text>Refer a friends and earn {{ServiceData?.data?.point}} loyalty points
+                        </ion-text>
+                    </div>
+                    <div class="referral_code_content">
+                        <!-- --------------vikas----------------- -->
+                        <p>Refer your friend and get points on first purchase delivery made by your friend using your
+                            referral code. *T&C Apply</p>
+                        <p>Your Referral Code</p>
+                        <!-- --------------------- -->
+                        <div class="refer_code mt-15 mb-15">
+                            {{ServiceData?.data?.refer}}
+                        </div>
+                        <div class="share_code" (click)="Go()">
+                            <button>Share Referral Code</button>
+                        </div>
+                    </div>
+                    <!-- <div class="footer_text">
+                        <ion-text>Fresh N Green</ion-text>
+                    </div> --vikas-->
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <img src="../../assets/image/0012.png" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <!-- <ion-title color="light" *ngIf="oofname=='0'">Offers </ion-title> -->
+        <ion-title color="light"> My Offers </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="oofname=='0'">
+    <ion-slides *ngIf="off_ban" pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let bann of off_ban " (click)="go_to_cat(bann.cat_id);">
+            <img style="max-height: auto" src="{{BaseImageURL}}/offerbanner/{{bann.android_ios_image}}">
+        </ion-slide>
+
+    </ion-slides>
+    <ion-col size="4" *ngIf="off_cat">
+        <div class="scroll_category">
+            <a class="abc" id="new_{{offcat.id}}" *ngFor="let offcat of off_cat"
+                (click)="got_again(offcat.id)">{{offcat.name}}</a>
+
+        </div>
+    </ion-col>
+    <ion-grid class="no-padding">
+        <ion-row class="no-padding">
+            <ion-col size="12">
+                <ion-col size-sm="4" size-xs="6" size-lg="3" class="inline" *ngFor="let offer of offrs">
+                    <div class="featured_div"
+                        (click)="route_sub_category_view(offer.product_id, offer.buy_item_product_name)">
+                        <div class="featured_img_container">
+                            <img src="{{BaseImageURL}}/offers/{{offer.offer_image}}">
+                        </div>
+                        <ion-item text-wrap lines="none">
+                            <ion-label class="featured_lable">
+                                {{offer.offer_title}}
+                            </ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="subcat"> {{offer.subcat_name}} </ion-label>
+                        </ion-item>
+                        <div class="offers_desc">
+                            If you purchase {{offer.buy_item_quantity}} product than only you will be able to get
+                            {{offer.free_products_count}} product free
+                        </div>
+                    </div>
+                </ion-col>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="oofname=='1'">
+    <ion-grid class="mt-15">
+        <ion-row class="no-padding">
+            <ion-col size="12">
+                <ion-col size-sm="4" size-xs="6" size-lg="3" class="inline" *ngFor="let offer of offrs">
+                    <div class="featured_div"
+                        (click)="GoCondition(offer?.cat_url_exist, offer?.cat_name, offer?.category, offer?.multi_cat_url, offer?.parent_id, offer?.subcat_name)">
+                        <div class="featured_img_container">
+                            <img src={{offer?.offer_img}}>
+                            
+                        </div>
+                        <ion-item text-wrap lines="none">
+                            <ion-label class="featured_lable" style="text-transform: capitalize">
+                                {{offer.discount_title}}
+                            </ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label class="subcat"> {{offer.subcat_name}} </ion-label>
+                        </ion-item>
+                        <div class="offers_desc" style="text-transform: capitalize">
+                            {{offer.description}} <br>
+
+                            Redeem Offer : {{offer.redeem_limit}} Times<br>
+
+                        </div>
+                    </div>
+                </ion-col>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

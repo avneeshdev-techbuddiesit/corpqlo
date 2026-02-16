@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <!-- <ion-title color="light">Log In</ion-title> --vikas-->
+    </ion-toolbar>
+    <!-- --------------------------Vikas------------------------------------------- -->
+
+    <ion-grid class="no-padding sign-in-title">
+        <ion-row>
+            <ion-col size="12">
+                <div class="head">
+                    <ion-text>
+                        <h1>Welcome</h1>
+                        <h1>Back</h1>
+                    </ion-text>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- --------------------------------------------------------------------- -->
+</ion-header>
+
+<ion-content class="no-padding">
+    <ion-grid class="no-padding">
+        <ion-row>
+            <ion-col size="12">
+                <div class="head  sign-in-head">
+                    <ion-text>Sign In</ion-text>
+                </div>
+                <!-- <div class="signup_line1">
+                    <ion-text>Enter your mobile number or email address</ion-text>
+                </div> --vikas-->
+            </ion-col>
+            <ion-col size="12">
+                <div class="form">
+                    <ion-item>
+                        <!-- <ion-label position="floating">Mobile/Email </ion-label> --vikas-->
+                        <ion-input [(ngModel)]="PData.mobile" placeholder="Email/Mobile Number*" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorMobile}}</label>
+
+                    <ion-item>
+                        <!-- <ion-label position="floating">Password </ion-label> --vikas-->
+                        <ion-input type="password" [(ngModel)]="PData.password" placeholder="Password*" required>
+                        </ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorPassword}}</label>
+
+                </div>
+                <div class="sign_btn mt-20">
+                    <button type="button" (click)="Login()">Log in</button>
+                </div>
+            </ion-col>
+
+            <ion-col size="12">
+                <div class="fblogin">
+                    <div class="reward_text mt-25  forget_password">
+                        <ion-text>
+                            <span><a (click)="route_forgot()" style="font-weight:600"> Forgot
+                                    Password </a></span>
+                        </ion-text>
+                    </div>
+                </div>
+            </ion-col>
+
+            <ion-col size="12">
+                <div class="fblogin">
+                    <div class="reward_text mt-25  sign_up">
+                        <ion-text>
+                            Don't have an account yet? <span><a routerLink="/sign-up" routerDirection="forward"
+                                    style="font-weight:600">Sign Up</a></span>
+                        </ion-text>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <!-- <img src="../../assets/image/0015.png" alt=""> -->
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

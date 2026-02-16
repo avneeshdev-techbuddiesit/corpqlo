@@ -1,0 +1,175 @@
+ion-content {
+  // background-image: url("../../assets/image/form_bg.png");
+  background-size: 100% 100%;
+  --background: transparent;
+  background-attachment: fixed;
+  --padding-start: 20px;
+  --padding-end: 20px;
+}
+.back_btn {
+  padding: 10px 0px;
+}
+.forget_link a {
+  color: var(--ion-color-primary, #3880ff);
+  font-weight: 600;
+}
+.back_btn > span {
+  display: inline-flex;
+  width: 30px;
+  align-items: center;
+  position: relative;
+  left: -8px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+}
+.back_btn > span > img {
+  width: 16px;
+  margin: 0 auto;
+}
+.head {
+  margin: 25px 0px;
+  font-size: 20px;
+}
+.signup_line {
+  text-transform: capitalize;
+}
+
+.form > ion-item:last-child > ion-label::after {
+  content: "";
+}
+.check > ion-item {
+  --padding-start: 0px;
+  --border-color: #ffff;
+  padding: 25px 0px;
+  font-size: 15px;
+  --background: transparent;
+}
+.agreement > ion-text {
+  font-size: 15px;
+  color: #757575;
+}
+.agreement > ion-text > span {
+  text-decoration: underline;
+  color: #1f1f1f;
+}
+.sign_btn {
+  // padding: 10px;
+  text-align: center;
+}
+.sign_btn > button {
+  padding: 10px;
+  width: 100%;
+  background: linear-gradient(to right, #ff9d3b, #ff9d3b);
+  color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 4px 7px 1px rgba(0, 0, 0, 0.34);
+}
+.fblogin {
+  text-align: center;
+  // padding: 25px 0px;
+}
+.fblogin > .text > ion-text {
+  font-size: 15px;
+}
+.fblogin > .fb_btn > button {
+  width: 50%;
+  display: inline-block;
+  max-width: 125px;
+  margin: 0px 10px 0px 0px;
+  padding: 12px 30px;
+  background: #fff;
+  border-radius: 30px;
+  box-shadow: 0px 6px 10px 1px rgba(0, 0, 0, 0.2);
+}
+.error {
+  color: #e7401b;
+  font-weight: 300;
+}
+
+// =======================================Vikas======================================
+
+.header-md:after {
+  background-color: #fff;
+  height: 50px;
+  bottom: 0;
+  z-index: 99;
+  background-image: none;
+  border-radius: 50px 50px 0 0;
+}
+
+// ion-toolbar.in-toolbar.md.toolbar-title-default.hydrated {
+//     height: 110px;
+// }
+
+.sign-in-title {
+  background-color: #ff9d3b;
+}
+
+.sign-in-title .head {
+  margin: 30px 0 100px;
+}
+
+.sign-in-title .head ion-text h1 {
+  color: #fff;
+  font-weight: 100;
+  padding-left: 12px;
+}
+
+.head.sign-in-head {
+  margin: 0;
+  text-align: center;
+}
+
+.form > ion-item {
+  --border-width: 1px;
+  --border-radius: 30px;
+  --inner-padding-start: 25px;
+  --min-height: 40px;
+}
+
+.form > ion-item > ion-input {
+  --padding-top: 0;
+}
+
+.sign_btn.mt-20 > button {
+  padding: 15px !important;
+  color: #000 !important;
+  border-radius: 22px !important;
+}
+
+ion-title {
+  font-size: 25px;
+}
+
+.forget_password {
+  margin: 0 !important;
+  text-align: end;
+}
+
+.forget_password a {
+  font-weight: 100 !important;
+}
+
+.sign_up {
+  margin: 0 !important;
+}
+
+.sign_up ion-text {
+  font-weight: 100 !important;
+}
+
+.sign_up a {
+  font-weight: 100 !important;
+  color: #ff9d3b;
+}
+
+.form ion-item {
+  --highlight-color-valid: transparent;
+  --highlight-color-invalid: transparent;
+  --highlight-color-focused: var(--ion-color-light);
+}
+
+// ===============================================================================

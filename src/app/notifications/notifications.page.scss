@@ -1,0 +1,135 @@
+.inline {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.order_main > .order_no {
+  font-weight: 500;
+  font-size: 12px;
+}
+.order_main > .track_btn > button {
+  border: 1px solid #e32221;
+  background: none;
+  padding: 5px 10px;
+  text-transform: capitalize;
+  border-radius: 7px;
+  color: #e32221;
+  box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.15);
+}
+.order_status > button {
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.order_status > button.pending {
+  background: #f8cb00;
+}
+.order_status > button.delivered {
+  background: #27aa12;
+}
+.notification_div {
+  border-bottom: 1px solid #f4f4f4;
+}
+.date {
+  background: none;
+  padding: 5px 4px;
+  text-transform: capitalize;
+  /* border-radius: 7px; */
+  color: #e32221;
+  font-size: 12px;
+}
+.read {
+  background-color: #f4f4f4;
+}
+.r_01 {
+  margin-left: 50%;
+}
+
+ion-icon {
+  // --ionicon-stroke-width: 36px;
+  font-size: 25px;
+  color: #1eb270;
+}
+
+.roundOuter {
+  border: 1px solid #defaeb;
+  padding: 11px;
+  background-color: #defaeb;
+  border-radius: 32px;
+}
+
+.Now {
+  margin-left: 39% !important;
+}
+.Fresh {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+// =========================================================
+
+ion-content {
+  --background: #f2f2f2;
+}
+
+ion-grid {
+  padding: 15px;
+}
+
+.notification_div {
+  background-color: #fff;
+  padding: 10px;
+}
+
+ion-col {
+  padding: 0;
+}
+
+.order_no ion-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.date {
+  color: #000 !important;
+}
+
+.bell-icon {
+  width: 10%;
+}
+
+.bell-icon span {
+  background-color: #7bed9f;
+  padding: 8px 12px;
+  border-radius: 50%;
+  display: block;
+}
+
+// .bell-icon span img {
+//     width: 55%;
+// }
+
+.notification_div {
+  display: flex;
+  align-items: center;
+}
+
+.r_01 {
+  margin: 0;
+}
+
+@media (min-width: 500px) {
+  .bell-icon {
+    width: 6%;
+  }
+}
+
+@media (max-width: 330px) {
+  ion-grid {
+    padding: 15px 5px;
+  }
+  .bell-icon {
+    width: 13%;
+  }
+}

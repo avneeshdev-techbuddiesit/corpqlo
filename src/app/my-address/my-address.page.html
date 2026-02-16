@@ -1,0 +1,243 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">My Address</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid *ngIf="is_api_request">
+        <ion-row class="no-padding">
+            <ion-col class="no-padding" size="12">
+                <div class="AddNewAddress">
+                    <div style="margin-left: 30px;padding-top: 23px" (click)="add_address('home')">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        <span> Add a new address</span>
+                    </div>
+                </div>
+                <div class="address-title">
+                    <p>Personal Address</p>
+                </div>
+
+                <div class="my_address_main">
+                    <div class="add_block" *ngIf="homes">
+                        <div class="main_add mb-15 ion-activatable ripple-parent">
+                            <div class="address-container">
+                                <div class='address-icon'>
+                                    <ion-icon name="home" class="home-icon"></ion-icon>
+                                </div>
+                                <div class="add_icon">
+                                    <p class="address_type">HOME</p>
+                                    <div class="one">
+                                        <div class="name">
+                                            <ion-text>{{homes.first_name}}</ion-text>
+                                        </div>
+                                    </div>
+                                    <div class="two">
+                                        <ion-text>Mobile Number. <span>{{homes.mobile_number}}</span></ion-text>
+                                    </div>
+                                    <div class="three">
+                                        <ion-text *ngIf="homes.pincode!=0">{{homes.address}}, {{homes.locality}},
+                                            {{homes.land_mark}},{{homes.city}} {{homes.state_name}}-{{homes.pincode}}
+                                        </ion-text>
+                                        <ion-text *ngIf="homes.pincode==0">{{homes.address}}, {{homes.locality}},
+                                            {{homes.land_mark}},{{homes.city}} {{homes.state_name}}</ion-text>
+                                    </div>
+
+                                </div>
+                                <div class="icon text-right">
+                                    <span class="add-toggle">
+                                        <input type="radio" name="radio"
+                                            (click)="set_default(homes.id,'1',homes.display_address)" id="toggle_1"
+                                            class="chkbx-toggle" value="{{homes.id}}" *ngIf="homes.default_addr == '1'"
+                                            checked>
+                                        <input type="radio" name="radio"
+                                            (click)="set_default(homes.id,'1',homes.display_address)" id="toggle_1"
+                                            class="chkbx-toggle" value="{{homes.id}}" *ngIf="homes.default_addr!='1'">
+                                        <label for="toggle_1"></label>
+                                    </span>
+                                    <span class="edit">
+                                        <!-- <img src="assets/image/my_address/edit.png" (click)="edit_address(homes.id,'home');"> -->
+                                        <ion-icon name="create" (click)="edit_address(homes.id,'home');"></ion-icon>
+                                    </span>
+                                    <!-- <span *ngIf="homes.default_addr!=1" (click)="delete_address(homes.id);"><img
+                                            src="assets/image/my_address/delete.png"></span>
+                                    <span *ngIf="homes.default_addr == 1"
+                                        (click)="rest.presentToastTop('Default address can not be delete')"><img
+                                            src="assets/image/my_address/delete.png"></span> -->
+                                </div>
+                            </div>
+
+                            <ion-ripple-effect></ion-ripple-effect>
+                        </div>
+                    </div>
+
+                    <div class="add_block" *ngIf="!homes">
+                        <div class="main_add mb-15 add_new_block ion-activatable ripple-parent">
+                            <div class="add_icon" (click)="add_address('home')">
+                                <img src="assets/image/my_address/add_address.png">
+                                <p>Add New Address</p>
+                                <p class="address-type">HOME</p>
+                            </div>
+                            <ion-ripple-effect></ion-ripple-effect>
+                        </div>
+                    </div>
+
+                    <div class="add_block" *ngIf="offices">
+                        <div class="main_add mb-15 ion-activatable ripple-parent">
+                            <div class="address-container">
+                                <div class='address-icon'>
+                                    <ion-icon name="briefcase"></ion-icon>
+                                </div>
+                                <div class="add_icon">
+                                    <p class="address_type">OFFICE</p>
+                                    <div class="one">
+                                        <div class="name">
+                                            <ion-text>{{offices.customer_first_name}}</ion-text>
+                                        </div>
+
+                                    </div>
+                                    <div class="two">
+                                        <ion-text>Mobile Number. <span>{{offices.mobile_number}}</span></ion-text>
+                                    </div>
+                                    <div class="three">
+                                        <ion-text *ngIf="offices.pincode==0">{{offices.address}}, {{offices.locality}},
+                                            {{offices.land_mark}},{{offices.city}} {{offices.state_name}}</ion-text>
+                                        <ion-text *ngIf="offices.pincode!=0">{{offices.address}}, {{offices.locality}},
+                                            {{offices.land_mark}},{{offices.city}}
+                                            {{offices.state_name}}-{{offices.pincode}}
+                                        </ion-text>
+                                    </div>
+
+                                </div>
+                                <div class="icon text-right">
+                                    <span class="add-toggle">
+                                        <input type="radio" name="radio"
+                                            (click)="set_default(offices.id,'2',offices.display_address)" id="toggle_2"
+                                            class="chkbx-toggle" value="{{offices.id}}"
+                                            *ngIf="offices.default_addr=='1'" checked>
+                                        <input type="radio" name="radio"
+                                            (click)="set_default(offices.id,'2',offices.display_address)" id="toggle_2"
+                                            class="chkbx-toggle" value="{{offices.id}}"
+                                            *ngIf="offices.default_addr!='1'">
+                                        <label for="toggle_2"></label>
+                                    </span>
+                                    <span class="edit">
+                                        <!-- <img src="assets/image/my_address/edit.png" (click)="edit_address(offices.id,'office');"> -->
+                                        <ion-icon name="create" (click)="edit_address(offices.id,'office');"></ion-icon>
+                                    </span>
+                                    <!-- <span *ngIf="offices.default_addr != 1"
+                                                (click)="delete_address(offices.id);"><img
+                                                    src="assets/image/my_address/delete.png"></span>
+                                            <span *ngIf="offices.default_addr == 1"
+                                                (click)="rest.presentToastTop('Default address can not be delete')"><img
+                                                    src="assets/image/my_address/delete.png"></span> -->
+                                </div>
+                            </div>
+                            <ion-ripple-effect></ion-ripple-effect>
+                        </div>
+                    </div>
+
+                    <div class="add_block" *ngIf="!offices">
+                        <div class="main_add mb-15 add_new_block ion-activatable ripple-parent">
+                            <div class="add_icon" (click)="add_address('office')">
+                                <img src="assets/image/my_address/add_address.png">
+                                <p>Add New Address</p>
+                                <p class="address-type">OFFICE</p>
+                            </div>
+                            <ion-ripple-effect></ion-ripple-effect>
+                        </div>
+                    </div>
+
+                    <div class="add_block" *ngIf="others">
+                        <div class="main_add mb-15 ion-activatable ripple-parent">
+                            <div class="address-container">
+                                <div class='address-icon'>
+                                    <ion-icon name="business"></ion-icon>
+                                </div>
+                                <div class="add_icon">
+                                    <p class="address_type">OTHER</p>
+                                    <div class="one">
+                                        <div class="name">
+                                            <ion-text>{{others.customer_first_name}}</ion-text>
+                                        </div>
+
+                                    </div>
+                                    <div class="two">
+                                        <ion-text>Mobile Number. <span>{{others.mobile_number}}</span></ion-text>
+                                    </div>
+                                    <div class="three">
+                                        <ion-text *ngIf="others.pincode==0">{{others.address}}, {{others.locality}},
+                                            {{others.land_mark}},{{others.city}} {{others.state_name}}</ion-text>
+                                        <ion-text *ngIf="others.pincode!=0">{{others.address}}, {{others.locality}},
+                                            {{others.land_mark}},{{others.city}}
+                                            {{others.state_name}}-{{others.pincode}}
+                                        </ion-text>
+                                    </div>
+                                </div>
+                                <div class="icon text-right">
+                                    <span class="add-toggle">
+                                        <input type="radio" name="radio"
+                                            (click)="set_default(others.id,'3',others.display_address)" id="toggle_3"
+                                            class="chkbx-toggle" value="{{others.id}}" *ngIf="others.default_addr=='1'"
+                                            checked>
+                                        <input type="radio" name="radio"
+                                            (click)="set_default(others.id,'3',others.display_address)" id="toggle_3"
+                                            class="chkbx-toggle" value="{{others.id}}" *ngIf="others.default_addr!='1'">
+                                        <label for="toggle_3"></label>
+                                    </span>
+                                    <span class="edit">
+                                        <!-- <img src="assets/image/my_address/edit.png" (click)="edit_address(others.id,'other');"> -->
+                                        <ion-icon name="create" (click)="edit_address(others.id,'other');"></ion-icon>
+                                    </span>
+                                    <!-- <span *ngIf="others.default_addr!=1" (click)="delete_address(others.id);"><img
+                                            src="assets/image/my_address/delete.png"></span>
+                                    <span *ngIf="others.default_addr == 1"
+                                        (click)="rest.presentToastTop('Default address can not be delete')"><img
+                                            src="assets/image/my_address/delete.png"></span> -->
+                                </div>
+                            </div>
+                            <ion-ripple-effect></ion-ripple-effect>
+                        </div>
+                    </div>
+
+                    <div class="add_block" *ngIf="!others">
+                        <div class="main_add mb-15 add_new_block ion-activatable ripple-parent">
+                            <div class="add_icon" (click)="add_address('other')">
+                                <img src="assets/image/my_address/add_address.png">
+                                <p>Add New Address</p>
+                                <p class="address-type">OTHER</p>
+                            </div>
+                            <ion-ripple-effect></ion-ripple-effect>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list id="skeleton" *ngIf="is_api_request == false">
+        <ion-list-header>
+            <ion-skeleton-text animated style="width: 80px"></ion-skeleton-text>
+        </ion-list-header>
+        <ion-item *ngFor="let skeleton of [1,2,3,4,5,6,7,8]">
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+
+    </ion-list>
+</ion-content>
+
+<app-footer-tabs></app-footer-tabs>

@@ -1,0 +1,70 @@
+.refer_main{
+    overflow: hidden;
+    text-align: center;
+}
+.refer_content{
+    text-align: center;
+    padding: 20px 5px;
+}
+.refer_text{
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+.refer_text > ion-text > span{
+    color: #6aa510;
+}
+.refer_code{
+    width: max-content;
+    margin: 0 auto;
+    padding: 10px 30px;
+    background-image: url("../../assets/image/refer/refer_bg.png");
+    background-size: 100% 100%;
+    font-weight: 500;
+    color: #6aa510;
+}
+.share_code > button{
+    border: none;
+    background: #6aa510;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    color: #fff;
+    text-transform: capitalize;
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.39);
+}
+
+// ===================================================================
+
+.referral_code_content {
+    background-color: #6aa510;
+    border-radius: 15px;
+    color: #fff;
+    padding: 20px;
+    /* margin-top: 30px; */
+    margin: 30px 20px;
+}
+
+.referral_code_content p:first-child {
+    font-size: 12px;
+    margin-bottom: 20px !important;
+}
+
+.refer_code {
+    background: none !important;
+    color: #fff !important;
+    border: 1px dotted;
+    border-radius: 10px;
+}
+
+.refer_main {
+    display: none;
+}
+
+.share_code button {
+    background: #fff !important;
+    color: #000 !important;
+    border-radius: 20px !important;
+}
+
+// ================================================================

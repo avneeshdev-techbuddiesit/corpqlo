@@ -1,0 +1,428 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">My Account</ion-title>
+        <!-- -----------------vikas------------------------- -->
+        <!-- <div class="profile_image"></div> -->
+        <!-- ------------------------------------------ -->
+        <ion-buttons class="no-outline" slot="end" routerLink="/search">
+            <ion-icon style="font-size: 24px;" color="light" md="md-search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<div class="profile_image">
+    <img src="../../assets/image/logo.png" alt="">
+</div>
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col size="12" class="profile_completion">
+                <div class="profile_main">
+                    <!-- <div class="progress_bar">
+                        <ion-progress-bar value="{{ stats_bar/100 }}"></ion-progress-bar>
+                        <p>{{stats_bar}}% Complete</p>
+                    </div> --vikas-->
+
+                    <div class="profile_div pt-10 pb-10">
+
+                        <div class="account_info">
+                            <div class="name">
+                                <div class="student_name">
+                                    <ion-text style="text-transform: capitalize;">{{first_name}} {{last_name}}
+                                    </ion-text>
+                                </div>
+                                <!-- <div class="edit">
+                                    <ion-text style="text-transform: capitalize;"><span
+                                            *ngIf="gender != ''">{{gender}}</span><span *ngIf="!gender">&ndash;</span>
+                                    </ion-text>
+                                </div> --vikas-->
+                            </div>
+                            <div class="form">
+                                <div class="form_div">
+                                    <div class="part_1 inline2">
+                                        <ion-text>Email Address</ion-text>
+                                    </div>
+                                    <div class="part_2 inline">
+                                        <ion-text><span *ngIf="email != ''">{{email}}</span><span
+                                                *ngIf="email == ''">&ndash;</span>
+                                            &nbsp; &nbsp; <span (click)="edit_email(1);"><i class="fa fa-pencil"
+                                                    aria-hidden="true"></i></span>
+                                        </ion-text>
+                                    </div>
+                                </div>
+                                <div class="form_div">
+                                    <div class="part_1 inline2">
+                                        <ion-text>Mobile Number</ion-text>
+                                    </div>
+                                    <div class="part_2 inline">
+                                        <ion-text><span *ngIf="mobile != ''">{{mobile}}</span><span
+                                                *ngIf="mobile == ''">&ndash;</span></ion-text>
+                                        &nbsp; &nbsp;<span (click)="edit_mobile(2);"><i class="fa fa-pencil"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form_div">
+                                    <div class="part_1 inline2">
+                                        <ion-text>DOB</ion-text>
+                                    </div>
+                                    <div class="part_2 inline" *ngIf="dob!='1/1/1970'">
+                                        <ion-text> <span *ngIf="dob != ''">{{dob}}</span><span
+                                                *ngIf="!dob ">&ndash;</span></ion-text>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+
+            <ion-col size="12">
+                <div class="myaccount-wrapper">
+                    <div class="row">
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4 myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent" (click)="goto_profile(0)">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/my-profile.png" /> -->
+                                            <img src="../../assets/image/profile.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>My Profile</span></p>
+                                            <!-- <p class="description"><small>Edit Name, Email, Mobile and others.</small>
+                                            </p> --vikas-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4 myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent" (click)="route_user('my-address')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/address-map-pin.png" /> -->
+                                            <img src="../../assets/image/address.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>My Address</span></p>
+                                            <!-- <p class="description"><small>Add and edit your delivery address.</small>
+                                            </p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4  myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent"
+                                (click)="route_user('change-password')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/sign-in-lock.png" /> -->
+                                            <img src="../../assets/image/changePassword.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>Change Password</span></p>
+                                            <!-- <p class="description"><small>Change your login password.</small></p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4  myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent" (click)="route_user('order-list')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/my-order.png" /> -->
+                                            <img src="../../assets/image/myorder.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>My Orders</span></p>
+                                            <!-- <p class="description"><small>Manage your order, retrun, Re-order.</small>
+                                            </p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4  myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent" (click)="route_user('my-wishlist')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/my-wishlist.png" /> -->
+                                            <img src="../../assets/image/whislist.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>My Wishlist</span></p>
+                                            <!-- <p class="description"><small>See added item to your wishlist.</small></p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4  myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent" (click)="route_user('cart')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/my-cart.png" /> -->
+                                            <img src="../../assets/image/cart.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>My Cart</span></p>
+                                            <!-- <p class="description"><small>See added item to your cart.</small></p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4  myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent"
+                                (click)="route_user('notifications')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/my-notification-bell.png" /> -->
+                                            <img src="../../assets/image/notification.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>Notification</span></p>
+                                            <!-- <p class="description"><small>See all notification of your account.</small>
+                                            </p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4  myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent"
+                                (click)="route_user('shopping-preferenes')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/my-preferences.png" /> -->
+                                            <img src="../../assets/image/shopping.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>Shopping Prefences</span></p>
+                                            <!-- <p class="description"><small>Set your shopping preferences you
+                                                    like.</small></p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <!-- <div class="col-xs-4  myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent"
+                                (click)="route_user('loyalty-point')">
+                                <div class="row no-margin">
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <img src="assets/image/icon/my-loyality.png" />
+                                        </div>
+                                    </div>
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>Loyality Points</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <!-- <div class="col-xs-4 myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent" (click)="route_user('wallet')">
+                                <div class="row no-margin">
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <img src="assets/image/icon/my-wallet.png" />
+                                        </div>
+                                    </div>
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>My Wallet</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <!-- <div class="col-xs-4 myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent"
+                                (click)="route_user('refer-freind')">
+                                <div class="row no-margin">
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <img src="../../assets/image/referFriend.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>Refer A Friend</span></p>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4 myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent" (click)="route_user('order-issue')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/orderissue_active.png" /> -->
+                                            <img src="../../assets/image/orderissue.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>Order Issue Ticket</span></p>
+                                            <!-- <p class="description"><small>Issue store tickets for your stores.</small>
+                                            </p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4 myaccount-col">
+                            <div class="account-tile ion-activatable ripple-parent" (click)="route_user('store-issue')">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/storeissue_active.png" /> -->
+                                            <img src="../../assets/image/storeIssue.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>Store Issue Ticket</span></p>
+                                            <!-- <p class="description"><small>Issue store tickets for your stores.</small>
+                                            </p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xs-6"> --vikas-->
+                        <div class="col-xs-4 myaccount-col">
+                            <!-- <div class="account-tile ion-activatable ripple-parent" (click)="route_user('offers')"> -->
+                            <div class="account-tile ion-activatable ripple-parent" (click)="myOffer()">
+                                <div class="row no-margin">
+                                    <!-- <div class="col-xs-3 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-icon">
+                                            <!-- <img src="assets/image/icon/my-notification-bell.png" /> -->
+                                            <img src="../../assets/image/myoffers.png" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xs-9 no-padding"> --vikas-->
+                                    <div class="no-padding">
+                                        <div class="account-text">
+                                            <p class="title"><span>My Offer</span></p>
+                                            <!-- <p class="description"><small>See all offer of your product.</small></p> --vikas-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </ion-col>
+
+
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

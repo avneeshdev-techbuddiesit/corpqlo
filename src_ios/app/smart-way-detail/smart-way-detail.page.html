@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Smart Way To Start Shopping</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+    <ion-grid no-padding>
+        <ion-row no-padding>
+            <ion-col size="12" no-padding>
+                <div class="smart_img" *ngIf="image_data">
+                    <img style="width:100%" src="{{featureImageUrl}}/smart_way/{{ServiceData?.data?.landing_image}}">
+                </div>
+
+                <div class="smart_txt">
+                    <h4>{{ServiceData?.data?.title}}</h4>
+                    <span>{{ServiceData?.data?.updated_date | date: 'dd-MM-yyyy'}}</span>
+                </div>
+
+                <div class="smart_list" [innerHTML]="ServiceData?.data?.description">
+
+                </div>
+
+                <div class="smart_para">
+                    <p></p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,94 @@
+ion-title{
+    font-weight: 500;
+    font-size: 18px;
+    color: #1f1f1f;
+    text-align: center;
+}
+.all_recipes{
+    padding: 15px 0px 0px 8px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+.recipe_img{
+    padding: 10px 8px 0px 8px;
+    position: relative;
+}
+.all_recipes_text{
+    padding: 16px 0px 0px 8px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+.recipes_over{
+    font-size: 14px;
+    letter-spacing: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 20px;
+    max-height: 60px;
+}
+.date{
+    padding: 0px 8px 0px 8px;
+    font-weight: 500;
+    color: #807d7d;
+    font-size: 17px ; 
+    letter-spacing: 0.5px;
+}
+.line_bottom{
+    margin: 10px 10px 10px 10px;
+    border: solid 1px rgba(204, 197, 197, 0.18);
+}
+.recipe_icon{
+    position: absolute;
+    bottom: -10px;
+    width: 55px;
+    right: 30px;
+}
+.category_overlay{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+    align-items: center;
+    padding: 0px 20px 10px 20px;
+    letter-spacing: 0.5px;
+    background: linear-gradient(to bottom, rgba(175, 63, 50, 0.6196078431372549), rgba(185, 110, 63, 0.9019607843137255));
+}
+.category_overlay > p{
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    line-height: 25px;
+}
+.category_overlay > p.desc{
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-height: 20px;
+    max-height: 20px;
+}
+.posted{
+    width: 100%;
+    font-size: 14px;
+    color: white;
+    letter-spacing: 0.5px;
+}
+.posted_date{
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+    letter-spacing: 1px;
+}
+.posted_team{
+    display: inline-block;
+    width: 50%;
+    text-align: right;   
+    letter-spacing: 1px; 
+}

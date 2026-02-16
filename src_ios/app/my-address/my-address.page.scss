@@ -1,0 +1,162 @@
+ion-content
+{
+    --background: #ddd;
+}
+.chkbx-toggle {
+    display: none;
+  }
+  .chkbx-toggle + label {
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 30px;
+    height: 15px;
+    background-color: #e4e4e4;
+    -moz-border-radius: 60px;
+    -webkit-border-radius: 60px;
+    border-radius: 60px;
+    -moz-transition: background 0.4s;
+    -o-transition: background 0.4s;
+    -webkit-transition: background 0.4s;
+    transition: background 0.4s;
+    vertical-align: middle;
+  }
+  .chkbx-toggle + label::before, .chkbx-toggle + label::after {
+    content: "";
+    display: block;
+    position: absolute;
+  }
+  .chkbx-toggle + label::before {
+    right: 1px;
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    background-color: #999;
+    -moz-border-radius: 60px;
+    -webkit-border-radius: 60px;
+    border-radius: 60px;
+    -moz-transition: background 0.4s;
+    -o-transition: background 0.4s;
+    -webkit-transition: background 0.4s;
+    transition: background 0.4s;
+  }
+  .chkbx-toggle + label::after {
+    top: 0px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    -moz-transition: -moz-transform 0.4s;
+    -o-transition: -o-transform 0.4s;
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+  }
+
+  .chkbx-toggle:checked + label::before {
+    background-color: #6aa510;
+  }
+  .chkbx-toggle:checked + label::after {
+    -moz-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  .chkbx-toggle:disabled + label {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: 0.5;
+    cursor: default;
+  }
+  .label_for{
+    width: max-content;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .add_block .toggle_div{
+    padding: 15px 15px 0px 15px;
+  }
+.label_for span{
+    display: inline-block;
+    margin-right: 5px;
+}
+.label_for span img{
+    width: 26px;
+}
+
+.add_block .main_add{
+    position: relative;
+    padding: 10px;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(180, 180, 180, 0.5);
+}
+.add_block .main_add .one .name, .add_block .main_add .one .icon{
+    width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.add_block .main_add .one .icon span{
+    display: inline-block;
+    margin: 0px 10px;
+}
+.add_block .main_add .one .icon span img{
+    max-width: 15px;
+    max-height: 15px;
+}
+.add_block .main_add.add_new_block{
+    display: flex;
+    align-items: center;
+    // min-height: 110px;
+}
+.add_icon
+{
+    position: relative;
+}
+.add_block .main_add.add_new_block .add_icon{
+    width: 100%;
+    text-align: center;
+    
+}
+.add_block .main_add.add_new_block .add_icon:focus{
+    outline:none;
+}
+.add_block .main_add.add_new_block .add_icon img{
+    width: 35px;
+}
+.address-text{
+    text-align: center;
+    font-size: 20px;
+}
+.watch-text{
+    font-size: 18px;
+}
+
+.address-title
+{
+    padding: 10px;
+}
+.address-title p{
+    font-size: 16px;
+}
+.address-type
+{
+    position: absolute;
+    bottom: -10px;
+    right: -5px;
+    background: #ddd;
+    padding: 0px 5px;
+    font-size: 10px;
+    color:#333;
+}

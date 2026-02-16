@@ -1,0 +1,90 @@
+ion-content{
+    // background-image: url("../../assets/image/form_bg.png");
+    background-size: 100% 100%;
+    --background: transparent;
+    background-attachment: fixed;
+    --padding-start: 20px;
+    --padding-end: 20px;
+}
+.back_btn{
+    padding:10px 0px;
+}
+.forget_link a{
+    color: var(--ion-color-primary, #3880ff);
+    font-weight: 600;
+}
+.back_btn > span{
+    display: inline-flex;
+    width: 30px;
+    align-items: center;
+    position: relative;
+    left: -8px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+}
+.back_btn > span > img{
+    width: 16px;
+    margin: 0 auto;
+}
+.head{
+    margin: 25px 0px;
+    font-size: 20px;
+}
+.signup_line{
+    text-transform: capitalize;
+}
+
+.form > ion-item:last-child > ion-label::after{
+    content:"";
+}
+.check > ion-item{
+    --padding-start: 0px;
+    --border-color: #ffff;
+    padding: 25px 0px;
+    font-size: 15px;
+    --background: transparent;
+}
+.agreement > ion-text{
+    font-size: 15px;
+    color: #757575;
+}
+.agreement > ion-text > span{
+    text-decoration: underline;
+    color: #1f1f1f;
+}
+.sign_btn{
+    // padding: 10px;
+    text-align: center;
+}
+.sign_btn > button{
+    padding: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #6aa510, #6aa510);
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: 0px 4px 7px 1px rgba(0, 0, 0, 0.34);
+}
+.fblogin{
+    text-align: center;
+    // padding: 25px 0px;
+}
+.fblogin > .text > ion-text{
+    font-size: 15px;
+}
+.fblogin > .fb_btn > button{
+    width: 50%;
+    display: inline-block;
+    max-width: 125px;
+    margin: 0px 10px 0px 0px;
+    padding: 12px 30px;
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 0px 6px 10px 1px rgba(0, 0, 0, 0.2);
+}
+.error {
+    color: #e7401b;
+    font-weight: 300;
+}

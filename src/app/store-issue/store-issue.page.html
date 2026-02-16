@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Tickets History</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-row class="padcreate">
+        <ion-col size="6" class="left order">
+        </ion-col>
+        <ion-col size="6" class="right create-ticket" (click)="raiseticket()">
+            <!-- <img src="assets/image/add_ticket.png"> -->
+            <a>Create Ticket</a>
+        </ion-col>
+    </ion-row>
+    <!-- <ion-row class="padcreate">
+        <ion-col size="6" class="left order">
+        </ion-col>
+
+        <ion-col size="6" class="right" (click)="raiseticket()">
+            <!-- <img src="assets/image/add_ticket.png">
+            Create Ticket
+
+        </ion-col>
+    </ion-row>
+    <!-- <ion-card *ngFor="let store of ServiceData?.data" (click)="ViewOrder(store.id)">
+        <ion-card-content>
+            <ion-row>
+                <ion-col size="12">
+
+                    <span class="tickets">Ticket ID :</span> <span class="card-text">#ODMB{{store.id}}</span><br>
+                    <span class="tickets"> Store :</span> <span class="card-text">{{store.store_name}}</span><br>
+                    <span class="tickets"> Visited On :</span> <span class="card-text">{{store.visit_date}}</span><br>
+                    <span class="tickets"> Created On :</span> <span class="card-text">{{store.created_date}}</span>
+
+                    <div class="button_status">
+                        <button *ngIf="store.status == 1">Pending</button>
+                        <button *ngIf="store.status == 2">In-Process</button>
+                        <button *ngIf="store.status == 3">Resolved</button>
+                        <button *ngIf="store.status == 4">Closed</button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card> -->
+
+
+    <!-- new code start -->
+
+    <ion-card *ngFor="let store of ServiceData?.data" (click)="ViewOrder(store.id)">
+        <h6 class="TicketTime">#ODCQ{{store.id}}&nbsp; <ion-icon name="radio-button-on"></ion-icon>
+            &nbsp;{{store.created_date.substr(11,8)}}</h6>
+        <ion-item>
+
+            <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+            <ion-card-content>{{store.description}}</ion-card-content>
+
+        </ion-item>
+        <ion-card-content style=" border-top: 1px solid #a59f9f;">
+            <h6 class="date-time" style="margin-left: 15px">{{store.created_date}}</h6>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

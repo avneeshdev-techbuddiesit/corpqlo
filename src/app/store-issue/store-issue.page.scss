@@ -1,0 +1,125 @@
+.create {
+  size: 15px;
+  font-weight: 500;
+}
+.order {
+  padding-left: 10px;
+  font-size: 16px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+.padcreate {
+  padding-top: 5px;
+  outline: none;
+}
+ion-card {
+  border-radius: 0px;
+}
+.card-text {
+  color: #f1413d;
+  text-transform: capitalize;
+}
+.button_status > button {
+  width: max-content;
+  margin: 0 0 0 auto !important;
+  padding: 6px 15px;
+  background: #f8cb00;
+  color: #fff;
+  border-radius: 6px;
+  text-transform: capitalize;
+  //box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.23);
+  letter-spacing: 1px;
+}
+span.tickets {
+  padding-right: 14px;
+  padding-top: 10px !important;
+  font-size: 16px !important;
+}
+span {
+  font-size: 16px !important;
+}
+.sc-ion-card-md-h {
+  border-radius: 7px;
+}
+.button_status {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.TicketTime {
+  margin-left: 29px;
+}
+/* #date{margin-left: 15px;} */
+.hello {
+  color: blue;
+  font-weight: bolder;
+}
+
+.closed {
+  color: #ff9d3b;
+  font-size: 15px !important;
+}
+
+.StatusClosed {
+  background-color: #867b7b;
+}
+
+// ====================================================================
+
+ion-content {
+  --background: #f2f2f2;
+}
+
+h6.TicketTime {
+  font-size: 14px;
+  margin: 0 !important;
+  margin-left: 15px !important;
+}
+
+ion-card {
+  background-color: #fff !important;
+}
+
+ion-card-content {
+  font-size: 12px !important;
+  padding: 0 !important;
+  margin: 10px 0 0;
+  border: none !important;
+}
+
+ion-card {
+  padding: 15px;
+}
+
+h6.date-time {
+  font-size: 11px;
+  color: #0984e3;
+}
+
+ion-icon {
+  color: #ff9d3b;
+}
+
+h6.TicketTime {
+  display: flex;
+  align-items: center;
+}
+
+ion-col.create-ticket a {
+  font-size: 12px;
+  display: block;
+  border: none !important;
+  background-color: #ff9d3b;
+  color: #000 !important;
+  border-radius: 20px;
+  padding: 5px 10px 4px;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+
+ion-col.create-ticket {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 15px;
+}

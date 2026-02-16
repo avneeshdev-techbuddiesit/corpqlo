@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Rating & Review</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="rating_main">
+        <form>
+            <div>
+                <h4>Please Rate !!</h4>
+                <ion-icon name="star" *ngFor="let num of items;let i of index" (click)="createRange(i,0)"></ion-icon>
+                <ion-icon name="star-outline" *ngFor="let num2 of items2 ;let y of index"
+                    (click)="createRange(y,number_original)">
+                </ion-icon>
+                <p class="rating_exp">{{rating_title}}</p>
+            </div>
+
+            <div class="add_comment">
+                <ion-textarea rows="4" placeholder="Add a Review !!" id="comment_review" value="{{PData.description}}">
+                </ion-textarea>
+
+            </div>
+
+            <div class="buttons">
+                <button class="submit" (click)="ThreadSubmit()">Submit</button>
+            </div>
+        </form>
+    </div>
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

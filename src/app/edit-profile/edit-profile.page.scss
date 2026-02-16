@@ -1,0 +1,120 @@
+no-padding {
+  padding: 0px;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+ion-grid {
+  padding: 0px 15px 0px 15px;
+}
+.signup_line {
+  text-transform: capitalize;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #464444;
+}
+.form ion-item:last-child > ion-label::after {
+  content: "";
+}
+.form ion-item > ion-label::after {
+  content: " ";
+  color: white;
+}
+.form ion-item > ion-input,
+.form ion-item > ion-datetime {
+  --padding-bottom: 0px;
+  font-size: 15px;
+}
+.sign_btn {
+  padding: 10px 0;
+  text-align: center;
+}
+.sign_btn > button {
+  padding: 10px 18px;
+  width: 100%;
+  letter-spacing: 1px;
+  // font-size: 18px;
+  background: #ff9d3b;
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 4px 7px 1px rgba(0, 0, 0, 0.34);
+}
+.form ion-item {
+  --border-color: #cbcbcb;
+  --padding-end: 0px;
+  --padding-start: 0px;
+  --min-height: 50px;
+}
+.form ion-item > ion-label {
+  font-size: 14px !important;
+  color: #727272 !important;
+}
+.img_container {
+  text-align: center;
+  margin-top: 20px;
+  position: relative;
+}
+.img_container ion-avatar {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+.img_container a.edit_icon {
+  position: absolute;
+  padding: 5px;
+  background: rgb(234, 117, 85);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  align-items: center;
+  left: calc(50% + 17px);
+  top: 70px;
+}
+.img_container a.edit_icon > img {
+  width: 15px;
+  margin: 0 auto;
+}
+.error {
+  color: #e7401b;
+  font-weight: 500;
+  font-size: 13px;
+}
+.kids_dob {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+.kids_dob ion-item {
+  flex-basis: 46%;
+}
+.add_child {
+  display: inline-block;
+  margin: 15px 0px;
+  padding: 4px 15px;
+  background: linear-gradient(to right, #e3281f, #e8431b);
+  font-size: 12px;
+  color: #fff;
+  border-radius: 0px;
+}
+.delete_child {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  background: #e32c1e;
+  border-radius: 50%;
+  position: absolute;
+  right: -13px;
+  color: #fff;
+  font-size: 28px;
+  line-height: 16px;
+}

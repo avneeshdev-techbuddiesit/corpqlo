@@ -1,0 +1,160 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Change Preference</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="box-conteiner orderType-container">
+        <div class="row">
+            <div class="col-xs-6">
+                <div (click)="selectOrderType(2)" [ngClass]="{'box order-type _order_type ion-activatable ripple-parent':true, 'active':orderType==2}">
+                    <div class="box-content">
+                        <p class="order-type-title">Delivery Address</p>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+            <!-- <div class="col-xs-6">
+                <div (click)="selectOrderType(1)" [ngClass]="{'box order-type _order_type ion-activatable ripple-parent':true, 'active':orderType==1}">
+                    <div class="box-content">
+                        <p class="order-type-title">Pick From Store</p>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="box-conteiner pickup-container" *ngIf="orderType == '1' && storeList">
+        <p class="text-danger" *ngIf="MessageError">{{MessageError}}</p>
+        <p class="text-danger" *ngIf="MessageError2">{{MessageError2}}</p>
+        <p class="text-danger" *ngIf="MessageError3">{{MessageError3}}</p>
+
+        <div class="row">
+            <div class="col-xs-12" *ngFor="let store of storeList">
+                <div (click)="select_option(1, store.store_id)" [ngClass]="{'box address-list ion-activatable ripple-parent':true, 'active': store.store_id == userPref?.order_preference_store}">
+                    <div class="box-content relative">
+                        <p *ngIf="store.store_id == userPref?.order_preference_store" class="tick">✓</p>
+                        <p>{{store.store_name}}</p>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-conteiner address-container" *ngIf="orderType == '2' && addressList">
+        <div class="row">
+            <div class="col-xs-12" *ngFor="let address of addressList">
+                <div (click)="select_option(2, address.store_id, address.id )" [ngClass]="{'box address-list ion-activatable ripple-parent':true, 'active':address.id == userPref?.order_preference_address}">
+                    <div class="box-content relative">
+                        <p *ngIf="address.id == userPref?.order_preference_address" class="tick">✓</p>
+                        <p (click)="edit_address(address.addr_type, address.id)" class="address-type">
+                            <ion-icon *ngIf="address.addr_type == 'home'" name="home"></ion-icon>
+                            <ion-icon *ngIf="address.addr_type == 'office'" name="bowtie"></ion-icon>
+                            <ion-icon *ngIf="address.addr_type == 'other'" name="person-add"></ion-icon>
+                             {{address.addr_type | uppercase}} <ion-icon name="create"></ion-icon></p>
+                        <p>{{address.customer_first_name}} {{address.customer_last_name}}</p>
+                        <p>{{address.display_address}}</p>
+                        <p>Phone number: {{address.mobile_number}}</p>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+
+            <div class="col-xs-12" *ngIf="is_home == false">
+                <div [ngClass]="{'box address-list ion-activatable ripple-parent':true}">
+                    <div class="box-content relative">
+                        <p (click)="edit_address('home', '')" class="address-type"> <ion-icon name="home"></ion-icon> HOME<ion-icon name="create"></ion-icon></p>
+                        <p>&nbsp;</p>
+                        <ion-skeleton-text style="width: 100%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 40%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 60%"></ion-skeleton-text>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+
+            <div class="col-xs-12" *ngIf="is_office == false">
+                <div [ngClass]="{'box address-list ion-activatable ripple-parent':true}">
+                    <div class="box-content relative">
+                        <p (click)="edit_address('office', '')" class="address-type"> <ion-icon name="home"></ion-icon> OFFICE<ion-icon name="create"></ion-icon></p>
+                        <p>&nbsp;</p>
+                        <ion-skeleton-text style="width: 100%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 40%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 60%"></ion-skeleton-text>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+
+            <div class="col-xs-12" *ngIf="is_other == false">
+                <div [ngClass]="{'box address-list ion-activatable ripple-parent':true}">
+                    <div class="box-content relative">
+                        <p (click)="edit_address('other', '')" class="address-type"> <ion-icon name="home"></ion-icon> OTHER<ion-icon name="create"></ion-icon></p>
+                        <p>&nbsp;</p>
+                        <ion-skeleton-text style="width: 100%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 40%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 60%"></ion-skeleton-text>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-conteiner address-container" *ngIf="orderType == '2' && !addressList">
+        <div class="row">
+            <div class="col-xs-12" *ngIf="is_home == false">
+                <div [ngClass]="{'box address-list ion-activatable ripple-parent':true}">
+                    <div class="box-content relative">
+                        <p (click)="edit_address('home', '')" class="address-type"><ion-icon name="home"></ion-icon>HOME<ion-icon name="create"></ion-icon></p>
+                        <p>&nbsp;</p>
+                        <ion-skeleton-text style="width: 100%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 40%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 60%"></ion-skeleton-text>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+
+            <div class="col-xs-12" *ngIf="is_office == false">
+                <div [ngClass]="{'box address-list ion-activatable ripple-parent':true}">
+                    <div class="box-content relative">
+                        <p (click)="edit_address('office', '')" class="address-type"><ion-icon name="bowtie"></ion-icon> OFFICE<ion-icon name="create"></ion-icon></p>
+                        <p>&nbsp;</p>
+                        <ion-skeleton-text style="width: 100%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 40%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 60%"></ion-skeleton-text>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+
+            <div class="col-xs-12" *ngIf="is_other == false">
+                <div [ngClass]="{'box address-list ion-activatable ripple-parent':true}">
+                    <div class="box-content relative">
+                        <p (click)="edit_address('other', '')" class="address-type"><ion-icon name="person-add"></ion-icon> OTHER<ion-icon name="create"></ion-icon></p>
+                        <p>&nbsp;</p>
+                        <ion-skeleton-text style="width: 100%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 40%"></ion-skeleton-text>
+                        <ion-skeleton-text style="width: 60%"></ion-skeleton-text>
+                    </div>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>
+
+<ion-footer>
+    <div class="center">
+        <ion-button expand="block" (click)="SaveDefaultAddress()">Update</ion-button>
+    </div>
+    
+</ion-footer>

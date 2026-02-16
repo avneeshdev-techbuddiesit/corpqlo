@@ -1,0 +1,95 @@
+.inline{
+    display:inline-block;
+}
+.preferred_main{
+    padding: 10px 10px;
+}
+.preferred_main > .add_cat{
+    width: 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.preferred_main > .add_cat > a{
+    display: inline-block;
+    width: 30px;
+}
+.preferred_main > .categories{
+    width: calc(100% - 50px);
+    display: inline-block;
+    font-size: 16px;
+    color: #4c4c4c;
+}
+.category_div{
+    text-align: center;
+    padding: 20px 0px 10px 0px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.2);
+    position:relative;
+}
+.category_div > img{
+    margin: 0 auto;
+    width: auto;
+    min-height: 62px;
+    max-height: 62px;
+}
+.category_div > p{
+    margin-bottom: 0px !important;
+    margin-top: 10px !important;
+    font-weight: 500;
+    font-size: 14px;
+    height: 38px;
+}
+.category_div.added > .abs_check{
+    position: absolute;
+    display:block;
+    top: 0;
+    right: 0;
+    width: 25px;
+}
+.category_div > .abs_check{
+    display:none;
+}
+
+.day_time{
+    font-size: 16px;
+    color: #4c4c4c;
+    padding:15px 5px 10px 5px;
+}
+.multiple_select ion-select{
+    max-width: 100%;
+    width: 100%;
+    --padding-start: 0px;
+    --min-height: 60px;
+    font-size: 14px;
+}
+.multiple_select ion-item{
+    --min-height: 60px;
+}
+.update > button{
+    width: 90%;
+    border: none;
+    background: linear-gradient(to right, #e32320, #e8461a);
+    padding: 13px 62px;
+    border-radius: 2px;
+    margin-bottom: 15px;
+    color: #fff;
+    text-transform: capitalize;
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.39);
+    font-size: 16px;
+
+}
+.border{
+    border-bottom: solid 1px #e6e6e6;
+    margin-top: 10px;
+}
+label.error {
+    color: #e7401b;
+    font-weight: 500;
+}
+.main_head{
+    display: inline-flex;
+    height: 100%;
+    vertical-align: middle;
+    margin-top: 6px;
+}

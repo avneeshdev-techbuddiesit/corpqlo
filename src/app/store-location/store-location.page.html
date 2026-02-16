@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Store Location</ion-title>
+        <ion-buttons class="no-outline" slot="end" routerLink="/search">
+            <ion-icon style="font-size: 24px;" color="light" md="md-search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="no-padding">
+    <ion-grid class="no-padding">
+        <ion-row class="no-padding">
+            <ion-col size="12" *ngIf="stores_list">
+                <!-- <div *ngFor="let slist of stores_list" class="store_main"
+                    [ngStyle]="{'background-image':'url(' +image_url+slist.store_image + ')'}"> --vikas-->
+                <div *ngFor="let slist of stores_list" class="store_main">
+                    <div class="iframe_div">
+                        <iframe width="100%" id="namedd"
+                            src="https://maps.google.com/maps?q='+coordss+'&hl=en&z=14&amp;output=embed" frameborder="0"
+                            style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+
+                    <div class="store_div">
+                        <h4>{{slist.store_name}}</h4>
+                        <div class="add_main">
+                            <p><span>
+                                    <!-- <img src="assets/image/store_pointer.png"> --vikas-->
+                                    <ion-icon name="pin"></ion-icon>
+                                </span><span>
+                                    {{slist.store_address}},{{slist.CITY_NAME}},{{slist.STATE_NAME}},{{slist.store_pin_code}}</span>
+                            </p>
+                            <p><span>
+                                    <!-- <img src="assets/image/clock.png"> -->
+                                    <ion-icon name="time"></ion-icon>
+                                </span> <span> We’re open {{slist.store_from_day}} –
+                                    {{slist.store_to_day}}, {{slist.store_from_time}} – {{slist.store_to_time}}</span>
+                            </p>
+                            <p><span style="left:4px">
+                                    <!-- <img style="width:11px; margin-right: 12px;" src="assets/image/mobile.png"> -->
+                                    <ion-icon name="phone-portrait"></ion-icon>
+                                </span>
+                                <span>{{slist.store_contact}}</span>
+                            </p>
+                        </div>
+
+                        <!-- <a class="view_on_map" (click)="go_to_url(slist.coords,slist.store_location);">View On Map
+                            <span><i class="fa fa-location-arrow" aria-hidden="true"></i></span></a> --vikas-->
+
+
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

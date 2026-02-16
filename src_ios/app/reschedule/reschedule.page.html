@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Reschedule Order</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid *ngIf="is_api_request">
+        <ion-list-header *ngIf="reschedule_data?.data?.order_detail?.order_number && is_api_request">Reschedule Order
+            Number #{{reschedule_data?.data?.order_detail?.order_number}}</ion-list-header>
+
+        <ion-list-header>
+            <ion-label>Your Timeslot : {{reschedule_data?.data?.order_detail?.selectdeliverydate}}, {{reschedule_data?.data?.order_detail?.selectdeliverytime}} </ion-label>
+        </ion-list-header>
+            
+        <div *ngIf="order_type && order_type == 1 && is_api_request">
+            <ion-list *ngIf="timeslots">
+                <ion-radio-group allow-empty-selection [(ngModel)]="PDataReschedule.pickup_timeslot">
+
+                    <ion-item *ngFor="let timeslot of timeslots; let t_index = index;">
+                        <ion-label class="timeslot-title">{{timeslot}} </ion-label>
+                        <ion-radio [(ngModel)]="pickup_timeslot" slot="end" color="success" value="{{timeslot}}">
+                        </ion-radio>
+                    </ion-item>
+
+                </ion-radio-group>
+            </ion-list>
+
+            <ion-list *ngIf="!timeslots && is_api_request">
+                <p>No slot available.</p>
+            </ion-list>
+        </div>
+
+        <div *ngIf="order_type && order_type == 2 && is_api_request">
+            <ion-list *ngIf="timeslots">
+                <ion-radio-group [(ngModel)]="PDataReschedule.timeslot_time">
+                    <ion-item *ngFor="let timeslot of timeslots; let t_index = index;">
+                        <ion-label class="timeslot-title">{{timeslot.day_name}} <small>({{timeslot.slot_date}})</small>
+                            {{timeslot.full_time}} </ion-label>
+                        <ion-radio [disabled]="timeslot.is_disable || timeslot.is_slotfull" slot="end" color="success"
+                            value="{{timeslot.id}}#{{timeslot.slot_date}}"></ion-radio>
+                    </ion-item>
+                </ion-radio-group>
+            </ion-list>
+
+            <ion-list *ngIf="!timeslots && is_api_request">
+                <p>No slot available.</p>
+            </ion-list>
+        </div>
+
+        <div *ngIf="timeslots" class="center">
+            <ion-button (click)="go_to_submit()" expand="block" class="addmoney">
+                Reschedule
+            </ion-button>
+        </div>
+    </ion-grid>
+
+    <ion-list *ngIf="is_api_request == false" id="skeleton">
+        <ion-list-header>
+            <ion-skeleton-text animated style="width: 80px"></ion-skeleton-text>
+        </ion-list-header>
+        <ion-item *ngFor="let skeleton of [1,2,3,4,5]">
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

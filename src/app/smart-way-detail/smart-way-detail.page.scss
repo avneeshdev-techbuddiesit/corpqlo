@@ -1,0 +1,35 @@
+.smart_txt{
+    padding: 10px;
+}
+.smart_txt > h4{
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.smart_txt > span{
+    color: rgba(0, 0, 0, 0.64);
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+.smart_list{
+    padding: 10px;
+}
+.smart_list > ul{
+    list-style-type: decimal;
+    padding-left: 13px;
+}
+.smart_list > ul > li{
+    list-style-type: decimal;
+    padding-bottom: 10px;
+}
+.smart_para{
+    padding: 0px 10px 10px 10px;
+    text-align: justify;
+}
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: disc;
+}

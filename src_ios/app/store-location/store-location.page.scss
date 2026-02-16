@@ -1,0 +1,51 @@
+.store_main{
+    background-size: 100% 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.store_main .store_div{
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+.store_main .store_div h4{
+    margin: 0px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+    text-transform: capitalize;
+}
+.store_main .store_div .add_main > p{
+    padding: 0px 0px 0px 30px;
+    position: relative;
+    margin: 10px 0px !important;
+    text-transform: capitalize;
+}
+.store_main .store_div .add_main > p > span{
+    position: absolute;
+    left: 0;
+    
+}
+.store_main .store_div .add_main > p > span > img{
+    width: 18px;
+    height: auto;
+    max-height: 20px;
+}
+.store_div > a.view_on_map{
+    color: #fff;
+    display: block;
+    width: 140px;
+    margin: 0 0 0 auto;
+    text-align: center;
+    padding: 10px 10px;
+    background: #de0625;
+    margin-top: 45px;
+    border-radius: 30px;
+}
+.store_div > a.view_on_map > span{
+    transform: rotate(17deg);
+    margin-left: 3px;
+    display: inline-block;
+}

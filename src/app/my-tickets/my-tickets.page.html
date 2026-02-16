@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">My Tickets</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="">
+    <div class="vertical_align">
+        <div style="width:100%;">
+            <!-- <ion-searchbar placeholder="Search issues"></ion-searchbar> -->
+            <div class="bg_banner mar-top">
+                <div class="content_banner">
+                    <div class="wallet_inline text-center">
+                        <div>
+                            <p>
+                                <ion-icon name="chatboxes"></ion-icon>
+                                <span>Having a issue with order?</span>
+                            </p><a (click)="aaddticket()">Raise a Ticket</a>
+                        </div>
+                        <!-- <a>My Tickets</a> --vikas-->
+                        <a (click)="orderissue()">View all Tickets</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg_banner mar-bottom">
+                <div class="content_banner">
+                    <div class="wallet_inline text-center">
+                        <div>
+                            <p>
+                                <ion-icon name="chatboxes"></ion-icon>
+                                <span>Having a issue with store?</span>
+                            </p>
+                            <a (click)="raiseticket()">Raise a Ticket</a>
+                        </div>
+                        <!-- <a>My Tickets</a> --vikas-->
+                        <a routerLink="/store-issue">View all Tickets</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

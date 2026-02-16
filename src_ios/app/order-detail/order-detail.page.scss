@@ -1,0 +1,296 @@
+
+.inline{
+    width:50%;
+    display:inline-block;
+    vertical-align: top;
+}
+.p-5{
+    padding:5px;
+}
+.order_main{
+    padding: 7px 10px;
+}
+.order_main > .order_div, .address_border{
+    border: 1px solid rgba(204, 204, 204, 0.30);
+    padding: 12px 10px;
+    border-radius: 2px;
+    box-shadow: 0px 4px 7px 1px rgba(0, 0, 0, 0.15);
+}
+.order_main > .order_div:focus{
+    outline:none;   
+}
+.order_id{
+    margin-top: 20px;
+}
+.order_id > ion-text{
+    font-size: 16px;
+}
+.order_id > ion-text > span{
+    font-weight: 500;
+}
+.order_detial{
+    margin-top: 15px;
+}
+
+.order_detial > .date  > ion-text > span, .order_detial > .price > ion-text > span{
+    // font-weight: 500;
+    font-size: 11px;
+}
+.order_detial > .price{
+    text-align: right;
+    vertical-align: top;
+}
+.order_detial > .price > ion-text > span{
+    color:#ed3035;
+}
+.status > .icon > a{
+    width: 20%;
+    display: inline-block;
+    text-align: right;
+}
+.status > .icon > a > img{
+    width:20px;
+    max-height: 25px;
+}
+.status > .icon{
+    text-align: right;
+    vertical-align: middle;
+}
+.status_text > ion-text > span{
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 2px;
+    color: #fff;
+    // margin-left: 5px;
+}
+.status_text > ion-text > span.delivered{
+    background: #27aa12;
+}
+.status_text > ion-text > span.pending{
+    // background: #f8cb00;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.status_text > ion-text > span.cancel{
+    color: #ffffff;
+    background-color: #ff4b4b;
+    border-color: #ff4b4b;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.stepper{
+    margin-top:20px;
+}
+.stepper > .step{
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+.stepper > .step > .after{
+    display: inline-block;
+    position: absolute;
+    top: 22.5px;
+    width: 50%;
+    height: 1PX;
+    background: gray;
+    right: -25%;
+}
+.stepper > .step > .step_img{
+    display: inline-flex;
+    padding: 10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    align-items: center;
+    text-align: center;
+}
+.stepper > .step > .step_img.completed{
+    border: 1px solid green;
+}
+.stepper > .step > .step_img.pending{
+    border: 1px solid gray;
+}
+.stepper > .step > .step_img > img{
+    width: 20px;
+    margin: 0 auto;
+}
+.stepper > .step > p{
+    font-size: 12px;
+}
+.order_item{
+    margin: 10px 0px;
+}
+.order_item > .item_img{
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+.order_item > .item_img > .badge{
+    position: absolute;
+    right: 5px;
+    top: -5px;
+    background: #fff200;
+    color: #1f1f1f;
+    padding: 5px;
+    border-radius: 10px;
+    min-width: 25px;
+}
+.order_item > .item_detail{
+    width: calc(100% - 50px);
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 0px 10px 10px;
+}
+.order_item > .item_img > img{
+    width: 40px;
+}
+.order_item > .item_detail > .item_name{
+    padding: 5px 0px;
+}
+.order_item > .item_detail.item_cancelled > .item_name{
+    text-decoration: line-through;
+}
+.order_item > .item_detail > .item_name > ion-text{
+    // font-weight: 500;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-height: 19px;
+    max-height: 19px;
+    text-transform: capitalize;
+}
+.order_item > .item_detail > .item_desc > .item_rate{
+    text-align: right;
+}
+.order_item > .item_detail > .item_desc ion-text{
+    font-size: 13px;
+}
+.order_item > .item_detail.item_cancelled > .item_desc ion-text{
+    text-decoration: line-through;
+}
+.order_item > .item_detail > .item_desc > .item_rate ion-text{
+    color:#6aa510;
+    font-weight: 500;
+}
+.order_item > .item_detail.item_cancelled > .item_desc > .item_rate ion-text{
+    text-decoration: line-through;
+}
+.item_container{
+    margin: 20px 0px 0px 0px;
+}
+.shipping{
+    padding: 10px 0px;
+}
+.shipping > ion-text{
+    font-size: 16px;
+    font-weight: 500;
+}
+.address_border > .name > ion-text{
+    font-size: 15px;
+    font-weight: 500;
+}
+.address_border > .contact{
+    padding: 10px 0px;
+}
+.order_total  ion-text{
+    font-size: 16px;
+}
+.amount > ion-text{
+    color:#6aa510;
+}
+.inline > h4{
+    margin: 0;
+    font-size: 12px;
+    color: #484848;
+    // font-weight: 600;
+}
+.item_cancelled .inline > h4{
+    text-decoration: line-through;
+}
+.inline > h4 > del{
+    color: #a29c9c;
+}
+.free_offer_div > .offer_title > h4 {
+    font-size: 12px;
+    margin-bottom:0;
+}
+.free_offer_div > .offer_img {
+    width: 40px;
+    height: 40px;
+}
+.free_offer_div > .offer_title {
+    font-size: 12px;
+}
+.free_items_wrapper .free_item_container {
+    font-size: 12px;
+}
+.free_items_wrapper .offer_img {
+    width: 40px;
+    height: 40px;
+}
+.free_items_wrapper .offer_title > h4 {
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+hr{
+    border-top: 1px solid #ccc;
+}
+.cd_head{
+    font-size: 16PX;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 20px;
+}
+.substitute{
+    margin: 0 !important;
+    background: #008000;
+    width: max-content;
+    padding: 3px 10px;
+    color: #fff;
+}
+.badge-2{
+    position: absolute;
+    top: -5px;
+    left: 0;
+}
+.order-action
+{
+    margin-bottom: 10px;
+}
+.order-action .icon a{
+    background-color: #6aa510;
+    padding: 4px 6px;
+    width: calc( 100% / 5);
+    color: #fff;
+    margin-right: 10px;
+    font-size: 12px;
+    border-radius: 2px;
+}
+.order-action .icon a.reschedule{
+    background-color: #ddbc1b;
+    color: white;
+}
+.order-action .icon a.reorder{
+    background-color: #6aa510;
+    color: white;
+}
+.order-action .icon a.cancel{
+    background-color: #e64f4c;
+    color: white;
+}
+.order-action .icon a.invoice{
+    background-color: #6aa510;
+    color: white;
+}
+.order-action .icon a.ticket{
+    background-color: #337ab7;
+    color: white;
+}

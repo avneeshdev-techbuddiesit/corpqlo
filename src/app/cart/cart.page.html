@@ -1,0 +1,382 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">My Cart</ion-title>
+        <ion-buttons slot="end" class="empty" *ngIf="this.PData.user_id && total_cart_item"
+            (click)="emptyCartConfirm()">
+            <ion-icon style="font-size: 24px;" color="light" name="trash"></ion-icon>
+        </ion-buttons>
+        <ion-buttons class="no-outline" slot="end" routerLink="/search">
+            <ion-icon style="font-size: 24px;" color="light" md="md-search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid class="cart_head_bar" *ngIf="is_api_request && total_cart_item">
+        <!-- <ion-row>
+            <ion-col>
+                <div text-start>
+                    <ion-label class="cart-top-title">Order</ion-label>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div text-end>
+                    <ion-label class="cart-top-title">{{total_cart_item}}&nbsp;Items </ion-label>
+                </div>
+            </ion-col>
+        </ion-row> --vikas-->
+        <!-- -------------------vikas------------------ -->
+        <div>
+            <p>Subtotal ({{total_cart_item}} items)</p>
+            <p class="final_checkout_price" *ngIf="total_cart_item">{{currency}}
+                {{ServiceData?.data?.cart_subtotal}}
+            </p>
+        </div>
+        <div class="discount-amount-container">
+            <p *ngIf="ServiceData?.data?.total_discount && ServiceData?.data?.total_discount > 0">Promotion Discount</p>
+            <p class="discount-amount"
+                *ngIf="ServiceData?.data?.total_discount && ServiceData?.data?.total_discount > 0">- {{currency}}
+                {{ServiceData?.data?.total_discount}}
+            </p>
+        </div>
+        <!-- ------------------------------------- -->
+
+    </ion-grid>
+
+    <!-- <div class="empty" (click)="emptyCartConfirm()">
+        <p>Empty Cart</p>
+    </div> -->
+
+
+    <ion-grid *ngIf="cart_products && cart_products.length > 0 && total_cart_item && is_api_request"
+        id="cart_listing_container" class="cart_listing_container">
+
+        <div class="normal-product-container" *ngFor="let cart of cart_products">
+            <div class="normal_product_{{cart.vid}}"
+                [ngStyle]="{'background-color': cart.is_in_stock ? cart.is_in_stock : '#f3d0d0' }">
+                <!-- <div class="normal_product_{{cart.vid}}"> -->
+                <ion-row class="b-border">
+
+                    <ion-col size-xs="5" size-sm="5" size-md="5" class="flex_center">
+                        <!-- -------------------vikas------------------ -->
+                        <div>
+                            <div class="sp-message">
+
+                                <p style="font-weight:normal" class="label label-success" *ngIf="cart.special_message">
+                                    {{cart.special_message}}</p>
+
+                                <p style="font-weight:normal" class="label label-success"
+                                    *ngIf="!cart.special_message && cart.maxunit">offer Max Unit -
+                                    {{cart.maxunit}}</p>
+
+                                <p class="view_detail_link" *ngIf="cart.save_price && cart.save_price > 0">
+                                    Saving
+                                    {{currency}}
+                                    {{cart.save_price}}
+                                </p>
+                                <span style="font-size: .9em;font-weight: bold;color: green"
+                                    class="label">{{cart.availability_message}}</span>
+                            </div>
+                        </div>
+                        <!-- ------------------------------------- -->
+                        <div class="cart-image-container" text-start
+                            (click)="route_product_detail(cart?.product_id,cart?.product_name)">
+                            <img src="{{imageUrl}}thumbnails/100/{{cart.product_image}}" />
+                        </div>
+                        <!-- -------------------vikas------------------ -->
+                        <div class="quantity-final-price">
+                            <div class="prod_quantity_container">
+                                <p class="gram">{{cart.product_pec_weight1}}</p>
+                            </div>
+                            <div>
+                                <p class="prod_price">{{currency}}{{cart.final_price}}</p>
+                            </div>
+                        </div>
+                        <!-- ------------------------------------- -->
+                        <span class="cart-other-icons food_icon" *ngIf="cart.food_type=='veg'"><img
+                                src="assets/image/veg.png"></span>
+                        <span class="cart-other-icons food_icon" *ngIf="cart.food_type=='nonveg'"><img
+                                src="assets/image/non-veg.png"></span>
+                        <!-- <span class="cart-other-icons delivery_icon" *ngIf="cart.mb_express=='yes'"><img
+                                src="assets/image/delivery.png"></span> -->
+                    </ion-col>
+
+                    <ion-col size-xs="7" size-sm="7" size-md="7">
+
+                        <!-- -------------------vikas------------------ -->
+                        <div class="delete-product" (click)="remove_product(cart?.product_id,cart?.vid)">
+                            <ion-icon name="trash"></ion-icon>
+                        </div>
+                        <div class="product_price_container">
+                            <div class="">
+                                <p class="item-total-line-wise product_price">
+                                    {{currency}}<span>{{cart.product_subtotal}}</span>
+                                </p>
+                            </div>
+                            <div class="">
+                                <p class="prod_price cut_price" *ngIf="cart.cut_price">
+                                    {{currency}}{{cart.cut_price}}
+                                </p>
+
+                            </div>
+
+                        </div>
+                        <!-- ------------------------------------- -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3 class="prod_name"
+                                    (click)="route_product_detail(cart?.product_id,cart?.product_name)">
+                                    {{cart.product_name}} </h3>
+                            </div>
+                            <!-- <div class="prod_quantity_container col-xs-12">
+                                <p class="gram">{{cart.product_pec_weight1}}</p>
+                            </div> --vikas-->
+                        </div>
+
+                        <!-- <div class="row">
+                            <div class="col-xs-4">
+                                <p class="prod_price">{{currency}}{{cart.final_price}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <p class="prod_price cut_price" *ngIf="cart.cut_price">{{currency}}{{cart.cut_price}}
+                                </p>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <p class="item-total-line-wise product_price">
+                                    {{currency}}<span>{{cart.product_subtotal}}</span>
+                                </p>
+                            </div>
+                        </div> --vikas-->
+
+                        <!-- <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                <p style="font-weight:normal" class="label label-success" *ngIf="cart.special_message">
+                                    {{cart.special_message}}</p>
+
+                                <p style="font-weight:normal" class="label label-success"
+                                    *ngIf="!cart.special_message && cart.maxunit">offer Max Unit -
+                                    {{cart.maxunit}}</p>
+
+                                <p class="view_detail_link" *ngIf="cart.save_price && cart.save_price > 0">
+                                    Saving
+                                    {{currency}}
+                                    {{cart.save_price}}
+                                </p>
+                                <span style="font-size: .9em;font-weight: bold;color: green"
+                                    class="label">{{cart.availability_message}}</span>
+                            </div>
+                        </div>--vikas -->
+
+                        <div class="row">
+                            <!-- <div class="col-xs-6">
+                                &nbsp;
+                            </div> -vikas-->
+
+                            <div class="prod_quantity_container col-xs-12 col-sm-12 col-md-12 text-right">
+                                <div class="cart-action-container prod_quantity flex_center"
+                                    *ngIf="cart.cart_qnty && cart.is_in_stock !=0">
+                                    <button class="cart-action up_btn"
+                                        (click)="updateQuantity(cart?.product_id,cart?.vid,'down','normal_product_'+cart?.vid)">&minus;</button>
+                                    <button class="cart-quantity product_quantity_count"
+                                        id="count_{{cart?.product_id}}_{{cart?.vid}}">{{cart.cart_qnty}}</button>
+                                    <button class="cart-action down_btn"
+                                        (click)="updateQuantity(cart?.product_id,cart?.vid,'up','normal_product_'+cart?.vid)">&#43;</button>
+                                </div>
+                                <div class="add_cart2" *ngIf="cart.is_in_stock == 0">
+                                    OUT OF STOCK
+                                    &nbsp;&nbsp;&nbsp;
+                                    <!-- <i class="fa fa-trash" (click)="remove_product(cart?.product_id,cart?.vid)"
+                                        aria-hidden="true"></i> -->
+                                </div>
+                            </div>
+                        </div>
+                    </ion-col>
+
+                    <ion-col size="12" *ngFor="let offerItem of cart?.offer">
+                        <div class="free_item">
+                            <div class="free_item_image">
+                                <img src="{{imageUrl_free}}/product/{{offerItem.product_image}}">
+                            </div>
+                            <div class="free_item_dec">
+                                <div class="free_item_name">
+                                    <h4>{{offerItem.product_name}}</h4>
+                                    <span><img src="assets/image/icon/free_img.png"></span>
+                                </div>
+                                <div class="free_item_price">
+                                    {{currency}}{{offerItem.product_price}}
+                                </div>
+                                <p style="font-weight:normal; color:red;display: inline-block;width: 100%;" class="">
+                                    {{offerItem.special_message}}</p>
+
+                            </div>
+                            <div class="free_item_total_price prod_price">
+                                <p>{{currency}}<span>0</span></p>
+                            </div>
+                        </div>
+                    </ion-col>
+
+                    <ion-col size="12" class="note" *ngIf="cart.set_quantity && cart.set_quantity!='0'">
+                        <span></span>
+                    </ion-col>
+
+                    <div class="" *ngIf="cart.item_available"
+                        style="color:red;display: inline-block;width: 100%;text-align: right;">
+                        *Out Of Stock
+                    </div>
+                </ion-row>
+            </div>
+        </div>
+    </ion-grid>
+
+    <ion-grid *ngIf="cart_products_combo && cart_products_combo.length > 0 && total_cart_item && is_api_request"
+        id="cart_listing_container3" class="cart_listing_container">
+        <ion-row name="row" class="b-border" *ngFor="let cart_combo of cart_products_combo">
+            <ion-col size-xs="3" size-sm="2" size-md="2" class="flex_center"
+                (click)="route_combo_detail(cart_combo?.id,cart_combo?.combo_name)">
+                <div text-start>
+                    <ion-img src="{{combo_image}}{{cart_combo.image}}"></ion-img>
+                </div>
+            </ion-col>
+
+            <ion-col size-xs="9">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h3 (click)="route_combo_detail(cart_combo?.id,cart_combo?.combo_name)" class="prod_name">
+                            {{cart_combo?.combo_name}} <span class="badge badge-success">Combo</span></h3>
+
+                        <div class="" (click)="route_combo_detail(cart_combo.id,cart_combo.combo_name)">
+                            <p class="d-inline prod_price" style="color:green">{{currency}}{{cart_combo.price}} </p>
+                            &nbsp;
+                            <p class="d-inline prod_price" style="text-decoration: line-through;color:#9e9d9d">
+                                {{currency}}{{cart_combo.mrp}}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div>
+                            <ion-label class="product_price">
+                                {{currency}}<span>{{(cart_combo.price * cart_combo.cart_qnty) |  number  : '1.2-2'}}
+                                </span>
+                            </ion-label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="free_offer_div">
+                            <div class="free_items_wrapper">
+                                <div *ngFor="let combo_offer_product of cart_combo?.combo_products; let y=index;">
+                                    <div class="free_item_container">
+                                        <div class="offer_title">
+                                            <h4>{{combo_offer_product.product_name}}</h4>
+                                            <span>{{combo_offer_product.product_pec_weight}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">&nbsp;</div>
+                    <div class="col-xs-6">
+                        <div class="prod_quantity_container">
+                            <div class="product_qty combo-cart-action">
+                                <div class="add_cart2" *ngIf="!cart_combo.item_available">
+                                    <button class="quantity-action-btn less_item"
+                                        (click)="updateComboQuantity(cart_combo?.id,'down')">-</button>
+                                    <button class="quantity-action-btn quantity-text"
+                                        id="countcomb_{{cart_combo?.id}}">{{cart_combo.cart_qnty}}</button>
+                                    <button class="quantity-action-btn add_item"
+                                        (click)="updateComboQuantity(cart_combo?.id,'up')">+</button>
+                                </div>
+
+                                <div class="add_cart2" *ngIf="cart_combo.item_available">
+                                    <i class="fa fa-trash" (click)="remove_combo(cart_combo?.id)"
+                                        aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ion-col>
+
+            <div class="" *ngIf="cart_combo.item_available"
+                style="color:red;display: inline-block;width: 100%;text-align: right;">
+                *Out Of Stock
+            </div>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid class="cart_listing_container" *ngIf="!total_cart_item && is_api_request">
+        <ion-row name="row" class="">
+            <ion-col size="12" class="flex_center">
+                <div class="empty_cart">
+                    <img src="assets/image/emptycart_icon.png" alt="">
+                    <p>No items in your cart</p>
+                    <a class="cont_shop" routerLink='/home' routerDirection='root'>Start Shopping</a>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list id="skeleton" *ngIf="is_api_request == false">
+        <ion-list-header>
+            <ion-skeleton-text animated style="width: 80px"></ion-skeleton-text>
+        </ion-list-header>
+        <ion-item *ngFor="let skeleton of [1,2,3,4,5,6,7,8]">
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>
+
+<ion-footer *ngIf="total_cart_item">
+    <ion-toolbar>
+
+        <!-- <div class="col-xs-6 text-left pl-5 pr-5">
+            <p class="final_checkout_price" *ngIf="total_cart_item">{{currency}} {{ServiceData?.data?.cart_subtotal}}
+            </p>
+            <p class="discount-amount"
+                *ngIf="ServiceData?.data?.total_discount && ServiceData?.data?.total_discount > 0">Total Saving :
+                {{currency}} {{ServiceData?.data?.total_discount}}</p>
+        </div> -->
+
+        <div class="col-xs-12 final_checkout_button pl-5 pr-5" *ngIf="PData.user_id && cart_total >= checkout_limit"
+            (click)="route_checkout(ServiceData?.data?.is_order_rated,
+            ServiceData?.data?.last_order_id, ServiceData?.data?.total_outofstock)">
+            <span>Checkout</span>
+            <!-- <div>{{currency}} {{cart_remaining_total}}<ion-icon name="arrow-forward"></ion-icon> -->
+            <div class="checkout-amount">{{currency}} {{cart_total}}<ion-icon name="arrow-dropright-circle"></ion-icon>
+            </div>
+
+        </div>
+
+        <div *ngIf="PData.user_id && cart_total < checkout_limit && total_cart_item > 0"
+            class="col-xs-12 final_checkout_button pl-5 pr-5 min-amount" style="color:white">
+            *Minimum Amount Should be &nbsp;
+            <i class="fa fa-inr">{{checkout_limit}}</i>
+        </div>
+
+    </ion-toolbar>
+</ion-footer>
+<app-footer-tabs></app-footer-tabs>

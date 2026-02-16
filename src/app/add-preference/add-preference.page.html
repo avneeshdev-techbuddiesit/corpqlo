@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Add Preferences</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row no-padding>
+            <ion-col no-padding size="12" class="main_add mt-20 pl-5 pr-5">
+                <ion-col *ngFor="let pre of shopCategory; let i=index" size-sm="3" size-lg="3" size-xs="4"
+                    class="inline" (click)="AddedMultiCategoryID(pre.id,i)">
+                    <!-- <ion-col *ngFor="let pre of ServiceData.data.shopCategory; let i=index" size-sm="3" size-lg="3"
+                    size-xs="4" class="inline" (click)="AddedMultiCategoryID(pre.id,i)"> -->
+                    <div class="category_div" id="add{{pre.id}}">
+                        <!-- -------------------vikas------------------------ -->
+
+
+                        <!-- <img src={{image_url}}{{pre.category_banner}}> -->
+
+
+                        <img src="{{category_placeholder}}"
+                            (load)="download_image($event,pre.category_image_app,image_url,'category/thumbnails/200')">
+
+
+                        <!-- -------------------------------- -->
+                        <p class="cat_name" style="text-transform: capitalize; ">{{pre.name}}</p>
+                        <div class="abs_check"><img src="assets/image/preferred/selected.png"></div>
+                    </div>
+                </ion-col>
+            </ion-col>
+        </ion-row><br>
+
+        <div class="update center" *ngIf="SelectedArr3 && SelectedArr3.length >0" (click)="AddPeference()">
+            <button>Add</button>
+        </div>
+
+        <div class="update center" *ngIf="!SelectedArr3 || SelectedArr3.length ==0">
+            No category Left !
+        </div>
+
+    </ion-grid>
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

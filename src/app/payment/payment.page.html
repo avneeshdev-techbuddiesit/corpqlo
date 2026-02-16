@@ -1,0 +1,179 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Payment Option</ion-title>
+        <ion-buttons class="no-outline" slot="end" routerLink="/search">
+            <ion-icon style="font-size: 24px;" color="light" md="md-search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col size='12'>
+                <!-- <div class="amount-details">
+                    <p class="item-total">
+                        <span>Items Total</span>
+                        <span
+                            *ngIf="checkout_data?.total_discount">{{currency}}{{ConvertToInt(checkout_data?.cart_subtotal) + ConvertToInt(checkout_data?.total_discount) | number: '1.2-2'}}</span>
+                        <span *ngIf="!checkout_data?.total_discount">{{currency}}{{checkout_data?.cart_subtotal}}</span>
+                    </p>
+                    <p class="delivery-charge" *ngIf="checkout_data?.shipping_charge">
+                        <span>Delivery Charge</span>
+                        <span
+                            *ngIf="checkout_data?.shipping_charge !='0.00'">{{currency}}{{checkout_data?.shipping_charge }}</span>
+                        <span *ngIf="checkout_data?.shipping_charge =='0.00'">Free</span>
+                    </p>
+                    <p class="promotion-discount" *ngIf="checkout_data?.total_discount"><span>Promotion
+                            Discount</span><span>{{currency}} -
+                            {{checkout_data?.total_discount}}</span></p>
+                    <hr>
+                    <p class="total-payable"><span>Total Amount Payable</span><span></span></p>
+                </div> -->
+
+                <div class="amount-details">
+                    <p class="item-total"><span>Items Total</span>
+                        <span
+                            *ngIf="checkout_data?.total_discount">{{currency}}{{ConvertToInt(checkout_data?.cart_subtotal) + ConvertToInt(checkout_data?.total_discount) | number: '1.2-2'}}
+                        </span>
+                        <span *ngIf="!checkout_data?.total_discount">{{currency}}{{checkout_data?.cart_subtotal}}
+                        </span>
+                    </p>
+                    <p *ngIf="checkout_data?.shipping_charge" class="delivery-charge"><span>Delivery Charge</span>
+                        <span
+                            *ngIf="checkout_data?.shipping_charge !='0.00'">{{currency}}{{checkout_data?.shipping_charge }}</span>
+                        <span *ngIf="checkout_data?.shipping_charge =='0.00'"> Free</span></p>
+                    <p *ngIf="checkout_data.mb_express"><span>FNG Express Shipping</span> <span> + <i class="fa fa-inr"
+                                aria-hidden="true"></i>{{checkout_data.mb_express }}</span></p>
+
+                    <p *ngIf="wallet_amount"><span>Wallet Amount</span> <span>{{currency}}
+                            {{wallet_amount}}</span></p>
+                    <p *ngIf="checkout_data?.total_discount" class="promotion-discount"><span>Total Discount</span>
+                        <span> {{currency}} -
+                            {{checkout_data?.total_discount}}</span></p>
+                    <p *ngIf="discountamount" class="promotion-discount"><span>Total Promo Discount</span>
+                        <span>{{currency}}
+                            -{{ discountamount }}</span></p>
+
+                    <p *ngIf="!wallet_amount && !discountamount" class="total-payable"><span>Total Amount Payable</span>
+                        <span>{{currency}}
+                            {{ConvertToInt(cart_subtotal) + ConvertToInt(checkout_data?.shipping_charge)  | number: '1.2-2' }}</span>
+
+                    </p>
+                    <p *ngIf="!wallet_amount && discountamount" class="total-payable"><span>Total Amount Payable</span>
+                        <span>{{currency}}
+                            {{ConvertToInt(cart_subtotal) + ConvertToInt(checkout_data?.shipping_charge) - discountamount | number: '1.2-2' }}</span>
+
+                    </p>
+                    <p *ngIf="wallet_amount" class="total-payable"><span>Total Amount Payable</span>
+                        <span>{{currency}} {{ cart_subtotal }}</span>
+
+                    </p>
+                </div>
+
+            </ion-col>
+            <ion-col size='12'>
+                <!-- <div class="promo_code">
+                    <input type="text" [(ngModel)]="promocode" [ngModelOptions]="{standalone: true}"
+                        placeholder="Enter Promo Code">
+                    <button (click)="apply_promo(cart_subtotal, checkout_data?.total_cart_item);">Apply</button>
+                    <span *ngIf="promo_message && this.discountamount" style="color: green;">{{promo_message}}</span>
+                    <span *ngIf="promo_message && !this.discountamount" class="error">{{promo_message}}</span>
+                </div> -->
+
+
+
+                <!-- -------------------vikas------------------ -->
+                <!-- <ion-list class="wallet-container">
+                    <ion-item *ngIf="checkout_data.wallet_balance !='0.00'">
+                        <ion-label>Use From My Wallet <span>(<i class="fa fa-inr" aria-hidden="true"></i>
+                                {{checkout_data.wallet_balance}})</span>
+                        </ion-label>
+                        <ion-checkbox [(ngModel)]="PData.Wallet" [ngModelOptions]="{standalone: true}"
+                            (ionChange)="ChangeWallet(ReviewOrder?.cart_data?.cart_subtotal)" slot="start"
+                            value="pepperoni"></ion-checkbox>
+                    </ion-item>
+
+                    <ion-item
+                        *ngIf="checkout_data?.is_mb_express && o_tp && o_tp== '2' && checkout_data?.express_delivery_status == 'ON'">
+                        <ion-label>FNG Express Delivery
+                            ({{checkout_data?.express_time}} Min) <span>(Pay <i class="fa fa-inr"
+                                    aria-hidden="true"></i>
+                                {{checkout_data?.express_price}})</span>
+                        </ion-label>
+                        <ion-checkbox slot="start" [(ngModel)]="mb_express" value="sausage"
+                            (ionChange)="Changemb(checkout_data?.is_mb_express)"></ion-checkbox>
+                    </ion-item>
+                </ion-list> -->
+                <!-- <div *ngIf="VerifyPinShow" class="promo_code">
+                    <input type="password" pattern="[0-9]{6}" placeholder="Enter Wallet PIN" [(ngModel)]="Wallet_pin"
+                        [ngModelOptions]="{standalone: true}">
+                    <button
+                        (click)="verify_wallet_pin(checkout_data?.cart_subtotal,checkout_data?.shipping_charge);">Verify
+                        PIN</button>
+                    <span (click)="forgot_wallet_pin()" style="color: blue;"> &nbsp;&nbsp; Forgot
+                        Pin?</span>
+                    <span *ngIf="wallet_message" style="color: green;" class="">&nbsp;{{wallet_message}}</span>
+                </div> -->
+                <div class="promo_code">
+                    <input type="text" [(ngModel)]="promocode" [ngModelOptions]="{standalone: true}"
+                        placeholder="Enter Promo Code">
+                    <button (click)="apply_promo(cart_subtotal, checkout_data?.total_cart_item);">Apply</button>
+                    <span *ngIf="promo_message && this.discountamount" style="color: green;">{{promo_message}}</span>
+                    <span *ngIf="promo_message && !this.discountamount" class="error">{{promo_message}}</span>
+                </div>
+                <!-- ------------------------------------- -->
+            </ion-col>
+            <ion-col size='12'>
+                <div>
+                    <p class="payment-option-title">Select Payment Option</p>
+                </div>
+            </ion-col>
+            <ion-col class="payment-option">
+                <div class="card_div" [ngClass]="{selected: step === 0}" (click)="step=0">
+                    <p>Cards</p>
+                    <a (click)="choose_payment_method('PAYTM');">
+                        <ion-icon name="card"></ion-icon> Credit, Debit & ATM Cards
+                    </a>
+                </div>
+                <div class="card_div" [ngClass]="{selected: step === 1}">
+                    <p>Pay On Delivery</p>
+                    <a (click)="choose_payment_method('COD')">
+                        <ion-icon name="cash"></ion-icon> Cash on Delivery
+                    </a>
+                </div>
+
+            </ion-col>
+            <ion-col size="12">
+                <!-- <div class="nxtprevbtn">
+                    <div class="text-right next_step" *ngIf="pay_button == 'COD'"
+                        (click)="place_order(discountamount,wallet_amount,o_tp,ReviewOrder?.cart_data?.shipping_charges,checkout_data.express_price)">
+                        <a data-toggle="tab">Place Order</a>
+                    </div>
+
+                    <div class="text-right next_step" *ngIf="pay_button == 'PAYTM'" (click)="place_order()">
+                        <a data-toggle="tab">Pay Online</a>
+                    </div>
+
+                </div> -->
+            </ion-col>
+            <ion-col size='12' class="back-button-container">
+                <div class="back-button" (click)="myBackButton()">Back</div>
+                <div class="pay-button back-button">
+                    <div class="next_step" *ngIf="pay_button == 'COD'"
+                        (click)="place_order(discountamount,wallet_amount,o_tp,ReviewOrder?.cart_data?.shipping_charges,checkout_data.express_price)">
+                        <a data-toggle="tab">Place Order</a>
+                    </div>
+
+                    <div class="next_step" *ngIf="pay_button == 'PAYTM'" (click)="place_order()">
+                        <a data-toggle="tab">Pay Online</a>
+                    </div>
+
+                </div>
+            </ion-col>
+            <!-- <button (click)="dummyfun()">dummy</button> -->
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

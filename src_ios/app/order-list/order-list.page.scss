@@ -1,0 +1,65 @@
+.order-list-container
+{
+    // margin-bottom: 20px;
+    padding: 0 0px;
+}
+.order-list-container.bg
+{
+    background-color: #dddddd8c;
+}
+.order-list-container .order-list{
+    padding:  10px 15px;
+    // border-radius: 2px;
+    // box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid #666;
+    // margin-bottom: 10px;
+}
+.order-list-container .order-list .order-status
+{
+    display: inline;
+}
+.order-list-container .order-list .order-status span{
+    text-transform: uppercase;
+    background-color: #ddd;
+    display: inline-flex;
+    padding: 3px 5px;
+    border-radius: 2px;
+    font-size: 12px;
+}
+.order-list-container .order-list .order-status span.cancel
+{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.order-list-container .order-list .order-status span.failed
+{
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.order-list-container .order-list .order-status span.success
+{
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.order-value
+{
+    color: #333;
+    font-size: 12px;
+}
+
+.order-amount .order-value
+{
+    color: green;
+    font-size: 15px;
+}
+.view-order-arrow
+{
+    display: flex;
+    height: 84px;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+}

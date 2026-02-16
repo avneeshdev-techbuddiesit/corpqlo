@@ -1,0 +1,16 @@
+node_modules/
+platforms/
+plugins/
+www/
+dist/
+
+android/
+ios/
+/__MACOSX
+/e2e
+.idea/
+.vscode/
+.DS_Store
+
+*.keystore
+*.jks

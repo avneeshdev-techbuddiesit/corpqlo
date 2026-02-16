@@ -1,0 +1,648 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Order Details</ion-title>
+        <ion-buttons class="no-outline" slot="end" routerLink="/search">
+            <ion-icon style="font-size: 24px;" color="light" md="md-search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid class="no-padding">
+        <ion-row>
+            <ion-col class="no-padding" size="12">
+                <div class="order_main">
+                    <div class="order_div">
+
+                        <div class="order-action" *ngIf="ServiceData?.order_detail">
+                            <div class="icon">
+
+                                <a class="reschedule"
+                                    *ngIf="ServiceData?.order_detail?.detail.reschedule_difference <= 2 && ServiceData?.order_detail?.detail.order_status != 'Delivered' && ServiceData?.order_detail?.detail.order_status != 'Cancel'"
+                                    (click)="GoToOrderDetails_resc(ServiceData?.order_detail?.detail.id,ServiceData?.order_detail?.detail.order_type)">Reschedule</a>
+
+                                <a class="reorder"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status == 'Delivered' || ServiceData?.order_detail?.detail.order_status == 'Out for Delivery' || ServiceData?.order_detail?.detail.order_status == 'Cancel'"
+                                    (click)="GoToreorder(ServiceData?.order_detail?.detail.id)">Reorder</a>
+
+                                <a class="cancel"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status != 'Cancel' && ServiceData?.order_detail?.detail.order_status != 'Picked' &&  ServiceData?.order_detail?.detail.order_status != 'Delivered' &&  ServiceData?.order_detail?.detail.order_status != 'Out for Delivery' "
+                                    (click)="GoToCancelOrder(ServiceData?.order_detail?.detail.id,ServiceData?.order_detail?.detail.order_number)">Cancel</a>
+
+                                <a class="invoice" *ngIf="ServiceData?.order_detail?.detail.order_status == 'Delivered'"
+                                    (click)="GoToOrderinvoice(ServiceData?.order_detail?.detail.id)">Download
+                                    Invoice</a>
+
+                                <a class="ticket"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status != 'Delivered' || (ServiceData?.order_detail?.detail.order_status == 'Delivered' && ServiceData?.order_detail?.detail.difference <=7)"
+                                    (click)="GoToOrderRaiseTicket(ServiceData?.order_detail?.detail.id)">Raise
+                                    Ticket</a>
+                            </div>
+                        </div>
+
+                        <div class="order_detial">
+                            <div class="date inline">
+                                <ion-text>Order ID: <span>#{{ServiceData?.order_detail?.detail.order_number}}</span>
+                                </ion-text>
+                            </div>
+                            <!-- <div *ngIf="ServiceData?.order_detail?.detail.rating" class="price pending inline">
+                                <ion-text
+                                    style="background: rgba(248, 203, 0, 0.51); padding: 4px 14px; text-align: center;"
+                                    (click)="GoToOrderDetails_rate(ServiceData?.order_detail?.detail.id)"> Rating: <span
+                                        class="">{{ServiceData?.order_detail?.detail.rating}}</span></ion-text>
+                            </div> --vikas-->
+
+                            <!-- ------------------vikas---------------------- -->
+                            <div class="price inline text-right">
+                                <ion-text>Order Total:
+                                    <span
+                                        style="font-size: 15px;color: #6aa510;font-weight: 500;">{{currency}}{{ServiceData?.order_detail?.item_subtotal}}</span>
+                                </ion-text>
+                            </div>
+                            <!-- ------------------------------------------------ -->
+                        </div>
+
+                        <!-- <div class="order_detial">
+                            <div class="date">
+                                <ion-text>Order Date: <span>{{ServiceData?.order_detail?.detail.order_date}}</span>
+                                </ion-text>
+                            </div>
+
+                        </div> --vikas-->
+
+                        <!-- <div class="order_detial status">
+                            <div class="status_text inline">
+                                <ion-text>
+                                    <span class="pending"
+                                        *ngIf="ServiceData?.order_detail?.detail.order_status != 'Cancel'">{{ServiceData?.order_detail?.detail.order_status}}</span>
+                                    <span class="cancel"
+                                        *ngIf="ServiceData?.order_detail?.detail.order_status == 'Cancel'">Cancelled</span>
+
+                                </ion-text>
+                            </div>
+                            <div class="price inline text-right">
+                                <ion-text>Order Total:
+                                    <span
+                                        style="font-size: 15px;color: #6aa510;font-weight: 500;">{{currency}}{{ServiceData?.order_detail?.item_subtotal}}</span>
+                                </ion-text>
+                            </div>
+                        </div> --vikas-->
+
+                        <!-- <div class="order_detial">
+                            <div class="date" style="width: 100%;">
+                                <ion-text *ngIf="ServiceData?.order_detail?.detail.cancel_reason!=''">Reason:
+                                    <span>{{ServiceData?.order_detail?.detail.cancel_reason}}</span></ion-text>
+                            </div>
+                        </div> -->
+
+                        <div class="stepper">
+                            <div class="step">
+                                <a class="step_img completed"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status=='Order Confirm' ||ServiceData?.order_detail?.detail.order_status=='Assign Delivery Boy' || ServiceData?.order_detail?.detail.order_status=='Picked' || ServiceData?.order_detail?.detail.order_status=='Delivered'">
+                                    <!-- <img src="assets/image/order/order_1.png"> --vikas-->
+                                </a>
+                                <a class="step_img pending"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status!='Order Confirm'  && ServiceData?.order_detail?.detail.order_status!='Assign Delivery Boy' && ServiceData?.order_detail?.detail.order_status!='Picked' && ServiceData?.order_detail?.detail.order_status!='Delivered'">
+                                    <!-- <img src="assets/image/order/order_1.png"> --vikas-->
+                                </a>
+                                <p>Order Placed</p>
+                                <span class="after"></span>
+                            </div>
+                            <div class="step" *ngIf="ServiceData?.order_detail?.detail.order_status!='Cancel'">
+                                <a class="step_img completed"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status=='Picked' || ServiceData?.order_detail?.detail.order_status=='Assign Delivery Boy' || ServiceData?.order_detail?.detail.order_status=='Delivered'">
+                                    <!-- <img src="assets/image/order/order_2.png"> --vikas-->
+                                </a>
+                                <a class="step_img pending"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status!='Picked' && ServiceData?.order_detail?.detail.order_status!='Delivered' && ServiceData?.order_detail?.detail.order_status!='Assign Delivery Boy'">
+                                    <!-- <img src="assets/image/order/order_2.png"> -->
+                                </a>
+                                <p>In Process</p>
+                                <span class="after"></span>
+                            </div>
+
+                            <div class="step" *ngIf="ServiceData?.order_detail?.detail.order_status!='Cancel'">
+                                <a class="step_img completed"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status=='Picked' || ServiceData?.order_detail?.detail.order_status=='Assign Picker'  || ServiceData?.order_detail?.detail.order_status=='Delivered'">
+                                    <!-- <img src="assets/image/order/order_3.png"> -->
+                                </a>
+                                <a class="step_img pending"
+                                    *ngIf="ServiceData?.order_detail?.detail.order_status!='Picked' &&  ServiceData?.order_detail?.detail.order_status!='Assign Picker'  && ServiceData?.order_detail?.detail.order_status!='Delivered'">
+                                    <!-- <img src="assets/image/order/order_3.png"> -->
+                                </a>
+                                <p>On the way</p>
+                                <span class="after"></span>
+                            </div>
+                            <div class="step" *ngIf="ServiceData?.order_detail?.detail.order_status=='Delivered'">
+                                <a class="step_img completed">
+                                    <!-- <img src="assets/image/order/order_4.png"> -->
+                                </a>
+
+                                <p>Delivered</p>
+                            </div>
+
+                            <div class="step" *ngIf="ServiceData?.order_detail?.detail.order_status=='Cancel'">
+
+                                <a class="step_img completed">
+                                    <!-- <img src="assets/image/order/order_4.png"> -->
+                                </a>
+                                <p>Cancelled</p>
+                            </div>
+
+                            <div class="step"
+                                *ngIf="ServiceData?.order_detail?.detail.order_status!='Cancel' && ServiceData?.order_detail?.detail.order_status!='Delivered'">
+
+                                <a class="step_img pending">
+                                    <!-- <img src="assets/image/order/order_4.png"> -->
+                                </a>
+                                <p>Delivered</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+
+            <!-- ------------------vikas------------------------ -->
+            <ion-col class="no-padding" size="12">
+                <div class="address_detail payment_mode">
+                    <div class="address_border">
+                        <div class="inline type">
+                            <ion-text>{{ServiceData?.order_detail?.detail.payment_type}}</ion-text>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+            <!-- ------------------------------------------ -->
+
+            <ion-col class="no-padding" size="12">
+                <div class="order_main product_details">
+                    <div class="shipping">
+                        <!-- <ion-text>Order Products </ion-text> --vikas-->
+                        <span class="small">{{ServiceData?.order_detail?.total_itmes}} ITEMS</span>
+                    </div>
+
+                    <div class="order_div">
+                        <div class="item_container">
+
+                            <div class="order_item" *ngFor="let pro of ServiceData?.order_detail?.products">
+                                <div class="item_img">
+                                    <img src="{{featureImageUrl}}thumbnails/100/{{pro.product_image}}">
+
+                                    <span class="badge-2" *ngIf="pro.offer_type=='2'"><img width="20"
+                                            src="assets/image/discount_icon.png"></span>
+
+                                </div>
+                                <div class="item_detail item_cancelled" *ngIf="pro.status==3">
+                                    <div class="item_name">
+                                        <ion-text>{{pro.product_name}}</ion-text>
+                                    </div>
+                                    <div class="item_desc">
+                                        <div class="item_type">
+                                            <ion-text class="type">{{pro.pweight}}</ion-text>
+                                            <!-- <span style="margin-left: 10px;" *ngIf="pro?.is_mbexpress == 'yes'"><img
+                                                    src="assets/image/delivery.png"></span> -->
+                                        </div>
+                                        <div class="inline">
+                                            <h4 class="product_title_rate">
+                                                <del class="product_title_rate offer-cut-text">{{pro.act_price}} </del>
+                                                {{pro.unit_price}} X
+                                                <span> {{pro.product_qty}} </span>
+                                            </h4>
+                                        </div>
+                                        <div class="inline item_rate">
+                                            <ion-text class="price">{{currency}}
+                                                {{pro.price_for_print}}</ion-text>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item_img" *ngIf="pro.status==3 && pro.substitute_product">
+                                    <img src="{{featureImageUrl}}{{pro?.substitute_product?.product?.product_image}}">
+                                    <!--  <span class="badge">{{pro.product_qty}}</span>-->
+                                </div>
+                                <div class="item_detail" *ngIf="pro.status==3 && pro.substitute_product">
+                                    <div class="item_name">
+                                        <ion-text>{{pro?.substitute_product?.product?.product_name}}</ion-text>
+                                    </div>
+                                    <div class="item_desc">
+                                        <div class="item_type">
+                                            <p class="substitute">Substitute</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item_detail item_cancelled" *ngIf="pro.status==2">
+                                    <div class="item_name">
+                                        <ion-text>{{pro.product_name}}</ion-text>
+                                    </div>
+                                    <div class="item_desc">
+                                        <div class="item_type">
+                                            <ion-text class="type">{{pro.pweight}}</ion-text>
+                                            <span style="margin-left: 10px;" *ngIf="pro?.is_mbexpress == 'yes'"><img
+                                                    src="assets/image/delivery.png"></span>
+                                        </div>
+                                        <div class="inline">
+                                            <h4 class="product_title_rate">
+                                                <del class="product_title_rate offer-cut-text">{{pro.act_price}} </del>
+                                                {{pro.unit_price}} X
+                                                <span> {{pro.product_qty}} </span>
+                                            </h4>
+                                        </div>
+                                        <div class="inline item_rate">
+                                            <ion-text class="price">{{currency}}
+                                                {{pro.price_for_print}}</ion-text>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item_detail" *ngIf="pro.status==1">
+                                    <div class="item_name">
+                                        <ion-text>{{pro.product_name}}</ion-text>
+                                    </div>
+                                    <div class="item_desc">
+                                        <div class="item_type">
+                                            <ion-text class="type">{{pro.pweight}}</ion-text>
+                                            <span style="margin-left: 10px;" *ngIf="pro?.is_mbexpress == 'yes'"><img
+                                                    src="assets/image/delivery.png"></span>
+                                        </div>
+                                        <div class="inline">
+                                            <h4 class="product_title_rate">
+                                                <del class="product_title_rate offer-cut-text">{{pro.act_price}} </del>
+                                                {{pro.unit_price}} X
+                                                <span> {{pro.product_qty}} </span>
+                                            </h4>
+                                        </div>
+                                        <div class="inline item_rate">
+                                            <ion-text class="price">{{currency}}
+                                                {{pro.price_for_print}}</ion-text>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- <hr> --vikas-->
+                            <h3 class="cd_head"
+                                *ngIf="ServiceData?.order_detail?.combo && ServiceData?.order_detail?.combo.length>0;">
+                                Combo Details</h3>
+
+                            <div class="item_container">
+                                <div class="order_item" *ngFor="let procom of ServiceData?.order_detail?.combo">
+                                    <div class="item_img">
+                                        <img src="{{imageUrl_free}}/combo/{{procom.image}}">
+                                        <span class="badge"></span>
+                                    </div>
+                                    <div class="item_detail">
+                                        <div class="item_name">
+                                            <ion-text>{{procom.name}}</ion-text>
+                                        </div>
+                                        <div class="item_desc">
+                                            <div class="item_type">
+                                                <ion-text class="type">{{procom.pweight}}</ion-text>
+                                            </div>
+                                            <div class="inline">
+                                                <h4 class="product_title_rate">
+                                                    <del class="product_title_rate offer-cut-text"> </del>
+                                                    {{procom.price}} X
+                                                    <span> {{procom.qnty}} </span>
+                                                </h4>
+                                            </div>
+                                            <div class="inline item_rate">
+                                                <ion-text class="price">{{currency}}
+                                                    {{procom.price_for_print}}</ion-text>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="free_offer_div">
+                                        <div class="free_items_wrapper" *ngFor="let procom_in of procom.detail">
+                                            <div></div>
+                                            <div>
+                                                <div class="free_item_container">
+                                                    <div class="offer_img">
+                                                        <img src="{{featureImageUrl}}{{procom_in.product_image}}"></div>
+                                                    <div class="offer_title">
+                                                        <h4>{{procom_in.product_name}}</h4>
+                                                        <span>{{procom_in.pweight}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+
+            <!-- <ion-col class="no-padding" size="12">
+                <div class="address_detail order_main">
+                    <div class="shipping">
+                        <ion-text>Delivery</ion-text>
+                    </div>
+                    <div class="address_border">
+                        <div class="delivery_estimation p-5">
+                            <div class="inline">
+                                <ion-text>Delivery Date</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{ServiceData?.order_detail?.detail.selectdeliverydate}}</ion-text>
+                            </div>
+                        </div>
+                        <div class="preferred_time p-5" *ngIf="ServiceData?.order_detail?.detail.order_type=='2'">
+                            <div class="inline">
+                                <ion-text>Delivery Time</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text> --vikas-->
+            <!-- {{ServiceData?.order_detail?.detail.day_name}} at -->
+            <!-- {{ServiceData?.order_detail?.detail.time_slot}}</ion-text>
+                            </div>
+                        </div>
+
+                        <div class="preferred_time p-5" *ngIf="ServiceData?.order_detail?.detail.order_type=='1'">
+                            <div class="inline">
+                                <ion-text>Preferred Time Of Pickup</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>
+                                    {{ServiceData?.order_detail?.detail.day_name}} at
+                                    {{ServiceData?.order_detail?.detail.time_slot}}</ion-text>
+                            </div>
+                        </div>
+                        <div class="delivery_by p-5">
+                            <div class="inline">
+                                <ion-text>Delivery Boy</ion-text>
+                            </div>
+                            <div class="inline text-right" *ngIf="ServiceData?.order_detail?.detail.delivery_boy_name">
+                                <ion-text>{{ServiceData?.order_detail?.detail.delivery_boy_name}}</ion-text>
+                            </div>
+                            <div class="inline text-right" *ngIf="!ServiceData?.order_detail?.detail.delivery_boy_name">
+                                <ion-text>-</ion-text>
+                            </div>
+                        </div>
+                        <div class="delivery_by p-5">
+                            <div class="inline">
+                                <ion-text>Delivered On</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text *ngIf="ServiceData?.order_detail?.detail.order_status != 'Delivered'">-
+
+                                </ion-text>
+
+                                <ion-text *ngIf="ServiceData?.order_detail?.detail.order_status == 'Delivered'">
+                                    {{ServiceData?.order_detail?.detail.order_delivered_date}}
+                                </ion-text>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col> --vikas-->
+
+            <!-- <ion-col class="no-padding" size="12">
+                <div class="address_detail order_main">
+                    <div class="shipping">
+                        <ion-text>Payment Method</ion-text>
+                    </div>
+                    <div class="address_border">
+                        <div class="inline pay_by">
+                            <ion-text>Payment By</ion-text>
+                        </div>
+                        <div class="inline type text-right">
+                            <ion-text>{{ServiceData?.order_detail?.detail.payment_type}}</ion-text>
+                        </div>
+
+                        <div class="inline pay_by" *ngIf="ServiceData?.order_detail?.detail.is_wallet_used">
+                            <ion-text>Paid By Wallet</ion-text>
+                        </div>
+                        <div class="inline type text-right"
+                            *ngIf="ServiceData?.order_detail?.detail.is_wallet_used=='1'">
+                            {{currency}}
+                            <ion-text>{{ServiceData?.order_detail?.detail.wallet_used_amount}}</ion-text>
+                        </div>
+
+                        <div class="inline pay_by" *ngIf="ServiceData?.order_detail?.detail.payment_check=='PAYTM'">
+                            <ion-text>Paid By PAYTM</ion-text>
+                        </div>
+                        <div class="inline type text-right"
+                            *ngIf="ServiceData?.order_detail?.detail.payment_check=='PAYTM'">
+                            {{currency}}
+                            <ion-text>{{ServiceData?.order_detail?.detail.paymoney}}</ion-text>
+                        </div>
+
+                        <div class="inline pay_by" *ngIf="ServiceData?.order_detail?.detail.payment_check=='PAYPAL'">
+                            <ion-text>Paid By PAYPAL</ion-text>
+                        </div>
+                        <div class="inline type text-right"
+                            *ngIf="ServiceData?.order_detail?.detail.payment_check=='PAYTM'">
+                            {{currency}}
+                            <ion-text>{{ServiceData?.order_detail?.detail.paymoney}}</ion-text>
+                        </div>
+
+                    </div>
+                </div>
+            </ion-col> --vikas-->
+
+            <ion-col class="no-padding" size="12" *ngIf="ServiceData?.order_detail?.detail.comments">
+                <div class="address_detail order_main">
+                    <div class="shipping">
+                        <ion-text>Shopping Instructions </ion-text>
+                    </div>
+                    <div class="address_border">
+
+                        <div class="">
+                            <ion-text>{{ServiceData?.order_detail?.detail.comments}}</ion-text>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+
+            <ion-col class="no-padding" size="12">
+                <div class="address_detail order_main">
+                    <div class="shipping">
+                        <ion-text>SHIPPING ADDRESS</ion-text>
+                    </div>
+                    <div class="address_border">
+                        <div class="name">
+                            <ion-text>{{ServiceData?.order_detail?.detail.shipping_name}}</ion-text>
+                        </div>
+
+                        <div class="address">
+                            <ion-text>{{ServiceData?.order_detail?.detail.printed_address}}
+                            </ion-text>
+                        </div>
+                        <div class="contact">
+                            <ion-text>Phone Number: <span>{{ServiceData?.order_detail?.detail.shipping_mobile}}</span>
+                            </ion-text>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+
+            <ion-col class="no-padding" size="12">
+                <div class="address_detail order_main">
+                    <div class="shipping">
+                        <ion-text>ORDER SUMMARY</ion-text>
+                    </div>
+                    <div class="address_border">
+                        <div class="delivery_estimation p-5">
+                            <div class="inline">
+                                <ion-text>Item(s) Subtotal </ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.order_summery.item_subtotal}}</ion-text>
+                            </div>
+                        </div>
+                        <div class="preferred_time p-5"
+                            *ngIf="ServiceData?.order_detail?.detail.shipping_charges !='0.00' && ServiceData?.order_detail?.detail.shipping_charges">
+                            <div class="inline">
+                                <ion-text>Shipping Charge</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.detail.shipping_charges}}</ion-text>
+                            </div>
+                        </div>
+                        <div class="preferred_time p-5"
+                            *ngIf="ServiceData?.order_detail?.detail.shipping_charges =='0.00' ||  ServiceData?.order_detail?.detail.shipping_charges==''">
+                            <div class="inline">
+                                <ion-text>Shipping Charge</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text> Free</ion-text>
+                            </div>
+                        </div>
+                        <div class="preferred_time p-5" *ngIf="ServiceData?.order_detail?.detail.mb_express">
+                            <div class="inline">
+                                <ion-text>FNG Express Shipping </ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.detail.mb_express}}</ion-text>
+                            </div>
+                        </div>
+                        <div class="delivery_by p-5" *ngIf="ServiceData?.order_detail?.order_summery.promotion_applied">
+                            <div class="inline">
+                                <ion-text>Promotion Applied </ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.order_summery.promotion_applied}}</ion-text>
+                            </div>
+                        </div>
+
+                        <div class="delivery_by p-5"
+                            *ngIf="ServiceData?.order_detail?.order_summery.promocode && ServiceData?.order_detail?.order_summery.promocode!='0.00'">
+                            <div class="inline">
+                                <ion-text>Promocode</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.order_summery.promocode}}</ion-text>
+                            </div>
+                        </div>
+
+                        <div class="delivery_by p-5" *ngIf="ServiceData?.order_detail?.item_cancelled_amount ">
+                            <div class="inline">
+                                <ion-text>Item Cancelled </ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.item_cancelled_amount}}</ion-text>
+                            </div>
+                        </div>
+
+                        <div class="delivery_by p-5">
+                            <div class="inline">
+                                <ion-text>Total Amount</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.order_summery.total_amount}}</ion-text>
+                            </div>
+                        </div>
+
+                        <div class="delivery_by p-5"
+                            *ngIf="ServiceData?.order_detail?.order_summery.wallet_amount && ServiceData?.order_detail?.order_summery.wallet_amount!='0.00'">
+                            <div class="inline">
+                                <ion-text>Wallet Amount</ion-text>
+                            </div>
+                            <div class="inline text-right">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.order_summery.wallet_amount}}</ion-text>
+                            </div>
+                        </div>
+                        <div class="delivery_by p-5 order_total">
+                            <div class="inline total">
+                                <ion-text>Total Payable Amount:</ion-text>
+                            </div>
+                            <div class="inline text-right amount">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.order_summery.total_payable_amount}}</ion-text>
+                            </div>
+                        </div>
+
+                        <div class="delivery_by p-5 order_total total_saving"
+                            style="background-color: #d4edda; color:#155724;">
+                            <div class="inline total">
+                                <ion-text> Total Saving :</ion-text>
+                            </div>
+                            <div class="inline text-right amount">
+                                <ion-text style="color:#155724;"> {{currency}}
+                                    {{ServiceData?.order_detail?.order_summery.total_saving}}</ion-text>
+                            </div>
+                        </div>
+
+                        <div class="delivery_by p-5 order_total"
+                            *ngIf="ServiceData?.order_detail?.detail.refunded_amt > 0">
+                            <div class="inline total">
+                                <ion-text>*Total Refunded in Wallet:</ion-text>
+                            </div>
+                            <div class="inline text-right amount">
+                                <ion-text>{{currency}}
+                                    {{ServiceData?.order_detail?.detail.refunded_amt}}</ion-text>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+            <!-- ------------------vikas---------------------- -->
+            <!-- <ion-col class="no-padding" size="12">
+                <div class="order-action" *ngIf="ServiceData?.order_detail">
+                    <div class="icon">
+
+                        <a class="reschedule"
+                            *ngIf="ServiceData?.order_detail?.detail.reschedule_difference <= 2 && ServiceData?.order_detail?.detail.order_status != 'Delivered' && ServiceData?.order_detail?.detail.order_status != 'Cancel'"
+                            (click)="GoToOrderDetails_resc(ServiceData?.order_detail?.detail.id,ServiceData?.order_detail?.detail.order_type)">Reschedule</a>
+
+                        <a class="reorder" *ngIf="ServiceData?.order_detail?.detail.order_status == 'Delivered' ||
+                            ServiceData?.order_detail?.detail.order_status == 'Out for Delivery' ||
+                            ServiceData?.order_detail?.detail.order_status == 'Cancel' ||
+                            ServiceData?.order_detail?.detail.order_status == 'Picked'"
+                            (click)="GoToreorder(ServiceData?.order_detail?.detail.id)">Reorder</a>
+
+                        <a class="cancel"
+                            *ngIf="ServiceData?.order_detail?.detail.order_status != 'Cancel' && ServiceData?.order_detail?.detail.order_status != 'Picked' &&  ServiceData?.order_detail?.detail.order_status != 'Delivered' &&  ServiceData?.order_detail?.detail.order_status != 'Out for Delivery' "
+                            (click)="GoToCancelOrder(ServiceData?.order_detail?.detail.id,ServiceData?.order_detail?.detail.order_number)">Cancel</a>
+
+                        <a class="invoice" *ngIf="ServiceData?.order_detail?.detail.order_status == 'Delivered'"
+                            (click)="GoToOrderinvoice(ServiceData?.order_detail?.detail.id)">Download
+                            Invoice</a>
+
+                        <a class="ticket"
+                            *ngIf="ServiceData?.order_detail?.detail.order_status != 'Delivered' || (ServiceData?.order_detail?.detail.order_status == 'Delivered' && ServiceData?.order_detail?.detail.difference <=7)"
+                            (click)="GoToOrderRaiseTicket(ServiceData?.order_detail?.detail.id)">Raise
+                            Ticket</a>
+                    </div>
+                </div>
+            </ion-col> -->
+            <!-- ------------------------------------------ -->
+
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
+
+<app-footer-tabs></app-footer-tabs>

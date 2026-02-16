@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light" class="main_head">Shopping Preferences</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col no-padding size="12">
+                <div class="preferred_main">
+                    <div class="categories">
+                        <ion-text>Preferred Categories</ion-text>
+                    </div>
+                    <div class="add_cat text-right">
+                        <a (click)="go_to()"><img src="assets/image/preferred/add.png"></a>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col size="12">
+                <ion-col size-sm="3" size-lg="3" size-xs="4" class="inline" *ngFor="let pre of userPrefn;let ib=index">
+                    <div class="category_div added" id="adds{{pre.id}}" (click)="AddedMultiCategoryID2(pre.id,ib)">
+                        <img src={{image_url}}{{pre.category_banner}}>
+                        <p class="cat_name">{{pre.name}}</p>
+                        <div class="abs_check"><img src="assets/image/preferred/selected.png"></div>
+                    </div>
+                </ion-col>
+
+            </ion-col>
+            <ion-col size="12">
+                <div class="day_time">
+                    <ion-text>Preferred Delivery Day & Time Slot</ion-text>
+                </div>
+                <div class="multiple_select">
+                    <ion-list>
+                        <ion-item class="">
+
+                            <ion-select multiple="true" placeholder="Select Preferred Delivery Day"
+                                (ionChange)="PreferDateTime()" cancelText="Cancel" okText="Okay!"
+                                [(ngModel)]="PModel.Day" [ngModelOptions]="{standalone: true}">
+                                <ion-select-option value="Monday">Monday</ion-select-option>
+                                <ion-select-option value="Tuesday">Tuesday</ion-select-option>
+                                <ion-select-option value="Wednesday">Wednesday</ion-select-option>
+                                <ion-select-option value="Thursday">Thursday</ion-select-option>
+                                <ion-select-option value="Friday">Friday</ion-select-option>
+                                <ion-select-option value="Saturday">Saturday</ion-select-option>
+                                <ion-select-option value="Sunday">Sunday</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item class="">
+                            <ion-select multiple="true" placeholder="Select Preferred Delivery Time Slot"
+                                (ionChange)="PreferDateTime()" cancelText="Cancel" okText="Okay!"
+                                [(ngModel)]="PModel.Time" [ngModelOptions]="{standalone: true}">
+                                <ion-select-option value="10:00 AM">10:00 AM</ion-select-option>
+                                <ion-select-option value="12:00 PM">12:00 PM</ion-select-option>
+                                <ion-select-option value="02:00 PM">02:00 PM</ion-select-option>
+                                <ion-select-option value="04:00 PM">04:00 PM</ion-select-option>
+                                <ion-select-option value="06:00 PM">06:00 PM</ion-select-option>
+                                <ion-select-option value="08:00 PM">08:00 PM</ion-select-option>
+                                <ion-select-option value="10:00 PM">10:00 PM</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </ion-col>
+            <ion-col size="12">
+                <div class="day_time">
+                    <ion-text>Order Preference</ion-text>
+                </div>
+                <div class="form">
+                    <ion-select class="border" (ionChange)="GetListing()" placeholder="select Preference"
+                        [(ngModel)]="PModel.select">
+                        <ion-select-option *ngFor="let or of orderType" value="{{or.id}}">{{or.name}}
+                        </ion-select-option>
+                    </ion-select>
+
+                    <ion-select class="border" *ngIf="PData.type == '1'" (ionChange)="GetSelected(1)"
+                        placeholder="Default Store" [(ngModel)]="PModel.listStore" [selectedText]="PModel.listing">
+                        <ion-select-option *ngFor="let ls of stores2" value="{{ls.store_id}}">{{ls.store_name}}
+                            ({{ls.store_address}})</ion-select-option>
+                    </ion-select>
+                    <ion-select class="border" *ngIf="PData.type == '2'" (ionChange)="GetSelected(2)"
+                        placeholder="Default Address" [(ngModel)]="PModel.listAddress" [selectedText]="PModel.listing">
+                        <ion-select-option *ngFor="let ls of address_ls" value="{{ls.id}}">
+                            {{ls.display_address}}</ion-select-option>
+                    </ion-select>
+                    <label class="error">{{MessageOrderPrefError}}</label>
+                </div>
+            </ion-col>
+
+        </ion-row>
+
+        <div class="update center" (click)="UpdatePreferenceListing()">
+            <ion-button expand="block" class="theme-btn">Update</ion-button>
+        </div>
+
+    </ion-grid>
+</ion-content>

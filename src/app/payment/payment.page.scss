@@ -1,0 +1,135 @@
+ion-content {
+  --background: #f2f2f2;
+}
+
+ion-grid {
+  padding: 0;
+}
+
+ion-col {
+  padding: 0;
+}
+
+.amount-details {
+  background-color: #fff;
+  padding: 20px 20px;
+  border-radius: 0 0 30px 30px;
+}
+
+.amount-details p {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+}
+
+p.item-total span:last-child {
+  font-weight: 500;
+}
+
+p.delivery-charge span:last-child {
+  font-weight: 500;
+}
+
+p.promotion-discount {
+  color: #ff9d3b;
+  font-weight: 500;
+}
+
+p.total-payable {
+  font-weight: 500;
+}
+
+.amount-details hr {
+  background-color: #ccc;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.promo_code {
+  margin: 20px;
+}
+
+.promo_code input {
+  border: none;
+  padding: 10px 15px;
+  width: 70%;
+}
+
+.promo_code button {
+  background-color: #ff9d3b;
+  color: #fff;
+  padding: 13px 20px;
+  width: 30%;
+  border-radius: 0 5px 5px 0;
+}
+
+p.payment-option-title {
+  margin: 0 20px !important;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+ion-col.payment-option {
+  margin: 10px 20px;
+}
+
+.card_div {
+  margin-bottom: 15px;
+}
+
+.card_div a {
+  padding: 10px 20px;
+  background-color: #fff;
+  display: flex;
+}
+
+.card_div p {
+  margin-left: 10px !important;
+}
+
+.card_div a ion-icon {
+  font-size: 20px;
+}
+
+ion-col.back-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.back-button {
+  font-size: 15px;
+  font-weight: 100;
+  border: 1px solid #ff9d3b;
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin-top: 30px;
+  background-color: #fff;
+  width: 30%;
+  text-align: center;
+  margin: 30px 10px;
+}
+
+ion-list.wallet-container {
+  background: transparent !important;
+}
+
+ion-list.wallet-container ion-item {
+  --background: none !important;
+  --border-width: 0 !important;
+  --border-style: auto;
+}
+
+ion-list.wallet-container ion-item ion-label {
+  font-size: 12px !important;
+}
+
+.card_div.selected a {
+  background-color: #ff9d3b !important;
+  color: #fff;
+}
+
+.card_div a ion-icon {
+  margin-right: 10px;
+}

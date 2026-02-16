@@ -1,0 +1,105 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Combo Products</ion-title>
+        <ion-buttons slot="end" routerLink="/search">
+            <ion-icon style="font-size: 24px;" color="light" md="md-search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid class="no-padding">
+        <ion-row class="no-padding">
+            <ion-col size="12">
+                <div class="combo-title">
+                    <p>Combo product list</p>
+                </div>
+            </ion-col>
+
+            <ion-col size="12" *ngIf="combo_list.length <= 0">
+                <div class="no_combo">
+                    <p>Sorry! No Product Found</p>
+                </div>
+            </ion-col>
+
+            <ion-col size="12" *ngIf="combo_list && combo_list.length > 0 && is_api_request">
+                <div class="featured_main">
+                    <div class="featured_div ion-activatable ripple-parent" *ngFor="let cm of combo_list">
+                        <div class="featured_img_container">
+                            <img src={{image_url}}{{cm.image}}>
+                        </div>
+                        <ion-item text-wrap lines="none">
+                            <ion-label>
+                                {{cm.combo_name}}
+                            </ion-label>
+                        </ion-item>
+                        <div class="subcategory_price">
+                            <div class="price_cont">
+                                <p class="price ">
+                                    <i class="fa fa-inr"></i>
+                                    <span>{{cm.price}}</span>
+                                </p>
+                            </div>
+                            <div class="actual_price_cont">
+                                <p class="actual_price">
+                                    <i class="fa fa-inr"></i>
+                                    <span>{{cm.mrp}}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="add_to_cart_btn" (click)="route_combo_view(cm.id,cm.combo_name)">
+                            <button>View Combo</button>
+                        </div>
+
+                        <div class="limit" *ngIf="PData.user_id">
+                            <p> Limit : <span>{{cm.limit}}</span>, Remaining: <span>{{cm.remaining}}</span></p>
+                        </div>
+
+                        <div class="limit" *ngIf="!PData.user_id">
+                            <p> Limit : <span>{{cm.limit}}</span> </p>
+                        </div>
+
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list style="padding-top:10px" id="skeleton" *ngIf="is_api_request == false">
+        <ion-item style="--border-color:transparent;" *ngFor="let item of [1,2,3,4]">
+            <div style="width: 49%;margin: auto;">
+                <ion-thumbnail style="width: 100%;height: 100px;" slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </div>
+            <div style="width: 49%;margin: auto;">
+                <ion-thumbnail animated style="width: 100%;height: 100px;" slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </div>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
+
+<app-footer-tabs></app-footer-tabs>

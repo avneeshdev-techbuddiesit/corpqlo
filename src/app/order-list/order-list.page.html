@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">My Orders</ion-title>
+        <ion-buttons class="no-outline" slot="end" routerLink="/search">
+            <ion-icon style="font-size: 24px;" color="light" md="md-search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- --------------------vikas------------------- -->
+    <!-- <ion-searchbar placeholder="Search for order" type="search" autocomplete="off" name="search_order" animated="1"
+        (ionChange)="getOrders($event)" (keypress)="searchOrders($event)"></ion-searchbar> -->
+    <!-- ----------------------------------------------- -->
+    <ion-grid class="no-padding">
+        <ion-row class="pt-10">
+            <ion-col class="no-padding" size="12" *ngFor="let order of order_list; let ii = index">
+                <div [ngClass]="{'order-list-container':true,'bg':ii % 2 === 0}">
+                    <!-- --------------------vikas------------------- -->
+                    <div class="order-item-side-bar">
+                        <span class="cancel" *ngIf="order.order_status == 'Cancel'">
+                            <ion-icon name="close-circle"></ion-icon>
+                        </span>
+                        <span class="failed" *ngIf="order.order_status == 'PAYMENT FAILED'">
+                            <ion-icon name="checkmark-circle"></ion-icon>
+                        </span>
+                        <span class="success"
+                            *ngIf="order.order_status != 'Cancel' && order.order_status != 'PAYMENT FAILED'">
+                            <ion-icon name="checkmark-circle"></ion-icon>
+                        </span>
+                    </div>
+                    <!-- ----------------------------------------------- -->
+                    <div class="order-list ion-activatable ripple-parent" (click)="router_order_detail(order.id)">
+                        <div class="row">
+
+                            <div class="col-xs-7">
+                                <!-- --------------------vikas------------------- -->
+                                <div class="order-items">
+                                    <ion-text><span class="order-value"> items</span>
+                                    </ion-text>
+                                </div>
+                                <!-- ----------------------------------------------- -->
+                                <div class="order-number">
+                                    <ion-text>Order Id : <span class="order-value">#{{order.order_number}}</span>
+                                    </ion-text>
+                                </div>
+                                <div class="order-date">
+                                    <div class="date">
+                                        <ion-text>Placed on <span class="order-value">{{order.order_date }}</span>
+                                        </ion-text>
+                                    </div>
+                                    <!-- <div class="order-amount">
+                                        <ion-text>Order Amount :
+                                            <span class="order-value">{{currency}}{{order.total_amount}}</span>
+                                        </ion-text>
+                                    </div> --vikas-->
+                                </div>
+                                <!-- <div class="order-status">
+                                    <span class="cancel" *ngIf="order.order_status == 'Cancel'">Cancelled</span>
+                                    <span class="failed" *ngIf="order.order_status == 'PAYMENT FAILED'">PAYMENT
+                                        FAILED</span>
+                                    <span class="success"
+                                        *ngIf="order.order_status != 'Cancel' && order.order_status != 'PAYMENT FAILED'">{{order.order_status}}</span>
+                                </div> --vikas-->
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <div class="view-order-arrow">
+                                    <!-- <i class="fa fa-angle-right"></i> --vikas-->
+                                    <div class="order-status">
+                                        <span class="cancel" *ngIf="order.order_status == 'Cancel'">Cancelled</span>
+                                        <span class="failed" *ngIf="order.order_status == 'PAYMENT FAILED'">PAYMENT
+                                            FAILED</span>
+                                        <span class="success"
+                                            *ngIf="order.order_status != 'Cancel' && order.order_status != 'PAYMENT FAILED'">{{order.order_status}}</span>
+                                    </div>
+                                    <span>View Details</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-infinite-scroll threshold="50px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>
+
+<app-footer-tabs></app-footer-tabs>

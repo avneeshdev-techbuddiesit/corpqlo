@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Order Cancel</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="ShowCancelOrder">
+
+    <ion-grid>
+        <h5 class="center">Order Cancel #{{order_number}}</h5>
+        <hr class="hr">
+        <ion-item>
+            <ion-label position="stacked">Please submit cancel reason</ion-label>
+            <ion-textarea [(ngModel)]="PData.reason" [ngModelOptions]="{standalone: true}"
+                required placeholder="Tell us what is the problem with this order?"></ion-textarea>
+        </ion-item>
+        <!-- <p class="refund">Your refund amount will be add to your {{ rest._app_name_short }} Wallet.</p> -->
+        <hr class="hr">
+        <div class="sign_btn mt-20  center">
+            <ion-button expand="block" (click)="cancelOrder()">Cancel Order</ion-button>
+        </div>
+    </ion-grid>
+
+</ion-content>
+
+<ion-content *ngIf="ShowThankYouOrder">
+    <ion-grid>
+        <p class="your-order">Your order has been canceled</p>
+        <div class="center">
+            <ion-button expand="block" class="addmoney" color="light" (click)="continueShopping()">Continue Shopping
+            </ion-button>
+        </div>
+    </ion-grid>
+</ion-content>
+
+<app-footer-tabs></app-footer-tabs>

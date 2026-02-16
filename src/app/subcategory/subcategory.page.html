@@ -1,0 +1,486 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">{{header_title}} </ion-title>
+        <ion-buttons class="no-outline" slot="end" routerLink="/search">
+            <ion-icon style="font-size: 24px;" color="light" md="md-search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content #IonContent scrollEvents="true">
+    <!-- Start Banner and titlt -->
+    <ion-grid class="no-padding 1 header-section">
+
+        <div [ngClass]="{'hide':!is_api_request}">
+            <ion-slides pager="true" #transactionSlider (ionSlideTouchEnd)="slideChanged()"
+                *ngIf="!subcategory_list || subcategory_list.length == 0 && parent_id == 1" [options]="slideOptsOne">
+                <ion-slide *ngFor="let slider of category_banner_slider2">
+                    <div class="banner-img">
+                        <ion-img src="{{slider}}"></ion-img>
+                    </div>
+                </ion-slide>
+            </ion-slides>
+
+            <ion-slides pager="true" #transactionSlider (ionSlideTouchEnd)="slideChanged()"
+                *ngIf="subcategory_list && subcategory_list.length > 0 && parent_id == 1" [options]="slideOptsOne">
+                <ion-slide *ngFor="let slider of subcategory_list">
+                    <div class="banner-img">
+                        <img src="{{cat_banner}}"
+                            (load)="download_image($event,slider.category_banner,image_url,'category/thumbnails/200')">
+                    </div>
+                </ion-slide>
+            </ion-slides>
+        </div>
+
+        <ion-row [ngClass]="{'no-padding':true,'hide':!is_api_request}" *ngIf="parent_id == 0">
+            <ion-col size="12" class="no-padding">
+                <div class="sub_main_img" *ngIf="!banner">
+                    <img src="{{cat_banner_placeholder}}">
+                </div>
+                <div class="sub_main_img" *ngIf="banner">
+                    <img src="{{cat_banner_placeholder}}"
+                        (load)="download_image($event,banner,image_url,'category/compress')">
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <div [ngClass]="{'hide':!is_api_request}">
+            <div id="dynamic-category" class="{{fix_category_class}}">
+                <div class="scroll_category">
+                    <a [ngClass]="{'active' : all_active==1}" (click)="load_category(category_id)">All</a>
+
+                    <a *ngFor="let subcategory of subcategory_list"
+                        [ngClass]="{'scroll_category_elem':true, 'active' : subcategory.id == subcategory_id}"
+                        (click)="load_subcategory(subcategory.id, subcategory.name)">
+                        <div> {{subcategory.name}}</div>
+                    </a>
+                </div>
+
+                <!-- Start Subcategory product title -->
+                <div class="no-padding pb-2 subcategory-sction-title" *ngIf="this.parent_id == 0">
+                    <div class="featured_text 3">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <p>{{subcat_name}}&nbsp;<span style="font-size: 12px;"
+                                        *ngIf="totalRecords!='' && totalRecords!=null && totalRecords!=undefined">({{totalRecords}})</span>
+                                </p>
+                            </div>
+                            <div *ngIf="subcat_name" class="col-xs-4 text-right">
+                                <p style="position: relative;" (click)="filter_modal()">
+                                    <ion-icon name="options"></ion-icon>
+                                    <ion-badge style="right:32px;top:-8px" id="cart-badge">{{apply_filter_count}}
+                                    </ion-badge>&nbsp;&nbsp;&nbsp;Filter
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Subcategory product title -->
+            </div>
+        </div>
+    </ion-grid>
+    <!-- End Banner and titlt -->
+
+    <!-- Start category-product-section -->
+    <ion-grid class="no-padding 2 category-section"
+        *ngIf="PData.parent_id == 1 && category_product_list && category_product_list.length > 0">
+        <ion-row class="no-padding" *ngFor="let category_list of category_product_list; let c_index=index;">
+            <ion-col class="no-padding" size="12" *ngIf="category_list && category_list.products">
+                <div class="featured_text 4 row subcategory_title">
+                    <div class="col-xs-8">
+                        <p>{{category_list.name}}</p>
+                    </div>
+                    <div class="col-xs-4 text-right">
+                        <a (click)="load_subcategory(category_list.id, category_list.name)">View All</a>
+                    </div>
+                </div>
+            </ion-col>
+
+            <ion-col class="no-padding product-wrapper" size="12">
+                <div class="product-container" *ngFor="let product of category_list.products;let cp_index=index;">
+                    <div class="row {{category_list.id}}_cat_product_control_{{product.product_id}}">
+                        <div class="offer-container">
+                            <p class="__offer per-discount"
+                                *ngIf="product.offers_data.offers_type == 'discount' && product.offers_data.discount_type == 'percentage'">
+                                {{product.offers_data.discount}}% Off</p>
+                            <p class="__offer flat-discount"
+                                *ngIf="product.offers_data.offers_type == 'discount' && product.offers_data.discount_type == 'flat'">
+                                {{product.offers_data.discount}} Flat</p>
+                            <p class="__offer special-price"
+                                *ngIf="product.offers_data.offers_type == 'special_price' ">Special Price</p>
+                            <p class="__offer bogo" *ngIf="product.offers_data.offers_type == 'offer'">OFFER</p>
+                        </div>
+                        <div class="col-xs-5 p-relative"
+                            (click)="route_product_view(product.product_id, product.product_name)">
+
+                            <div class="product-image">
+                                <img *ngIf="product.gallery && product?.gallery[0]" src="{{product_placeholder}}"
+                                    (load)="download_image($event,product?.gallery[0]?.image,image_url,'product/thumbnails/250')">
+
+                                <img *ngIf="!product.gallery && product.product_image" src="{{product_placeholder}}"
+                                    (load)="download_image($event,product.product_image,image_url,'product/thumbnails/250')">
+
+                                <img *ngIf="!product.gallery && !product.product_image" src="{{product_placeholder}}">
+                            </div>
+
+
+
+                            <!-- <div class="other-icons">
+                                <span class="icon-queue food_icon" *ngIf="product?.food_type == 'veg'"><img
+                                        src="assets/image/icon/veg.png" /></span>
+                                <span class="icon-queue food_icon" *ngIf="product?.food_type == 'nonveg'"><img
+                                        src="assets/image/icon/nonveg.png" /></span>
+                                <span class="icon-queue food_icon" *ngIf="product?.product_nature == 'nonfood'"><img
+                                        src="assets/image/icon/non_eatable_icon.png" /></span>
+                                <span class="icon-queue food_icon" *ngIf="product?.product_nature == 'food'"><img
+                                        src="assets/image/icon/eatable_icon.png" /></span>
+                                <span class="icon-queue flag_icon" *ngIf="product?.flag"><img
+                                        src="{{product.flag}}"></span>
+                                <span class="icon-queue weight_icon"
+                                    *ngIf="product?.product_weight_type == 'defined'"><img
+                                        src="assets/image/icon/weight.png"></span>
+                                <span class="icon-queue express_icon" *ngIf="product?.mb_express == 'yes'"><img
+                                        src="assets/image/icon/delivery.png"></span>
+                            </div> -->
+
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="product-name"
+                                (click)="route_product_view(product.product_id, product.product_name)">
+                                <p> {{product.product_name}}</p>
+                            </div>
+
+                            <div class='product-price-wrapper'>
+                                <div class="product-price-container">
+                                    <p class="product-price">{{currency}}{{product.price_for_print}}</p>
+                                    <p class="product-price cut-price"
+                                        *ngIf="product.price_for_print != product.product_price1">
+                                        {{currency}}{{product.product_price1}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="product.price_for_print != product.product_price1" class="price_saved">
+                                <p>You Save
+                                    {{currency}} <span>{{product.product_price1 - product.price_for_print}}</span>
+                                </p>
+                            </div>
+
+                            <div class='stock-availability'>
+                                <div [style.display]="product.is_stock==1 ? 'block' : 'none' " class="stock-in">
+                                    <button>Availability: In Stock</button>
+                                </div>
+                                <div [style.display]="product.is_stock==0 ? 'block' : 'none' " class="stock-out">
+                                    <button>Availability: Out Of Stock</button>
+                                </div>
+                            </div>
+
+                            <!-- <div class="product-variant-container" *ngIf="product?.variant_data">
+                                <div class="product-variant">
+                                    <select class="product-variant-select variant_data"
+                                        (change)="load_variant(product.product_id, cp_index,  $event, category_list.id+'_cat_product_control_'+product.product_id)">
+                                        <option *ngFor="let variant of product.variant_data" value="{{variant.id}}">
+                                            {{variant.product_pec_weight}}</option>
+                                    </select>
+                                </div>
+                            </div> --vikas-->
+
+                            <div class="pro-quan-pri-container">
+                                <!-- <div class="col-xs-5">
+                                    <div class="product-price-container">
+                                        <p class="product-price">{{currency}}{{product.price_for_print}}</p>
+                                        <p class="product-price cut-price"
+                                            *ngIf="product.price_for_print != product.product_price1">
+                                            {{currency}}{{product.product_price1}}</p>
+                                    </div>
+                                </div> vikas-->
+                                <div class="product-variant-container" *ngIf="product?.variant_data">
+                                    <div class="product-variant">
+                                        <select *ngIf="product.variant_data.length <= 1"
+                                            class="product-variant-select variant_data single-variant" (change)="load_variant(product.product_id, cp_index, $event,
+                                            category_list.id+'_cat_product_control_'+product.product_id)" disabled>
+                                            <option *ngFor="let variant of product.variant_data" value="{{variant.id}}">
+                                                {{variant.product_pec_weight}}</option>
+                                        </select>
+                                        <select *ngIf="product.variant_data.length > 1"
+                                            class="product-variant-select variant_data"
+                                            (change)="load_variant(product.product_id, cp_index,  $event, category_list.id+'_cat_product_control_'+product.product_id)">
+                                            <option *ngFor="let variant of product.variant_data" value="{{variant.id}}">
+                                                {{variant.product_pec_weight}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="product-add-button">
+                                    <div class="prod-quantity-container">
+
+                                        <div [style.display]="product.in_cart_quantity && product.is_stock == 1 ? 'block' : 'none' "
+                                            class="cart-control cart-action-container text-center update_btn">
+                                            <button class="cart-action down_btn"
+                                                (click)="updateQuantity(product.product_id, 'down', category_list.id+'_cat_product_control_'+product.product_id)">&minus;</button>
+                                            <button
+                                                class="cart-quantity product_quantity_count">{{product.in_cart_quantity}}</button>
+                                            <button class="cart-action up_btn"
+                                                (click)="updateQuantity(product.product_id, 'up', category_list.id+'_cat_product_control_'+product.product_id)">&#43;</button>
+                                        </div>
+
+                                        <div [style.display]="!product.in_cart_quantity && PData.user_id && product.is_stock==1 ? 'block' : 'none' "
+                                            class="cart-control add_to_cart_btn add_btn"
+                                            (click)="addToCart(product.product_id, category_list.id+'_cat_product_control_'+product.product_id)">
+                                            <div><button><span style="width: 100%;"> ADD </span><span
+                                                        class="add">&#43;</span> </button>
+                                            </div>
+                                        </div>
+
+                                        <div [style.display]="!PData.user_id && product.is_stock==1 ? 'block' : 'none' "
+                                            class="cart-control add_to_cart_btn add_to_cart_btn_login "
+                                            (click)="routeLogin()">
+                                            <div><button><span style="width: 100%;"> ADD </span><span
+                                                        class="add">&#43;</span> </button>
+                                            </div>
+
+                                        </div>
+
+                                        <div [style.display]="product.is_stock==0 ? 'block' : 'none' "
+                                            class="cart-control add_to_cart_btn add_to_cart_btn_out_stock ">
+                                            <!-- <button>NOTIFY ME</button> -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- End category-product-section -->
+
+    <!-- **************************************************************************************** -->
+    <!-- **************************************************************************************** -->
+    <!-- **********************************Subcategory products********************************** -->
+    <!-- **************************************************************************************** -->
+    <!-- **************************************************************************************** -->
+
+    <!-- Start subcategory-product-section -->
+    <ion-grid class="no-padding 3"
+        *ngIf="is_api_request && parent_id == 0 && subcategory_product_list && subcategory_product_list.length > 0">
+        <ion-row class="no-padding">
+            <ion-col class="no-padding product-wrapper" size="12">
+                <div class="product-container" *ngFor="let product of subcategory_product_list;let s_index=index;">
+                    <div class="row subcat_control_{{product.product_id}}">
+                        <div class="offer-container">
+                            <p class="__offer per-discount"
+                                *ngIf="product.offers_data.offers_type == 'discount' && product.offers_data.discount_type == 'percentage'">
+                                {{product.offers_data.discount}}% Off</p>
+                            <p class="__offer flat-discount"
+                                *ngIf="product.offers_data.offers_type == 'discount' && product.offers_data.discount_type == 'flat'">
+                                {{product.offers_data.discount}} Flat</p>
+                            <p class="__offer special-price"
+                                *ngIf="product.offers_data.offers_type == 'special_price' ">Special Price</p>
+                            <p class="__offer bogo" *ngIf="product.offers_data.offers_type == 'offer'">OFFER</p>
+                        </div>
+                        <div class="col-xs-5 p-relative"
+                            (click)="route_product_view(product.product_id, product.product_name)">
+                            <div class="product-image">
+                                <img *ngIf="product.gallery && product?.gallery[0]" src="{{product_placeholder}}"
+                                    (load)="download_image($event,product?.gallery[0]?.image,image_url,'product/thumbnails/250')">
+
+                                <img *ngIf="!product.gallery && product.product_image" src="{{product_placeholder}}"
+                                    (load)="download_image($event,product.product_image,image_url,'product/thumbnails/250')">
+
+                                <img *ngIf="!product.gallery && !product.product_image" src="{{product_placeholder}}">
+                            </div>
+
+
+
+                            <!-- <div class="other-icons">
+                                <span class="icon-queue food_icon" *ngIf="product?.food_type == 'veg'"><img
+                                        src="assets/image/icon/veg.png" /></span>
+                                <span class="icon-queue food_icon" *ngIf="product?.food_type == 'nonveg'"><img
+                                        src="assets/image/icon/nonveg.png" /></span>
+                                <span class="icon-queue food_icon" *ngIf="product?.product_nature == 'nonfood'"><img
+                                        src="assets/image/icon/non_eatable_icon.png" /></span>
+                                <span class="icon-queue food_icon" *ngIf="product?.product_nature == 'food'"><img
+                                        src="assets/image/icon/eatable_icon.png" /></span>
+                                <span class="icon-queue flag_icon" *ngIf="product?.flag"><img
+                                        src="{{product.flag}}"></span>
+                                <span class="icon-queue weight_icon"
+                                    *ngIf="product?.product_weight_type == 'defined'"><img
+                                        src="assets/image/icon/weight.png"></span>
+                                <span class="icon-queue express_icon" *ngIf="product?.mb_express == 'yes'"><img
+                                        src="assets/image/icon/delivery.png"></span>
+                            </div> -->
+
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="product-name"
+                                (click)="route_product_view(product.product_id, product.product_name)">
+                                <p> {{product.product_name}}</p>
+                            </div>
+                            <div class="product-price-container">
+                                <p class="product-price" *ngIf="product?.price_for_print">
+                                    {{currency}}{{product.price_for_print}}</p>
+                                <p class="product-price cut-price"
+                                    *ngIf="product.price_for_print!=product.product_price1">
+                                    {{currency}}{{product.product_price1}}</p>
+                            </div>
+
+                            <div class='stock-availability'>
+                                <div [style.display]="product.is_stock==1 ? 'block' : 'none' " class="stock-in">
+                                    <button>Availability: In Stock</button>
+                                </div>
+                                <div [style.display]="product.is_stock==0 ? 'block' : 'none' " class="stock-out">
+                                    <button>Availability: Out Of Stock</button>
+                                </div>
+                            </div>
+
+                            <!-- <div class="product-variant-container" *ngIf="product?.variant_data">
+                                <div class="product-variant ">
+                                    <select class="product-variant-select variant_data"
+                                        (change)="load_variant(product.product_id, s_index, $event, 'subcat_control_'+product.product_id)">
+                                        <option *ngFor="let variant of product.variant_data" value="{{variant.id}}">
+                                            {{variant.product_pec_weight}}</option>
+                                    </select>
+                                </div>
+                            </div> --vikas-->
+
+                            <div class="pro-quan-pri-container">
+                                <!-- <div class="col-xs-5">
+                                    <div class="product-price-container">
+                                        <p class="product-price" *ngIf="product?.price_for_print">
+                                            {{currency}}{{product.price_for_print}}</p>
+                                        <p class="product-price cut-price"
+                                            *ngIf="product.price_for_print!=product.product_price1">
+                                            {{currency}}{{product.product_price1}}</p>
+                                    </div>
+                                </div> vikas-->
+                                <div class="product-variant-container" *ngIf="product?.variant_data">
+                                    <div class="product-variant ">
+                                        <select *ngIf="product.variant_data.length <= 1"
+                                            class="product-variant-select variant_data single-variant"
+                                            (change)="load_variant(product.product_id, s_index, $event, 'subcat_control_'+product.product_id)"
+                                            disabled>
+                                            <option *ngFor="let variant of product.variant_data" value="{{variant.id}}">
+                                                {{variant.product_pec_weight}}</option>
+                                        </select>
+                                        <select *ngIf="product.variant_data.length > 1"
+                                            class="product-variant-select variant_data"
+                                            (change)="load_variant(product.product_id, s_index, $event, 'subcat_control_'+product.product_id)">
+                                            <option *ngFor="let variant of product.variant_data" value="{{variant.id}}">
+                                                {{variant.product_pec_weight}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="product-add-button">
+                                    <div class="prod-quantity-container">
+
+                                        <div [style.display]="product.in_cart_quantity && product.is_stock == 1 ? 'block' : 'none' "
+                                            class="cart-control cart-action-container text-center  update_btn">
+                                            <button class="cart-action down_btn"
+                                                (click)="updateQuantity(product.product_id, 'down', 'subcat_control_'+product.product_id)">&minus;</button>
+                                            <button
+                                                class="cart-quantity product_quantity_count">{{product.in_cart_quantity}}</button>
+                                            <button class="cart-action up_btn"
+                                                (click)="updateQuantity(product.product_id, 'up', 'subcat_control_'+product.product_id)">&#43;</button>
+                                        </div>
+
+                                        <div [style.display]="!product.in_cart_quantity && PData.user_id && product.is_stock==1 ? 'block' : 'none' "
+                                            class="cart-control add_to_cart_btn  add_btn"
+                                            (click)="addToCart(product.product_id, 'subcat_control_'+product.product_id)">
+                                            <div><button><span style="width: 100%;"> ADD </span><span
+                                                        class="add">&#43;</span> </button>
+                                            </div>
+                                        </div>
+
+                                        <div [style.display]="!PData.user_id && product.is_stock==1 ? 'block' : 'none' "
+                                            class="cart-control add_to_cart_btn add_to_cart_btn_login "
+                                            (click)="routeLogin()">
+                                            <div><button><span style="width: 100%;"> ADD </span><span
+                                                        class="add">&#43;</span> </button>
+                                            </div>
+                                        </div>
+
+                                        <div [style.display]="product.is_stock==0 ? 'block' : 'none' "
+                                            class="cart-control add_to_cart_btn add_to_cart_btn_out_stock ">
+                                            <!-- <button>NOTIFY ME</button> -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+
+            <ion-col size="12" class="text-center" *ngIf="subcategory_product_list.length == 0 && is_api_request">
+                <div class="text-center" style="width: 100%">Sorry! No product found.</div>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+    <!-- End subcategory-product-section -->
+
+    <!-- Start No-product-section -->
+    <ion-grid class="no-padding 3"
+        *ngIf="is_api_request && category_product_list.length == 0 && subcategory_product_list.length == 0 && featured_product_list.length == 0">
+        <ion-row class="no-padding">
+            <ion-col size="12" class="text-center">
+                <div class="text-center" style="width: 100%">Sorry! No product found.</div><br>
+                <img style="max-height: 140px;" src="{{no_product_placeholder}}" />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- End No-product-section -->
+
+    <!-- Start Sketon-section -->
+    <ion-list class="skelton" style="padding-top:0px" id="skeleton" *ngIf="is_api_request == false">
+        <ion-item style="--border-color:transparent;--padding-start:0px;--inner-padding-end:0px;--padding-bottom:10px">
+            <ion-thumbnail animated style="width: 100%;height: 80px;margin-right:0px;" slot="start">
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-thumbnail>
+        </ion-item>
+
+        <ion-item style="--border-color:transparent;">
+            <div style="width: 100%;margin: 0 auto 5px auto;">
+                <ion-thumbnail style="width: 100%;height: 40px;" slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+            </div>
+        </ion-item>
+
+        <ion-item style="--border-color:transparent;">
+            <div style="width: 100%;margin: 5px auto;">
+                <ion-thumbnail style="width: 100%;height: 25px;" slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+            </div>
+        </ion-item>
+
+        <ion-item style="--border-color:transparent;" *ngFor="let item of [1,2,3]">
+            <div style="width: 100%;margin: auto;">
+                <ion-thumbnail style="width: 100%;height: 100px;" slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </div>
+        </ion-item>
+    </ion-list>
+    <!-- End Skelton-product-section -->
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="PData.parent_id == 0">
+        <ion-infinite-scroll-content loadingSpinner="circles" loadingText="Please wait...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>
+
+<app-footer-tabs></app-footer-tabs>

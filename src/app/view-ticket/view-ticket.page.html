@@ -1,0 +1,155 @@
+<ion-header class="mb-20">
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">View Ticket</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="PData.type == 'order'" style="padding-top:10px;">
+    <ion-row class="ticket-satus">
+        <ion-col>
+            <span class="tickets">Status :</span>
+            <span *ngIf="ServiceData?.data?.status == 1" class="card-text">Pending</span>
+            <span *ngIf="ServiceData?.data?.status == 2" class="card-text">In-Process</span>
+            <span *ngIf="ServiceData?.data?.status == 3" class="card-text">Resolved</span>
+            <span *ngIf="ServiceData?.data?.status == 4" class="card-text">Closed</span>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ticket-details">
+        <ion-col size="12" class="ticket-id">
+            <span class="ticket-id">#{{ServiceData?.data?.order_id}}</span>
+            <ion-icon name="radio-button-on"></ion-icon>
+            <span class="ticket-time">{{ServiceData?.data?.created_date.substr(11,8)}}</span>
+            <span class="ticket-date">{{ServiceData?.data?.created_date.substr(0,10)}}</span>
+        </ion-col>
+        <ion-col class="ticket-desc" size="12">
+            <span class="card-text">{{ServiceData?.data?.description}}</span>
+        </ion-col>
+        <ion-col class="ticket-reply" size="12">
+            <!-- <span class="ticket-reply-title">Reply</span> -->
+            <!-- <span class="card-text">Static</span> -->
+        </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+        <ion-col>
+            <span class="tickets">Issue Type:</span>
+            <span *ngIf="ServiceData?.data?.ticket_type == 1" class="card-text">Order Issue</span>
+            <span *ngIf="ServiceData?.data?.ticket_type == 2" class="card-text">Store Issue</span>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <span class="tickets">Order Issue Type:</span>
+            <span *ngIf="ServiceData?.data?.issue_type == 1" class="card-text">Product Issue</span>
+            <span *ngIf="ServiceData?.data?.issue_type == 2" class="card-text">Delivery Boy</span>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <span class="tickets">Product :</span> <span class="card-text">{{ServiceData?.data?.name}}</span>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <span class="tickets">Subject :</span> <span class="card-text">{{ServiceData?.data.subject }}</span>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <span class="tickets">Description :</span> <span class="card-text">{{ServiceData?.data?.description}}</span>
+        </ion-col>
+    </ion-row> --vikas-->
+    <!-- <ion-row>
+        <ion-col>
+            <span class="tickets">Status :</span>
+            <span *ngIf="ServiceData?.data?.status == 1" class="card-text">Pending</span>
+            <span *ngIf="ServiceData?.data?.status == 2" class="card-text">In-Process</span>
+            <span *ngIf="ServiceData?.data?.status == 3" class="card-text">Resolved</span>
+            <span *ngIf="ServiceData?.data?.status == 4" class="card-text">Closed</span>
+        </ion-col>
+    </ion-row> --vikas-->
+    <!-- <ion-row>
+        <ion-col>
+            <span class="tickets">Created On :</span> <span class="card-text">{{ServiceData?.data?.created_date}}</span>
+        </ion-col>
+    </ion-row>
+    <div *ngIf="lngth">
+        <hr class="hr"><span class="thread">Ticket Thread</span> <br>
+        <ion-row *ngFor="let thread of ServiceData?.data?.log ;let im = index">
+            <ion-col [size]="4">
+                <span class="tickets"> Sr No. :</span> <span class="card-text">{{im+1}}</span> vikas-->
+    <!-- <span class="tickets" *ngIf="im > '0'"> </span> <span class="card-text">{{im+1}}</span>-->
+    <!-- </ion-col>
+            <ion-col [size]="8">
+                <span class="tickets"> Description :</span> <span class="card-text"> {{thread.description}}</span>
+            </ion-col>
+        </ion-row> 
+
+    </div>
+    <br>
+    <div (click)="Back()" class="center">
+        <button class="btn">Back</button>
+    </div>-->
+
+</ion-content>
+<ion-content *ngIf="PData.type == 'store'" style="--padding-top: 10px;">
+    <ion-row class="ticket-satus">
+        <ion-col>
+            <span class="tickets">Status :</span>
+            <span *ngIf="ServiceData?.data?.status == 1" class="card-text">Pending</span>
+            <span *ngIf="ServiceData?.data?.status == 2" class="card-text">In-Process</span>
+            <span *ngIf="ServiceData?.data?.status == 3" class="card-text">Resolved</span>
+            <span *ngIf="ServiceData?.data?.status == 4" class="card-text">Closed</span>
+        </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+        <ion-col>
+            <span class="tickets">Store :</span>
+            <span style="font-size:14px" class="card-text">{{ServiceData?.data?.store_name}}</span>
+        </ion-col>
+    </ion-row> -->
+    <ion-row class="ticket-details">
+        <ion-col size="12" class="ticket-id">
+            <span class="ticket-id">#{{ServiceData?.data?.order_id}}</span>
+            <ion-icon name="radio-button-on"></ion-icon>
+            <span class="ticket-time">{{ServiceData?.data?.created_date.substr(11,8)}}</span>
+            <span class="ticket-date">{{ServiceData?.data?.created_date.substr(0,10)}}</span>
+        </ion-col>
+        <ion-col class="ticket-desc" size="12">
+            <span class="card-text">{{ServiceData?.data?.description}}</span>
+        </ion-col>
+        <ion-col class="ticket-reply" size="12">
+            <!-- <span class="ticket-reply-title">Reply</span> -->
+            <!-- <span class="card-text">Static</span> -->
+        </ion-col>
+    </ion-row>
+
+
+    <!-- <ion-row>
+        <ion-col>
+            <span class="tickets">Created On :</span> <span class="card-text">{{ServiceData?.data?.created_date}}</span>
+        </ion-col>
+    </ion-row> -->
+    <!-- <ion-row>
+        <ion-col>
+            <span class="tickets">Description :</span> <span class="card-text">{{ServiceData?.data?.description}}</span>
+        </ion-col>
+    </ion-row> -->
+    <!-- <ion-row>
+        <ion-col>
+            <span class="tickets">Status :</span>
+            <span *ngIf="ServiceData?.data?.status == 1" class="card-text">Pending</span>
+            <span *ngIf="ServiceData?.data?.status == 2" class="card-text">In-Process</span>
+            <span *ngIf="ServiceData?.data?.status == 3" class="card-text">Resolved</span>
+            <span *ngIf="ServiceData?.data?.status == 4" class="card-text">Closed</span>
+        </ion-col>
+    </ion-row> --vikas-->
+    <!-- <br>
+
+
+    <div (click)="Back2()" class="center">
+        <button class="btn">Back</button>
+    </div> -->
+
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

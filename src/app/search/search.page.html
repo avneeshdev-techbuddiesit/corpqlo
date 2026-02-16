@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Search</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-padding">
+    <div class="col-xs-12">
+        <div class="search-conteiner">
+            <ion-searchbar placeholder="Search - min 3 characters" no-padding id="click_voice" type="text"
+                autocomplete="off" name="search_data" [(ngModel)]="PData.search_data" animated="1"
+                [ngModelOptions]="{standalone: true}" (ionChange)="getItems($event)" (keyup)="searchItems($event)">
+            </ion-searchbar>
+            <!-- <div class="search-icon">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+            <input class='search-bar' placeholder="Search - min 3 characters" no-padding id="click_voice" type="text"
+                autocomplete="off" name="search_data" [(ngModel)]="PData.search_data" animated="1"
+                [ngModelOptions]="{standalone: true}" (ionChange)="getItems($event)" (keyup)="searchItems($event)" /> -->
+
+            <div class="voice">
+                <i (click)="voice()" class="fa fa-microphone" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div *ngIf="p_list">
+            <ion-item *ngFor='let abdc of product_list' (click)="route_product_view(abdc.product_id,abdc.product_name)">
+                <ion-avatar slot="start">
+                    <img src="{{image_url}}/product/thumbnails/100/{{abdc.product_image}}">
+                </ion-avatar>
+                <ion-label>{{abdc.product_name}}</ion-label>
+            </ion-item>
+        </div>
+
+        <div *ngIf="p_list && product_list && product_list.length == 0">
+            <p style="text-align: center;">No product found.</p>
+        </div>
+
+        <div *ngIf="!p_list">
+            <ion-item *ngFor='let tag of my_search_tag'>
+                <ion-label (click)="route_search_detail(tag)">{{tag}}</ion-label>
+            </ion-item>
+        </div>
+
+    </div>
+
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

@@ -1,0 +1,346 @@
+<ion-app>
+    <ion-menu contentId="main-content" (ionDidClose)="menuClosed()">
+        <ion-content class="menuContent">
+            <ul class="side_nav bgImage navbar-fixed">
+                <ion-menu-toggle>
+                    <li class="ps-sticky ion-activatable ripple-parent">
+                        <!-- <span class="mb_logo"><img src="assets/image/Home.png"></span> -->
+                        <a *ngIf="user_id_login"><span>{{user_pic}}</span><span>{{user_login_name}}</span></a>
+                        <a *ngIf="!user_id_login"><span>G</span><span>Hello, Guest</span></a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+                </ion-menu-toggle>
+            </ul>
+            <ul class="side_nav bgImage other-menu">
+                <ion-menu-toggle>
+                    <li class="ion-activatable ripple-parent" *ngIf="!user_id_login">
+                        <a routerLink="/sign-in">
+                            <!-- <img src="assets/image/icon/home.png" alt="" /> -->
+                            <ion-icon name="log-in"></ion-icon>
+                            <span>Sign In</span>
+                            <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+                </ion-menu-toggle>
+
+                <li *ngIf="user_id_login">
+                    <div class="ion-activatable ripple-parent">
+                        <a (click)="menuItemHandler('account')">
+                            <!-- <img src="assets/image/icon/side_menu.png" alt="" /> -->
+                            <ion-icon name="person"></ion-icon>
+                            <span>My Account</span>
+                            <span class="arow"><i style="font-size: 14px;"
+                                    [ngClass]="{'fa':true, 'fa-plus':showSubmenuMyAccount==false, 'fa-minus':showSubmenuMyAccount==true}"
+                                    aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </div>
+                    <ion-menu-toggle>
+                        <ul [ngClass]="{'submenu side_nav':true, 'hide':showSubmenuMyAccount==false}">
+                            <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/order-list">
+                                    <!-- <img src="assets/image/icon/orders.png" alt="" /> -->
+                                    <ion-icon name="briefcase"></ion-icon>
+                                    <span>My Orders</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/my-account">
+                                    <!-- <img src="assets/image/icon/side_menu.png" alt="" /> -->
+                                    <ion-icon name="person"></ion-icon>
+                                    <span>My Profile</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/my-wishlist">
+                                    <!-- <img src="assets/image/icon/wishlist.png" alt="" /> -->
+                                    <ion-icon name="heart"></ion-icon>
+                                    <span>My Favorite</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/cart">
+                                    <!-- <img src="assets/image/icon/cart.png" alt="" /> -->
+                                    <ion-icon name="cart"></ion-icon>
+                                    <span>My Cart</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <!-- <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/wallet">
+                                    <ion-icon name="wallet"></ion-icon>
+                                    <span>My Wallet</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li> -->
+
+                            <!-- <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/loyalty-point">
+                                    <ion-icon name="cash"></ion-icon>
+                                    <span>Loyalty Points</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li> -->
+
+                            <!-- <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/refer-freind">
+                                    <ion-icon name="share-alt"></ion-icon>
+                                    <span>Refer A Friend</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li> -->
+
+                            <li class="ion-activatable ripple-parent">
+                                <!-- <a *ngIf="user_id_login" (click)=" offer(1)"> -->
+                                <a *ngIf="user_id_login" (click)=" myOffer()">
+
+                                    <!-- <img src="assets/image/icon/offers2.png" alt="" /> -->
+                                    <ion-icon name="pricetag"></ion-icon>
+                                    <span>My Offers</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/my-tickets">
+                                    <!-- <img src="assets/image/icon/ticket.png" alt="" /> -->
+                                    <ion-icon name="logo-closed-captioning"></ion-icon>
+                                    <span>My Tickets</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/select-ordertype">
+                                    <!-- <img src="assets/image/icon/change-address.png" alt="" /> -->
+                                    <ion-icon name="create"></ion-icon>
+                                    <span>Change Address/Preference</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/shopping-preferenes">
+                                    <!-- <img src="assets/image/icon/shopping-prefrence.png" alt="" /> -->
+                                    <ion-icon name="stats"></ion-icon>
+                                    <span>Shopping Preferences</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+                        </ul>
+                    </ion-menu-toggle>
+                </li>
+                <ion-menu-toggle>
+                    <li class="ion-activatable ripple-parent">
+                        <a routerLink="/category">
+                            <!-- <img src="assets/image/icon/category.png" alt="" /> -->
+                            <ion-icon name="apps"></ion-icon>
+                            <span>Shop By Category</span>
+                            <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+                </ion-menu-toggle>
+
+                <li>
+                    <!-- <div class="ion-activatable ripple-parent">
+                        <a (click)="menuItemHandler('mb_product')">
+                            <ion-icon name="appstore"></ion-icon>
+                            <span>FNG Products</span>
+                            <span class="arow"><i style="font-size: 14px;"
+                                    [ngClass]="{'fa':true, 'fa-plus':showSubmenuMbProduct==false, 'fa-minus':showSubmenuMbProduct==true}"
+                                    aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+
+                    </div> -->
+                    <ion-menu-toggle>
+                        <ul [ngClass]="{'submenu side_nav':true, 'hide':showSubmenuMbProduct==false}">
+                            <!-- <li class="ion-activatable ripple-parent" (click)="category_page()">
+                                <a>
+                                    <ion-icon name="cube"></ion-icon>
+                                    <span>FNG Brands</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li> -->
+
+                            <li class="ion-activatable ripple-parent">
+                                <a (click)="mb_express()">
+                                    <!-- <img src="assets/image/icon/express.png" alt="" /> -->
+                                    <ion-icon name="airplane"></ion-icon>
+                                    <span>FNG-Express</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent">
+                                <a routerLink="/combo-listing">
+                                    <!-- <img src="assets/image/icon/combo.png" alt="" /> -->
+                                    <ion-icon name="pricetags"></ion-icon>
+                                    <span>Combo</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+                        </ul>
+                    </ion-menu-toggle>
+                </li>
+                <ion-menu-toggle>
+                    <li class="ion-activatable ripple-parent">
+                        <!-- <a (click)="offer(0)"> -->
+                        <a (click)="myOffer()">
+                            <!-- <img src="assets/image/icon/offers.png" alt="" /> -->
+                            <ion-icon name="gift"></ion-icon>
+                            <span>All Offers</span>
+                            <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+                </ion-menu-toggle>
+                <li>
+                    <div class="ion-activatable ripple-parent">
+                        <a (click)="menuItemHandler('contact')">
+                            <!-- <img src="assets/image/icon/contact.png" alt="" /> -->
+                            <ion-icon name="help-circle"></ion-icon>
+                            <span>Customer Service</span>
+                            <span class="arow"><i style="font-size: 14px;"
+                                    [ngClass]="{'fa':true, 'fa-plus':showSubmenuContact==false, 'fa-minus':showSubmenuContact==true}"
+                                    aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </div>
+                    <ion-menu-toggle>
+                        <ul [ngClass]="{'submenu side_nav':true, 'hide':showSubmenuContact==false}">
+                            <li class="ion-activatable ripple-parent">
+                                <a routerLink="/contact-us">
+                                    <!-- <img src="assets/image/icon/contact.png" alt="" /> -->
+                                    <ion-icon name="information"></ion-icon>
+                                    <span>Contact Support</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+                            <li class="ion-activatable ripple-parent">
+                                <a routerLink="/terms-condition">
+                                    <!-- <img src="assets/image/icon/terms-condition.png" alt="" /> -->
+                                    <ion-icon name="information"></ion-icon>
+                                    <span>Terms & Conditions</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent">
+                                <a routerLink="/privacy-policy">
+                                    <!-- <img src="assets/image/icon/privacy-policy.png" alt="" /> -->
+                                    <ion-icon name="logo-polymer"></ion-icon>
+                                    <span>Privacy Policy</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                                <a routerLink="/my-tickets">
+                                    <!-- <img src="assets/image/icon/ticket.png" alt="" /> -->
+                                    <ion-icon name="magnet"></ion-icon>
+                                    <span>My Tickets</span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+
+                            <li class="ion-activatable ripple-parent">
+                                <a routerLink="/refund-return">
+                                    <!-- <img src="assets/image/icon/refund.png" alt="" /> -->
+                                    <ion-icon name="link"></ion-icon>
+                                    <span>Refund & Return Policy </span>
+                                    <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                                </a>
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </li>
+                        </ul>
+                    </ion-menu-toggle>
+                </li>
+
+                <ion-menu-toggle>
+                    <li class="ion-activatable ripple-parent">
+                        <a routerLink="/about-us">
+                            <!-- <img src="assets/image/icon/about-us.png" alt="" /> -->
+                            <ion-icon name="happy"></ion-icon>
+                            <span>About Us</span>
+                            <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+
+                    <li class="ion-activatable ripple-parent">
+                        <a routerLink="/store-location">
+                            <!-- <img src="assets/image/icon/store-location.png" alt="" /> -->
+                            <ion-icon name="pin"></ion-icon>
+                            <span>Store Location</span>
+                            <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+
+                    <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                        <a routerLink="/notifications">
+                            <!-- <img src="assets/image/icon/notification.png" alt="" /> -->
+                            <ion-icon name="notifications"></ion-icon>
+                            <span>Notifications </span>
+                            <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+
+                    <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                        <a (click)="goto_logout()">
+                            <!-- <img src="assets/image/icon/signout.png" alt="" /> -->
+                            <ion-icon name="log-out"></ion-icon>
+                            <span>Sign Out</span>
+                            <span class="arow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+                    <li class="ion-activatable ripple-parent" *ngIf="!user_id_login">
+                        <a class="business-acc">
+                            <span>Login to business Account</span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+                    <li class="ion-activatable ripple-parent" *ngIf="user_id_login">
+                        <a class="business-acc">
+                            <span>Switch to business Account</span>
+                        </a>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </li>
+                </ion-menu-toggle>
+            </ul>
+        </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet main id="main-content"></ion-router-outlet>
+
+</ion-app>

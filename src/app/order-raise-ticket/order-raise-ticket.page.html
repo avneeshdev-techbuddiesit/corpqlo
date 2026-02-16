@@ -1,0 +1,113 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Raise Ticket</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="DiliveryData?.data?.is_ticket_generated == 0">
+    <ion-grid no-padding>
+        <ion-row no-padding>
+            <ion-col size="12">
+                <div class="query mt-30  ticket-title">
+                    <ion-text>Please Fill The Below Details To create The Ticket</ion-text>
+                </div>
+            </ion-col>
+            <ion-col size="12">
+                <div class="form">
+                    <ion-item>
+                        <ion-select placeholder="Select Order Issue Type" [(ngModel)]="PData.ProductIssue"
+                            (ionChange)="changeFirst()" [ngModelOptions]="{standalone: true}">
+                            <ion-select-option value="1">Product Issue</ion-select-option>
+                            <!-- <ion-select-option *ngIf="DiliveryData?.data?.is_delivery_boy == 'yes'" value="1" >Product Issue</ion-select-option>-->
+                            <ion-select-option *ngIf="DiliveryData?.data?.is_delivery_boy == 'yes'" value="2">Delivery
+                                Boy Issue</ion-select-option>
+
+                        </ion-select>
+                    </ion-item>
+                    <label class="error">{{ErrorProductIssue}}</label>
+                    <ion-item *ngIf="PData.ProductIssue == 1">
+                        <!-- [selectedText]="PData.selected_data" -->
+                        <ion-select placeholder="Select Product" [(ngModel)]="PData.selected_data"
+                            [ngModelOptions]="{standalone: true}">
+
+                            <ion-select-option *ngFor="let iss of ServiceData?.data" value="{{iss.id}}">
+                                {{iss.product_name}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item *ngIf="PData.ProductIssue == 2">
+                        <ion-select-option value="">Select Delivery Boy</ion-select-option>
+                        <ion-select placeholder="Select Issue" [(ngModel)]="PData.selected_data"
+                            [ngModelOptions]="{standalone: true}">
+                            <ion-select-option value="{{ServiceData?.delivery_boy_data?.first_name?.id}}">
+                                {{ServiceData?.delivery_boy_data?.first_name}}
+                                {{ServiceData?.delivery_boy_data?.last_name}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+
+                    <label *ngIf="PData.ProductIssue" class="error">{{ErrorProductboth}}</label>
+
+                    <ion-item>
+                        <!-- <ion-label position="floating">Subject</ion-label> -->
+                        <ion-input [(ngModel)]="PData.subject" (ionChange)="change()"
+                            [ngModelOptions]="{standalone: true}" required type="text" placeholder="Subject">
+                        </ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorSubject}}</label>
+                    <ion-item>
+                        <!-- <ion-label position="floating">Description</ion-label> -->
+                        <ion-textarea [(ngModel)]="PData.description" (ionChange)="change()"
+                            [ngModelOptions]="{standalone: true}" required type="text" placeholder="Description">
+                        </ion-textarea>
+                    </ion-item>
+                    <label class="error">{{ErrorDescription}}</label>
+                    <ion-item>
+                        <!-- <ion-input type="file"   accept="image/jpeg,image/gif,image/png,application/pdf,.pdf,.doc,.docx,application/msword" ([ngModel])="PData.image" ></ion-input>-->
+                        <input type="file" name="myFile" id="uploaded_path_24">
+                    </ion-item>
+                </div>
+
+            </ion-col>
+        </ion-row>
+        <div class="sign_btn mt-20  center">
+            <button (click)="Submit()" class="submit_btn">Submit</button>
+            <button (click)="Cancel()" class="cancel_btn">Cancel</button>
+        </div>
+        <div class="background-image">
+            <!-- <img src="../../assets/image/0018.png" alt=""> -->
+        </div>
+
+    </ion-grid>
+</ion-content>
+<ion-content *ngIf="DiliveryData?.data?.is_ticket_generated == 1">
+    <ion-grid no-padding>
+        <ion-row no-padding>
+            <ion-col size="12">
+                <div class="query mt-30">
+                    <!--<ion-text>My Ticket</ion-text>-->
+                </div>
+            </ion-col>
+            <ion-col size="12">
+                <p (click)="ViewOrder(PData.ticket_id)">Ticket Is Already created Against This Order Id..(<span
+                        class="ticketid">#ODCQ{{PData.ticket_id}}</span>)</p>
+                <div class="form">
+                    <ion-item>
+                        <ion-label position="floating">Description</ion-label>
+                        <ion-input [(ngModel)]="PData.description" (ionChange)="change()"
+                            [ngModelOptions]="{standalone: true}" required (ionChange)="change()" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorDescription}}</label>
+                </div>
+
+            </ion-col>
+        </ion-row>
+        <div class="sign_btn mt-20  center">
+            <button (click)="ThreadSubmit()">Submit</button>
+            <button (click)="Cancel()">Cancel</button>
+        </div>
+
+    </ion-grid>
+</ion-content>
+
+<app-footer-tabs></app-footer-tabs>

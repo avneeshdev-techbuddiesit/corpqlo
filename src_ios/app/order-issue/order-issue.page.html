@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home' routerLink='/{{router_nav}}'></ion-back-button>
+        <ion-title color="light">Order Issue</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row class="padcreate" (click)="aaddticket()">
+        <ion-col size="6" class="left order">
+        </ion-col>
+        <ion-col size="6" class="right" style="padding-right:16px;">
+            <!-- <img src="assets/image/add_ticket.png"> -->
+            Create Ticket
+        </ion-col>
+    </ion-row>
+
+    <ion-card style="box-shadow: none;" class="mt-0">
+        <ion-card-content no-padding style="padding: 20px 5px;">
+            <ion-row *ngFor="let ordr of ServiceData?.data" (click)="ViewOrder(ordr.id)" class="order_issues">
+                <ion-col size="9">
+                    <span class="tickets">Ticket ID :</span> <span class="card-text">#ODMB{{ordr.id}}</span><br>
+                    <span class="tickets"> Subject :</span> <span class="card-text">{{ordr.subject}}</span><br>
+                    <span class="tickets"> Created On :</span> <span class="card-text">{{ordr.created_date}}</span>
+                </ion-col>
+                <ion-col size="3">
+                    <div class="button_status">
+                        <button *ngIf="ordr.status == 1">Pending</button>
+                        <button *ngIf="ordr.status == 2">In-Process</button>
+                        <button *ngIf="ordr.status == 3">Resolved</button>
+                        <button *ngIf="ordr.status == 4">Closed</button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

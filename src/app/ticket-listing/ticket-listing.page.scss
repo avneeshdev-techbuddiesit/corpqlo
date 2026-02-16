@@ -1,0 +1,103 @@
+ion-content{
+    position: relative;
+    top: -1px;
+    z-index: 10;
+}
+.inline{
+    width:50%;
+    display:inline-block;
+}
+.nav-tabs{
+    background: #fff200;
+}
+.nav-tabs > li{
+    width: 50%;
+    display: inline-block;
+    border:none;
+    outline:none;
+}
+.nav-tabs > li > a{
+    width: 100%;
+    display: inline-block;
+    text-align:center;
+    margin:0px;
+    transition:none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.nav-tabs > li:focus{
+    outline:none;
+    border:none;
+}
+.nav-tabs > li.active{
+    border-bottom: 3px solid #ddd200;
+}
+.nav-tabs > li.active > a{
+    background: transparent;
+    border: none;
+    color:#e01423;
+}
+.tab-content{
+    padding:10px;
+}
+.store > .add > a{
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: 600;
+    box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.26);
+}
+.store > .add > a > span{
+    display: inline-block;
+    width: 13px;
+    margin-right: 6px;
+}
+.issue_div{
+    margin: 15px 0px;
+    box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.26);
+    padding: 20px 10px;
+    border-radius: 10px;
+}
+.ticketid > .status > p{
+    width: max-content;
+    margin: 0 0 0 auto !important;
+    display: inline-block;
+    /* border: 1px solid #ccc; */
+    padding: 5px 15px;
+    background: #f8cb00;
+    color: #fff;
+    border-radius: 5px;
+}
+.ticketid > .status > p.pending{
+    background: #f8cb00;
+}
+.ticketid > .status > p.recieved{
+    background: #27aa12;
+}
+.ticketid > .text > p.pending{
+    width: max-content;
+    margin: 0 0 0 auto !important;
+    display: inline-block;
+    /* border: 1px solid #ccc; */
+    padding: 5px 15px;
+    background: #f8cb00;
+    color: #fff;
+    border-radius: 5px;
+}
+.ticketid > .text > ion-text{
+    font-size: 15px;
+}
+.ticketid > .text > ion-text > span{
+    font-weight:500;
+}
+.subject > ion-text{
+    font-weight:500;
+}
+.subject > ion-text > span{
+    color:#ed3035;
+}
+.day > ion-text > span{
+    font-weight: 500;
+}

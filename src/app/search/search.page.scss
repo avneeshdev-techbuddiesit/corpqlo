@@ -1,0 +1,31 @@
+.voice {
+  //   text-align: center;
+  //   padding-top: 11px;
+  font-size: 16px;
+  //   position: absolute;
+  //   right: 5px;
+  //   z-index: 9999999;
+  //   top: 7px;
+  //   padding: 10px 15px;
+}
+.search-conteiner {
+  margin: 5px 0;
+}
+
+input#click_voice {
+  border: none;
+  width: 100%;
+  padding: 10px;
+}
+
+.search-conteiner {
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 0 10px;
+}
+
+.search-icon {
+  font-size: 16px;
+  color: #4d4d4d;
+}

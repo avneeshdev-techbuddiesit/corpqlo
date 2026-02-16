@@ -1,0 +1,223 @@
+ion-title{
+    font-weight: 500;
+    font-size: 18px;
+    color: #1f1f1f;
+    text-align: center;
+}
+.no-padding{
+    padding:0px;
+}
+.featured_div{
+    min-width: 70%;
+    display: inline-block;
+    border: 1px solid rgba(204, 204, 204, 0.52);
+    margin: 0px 5px 0px 5px;
+    border-radius: 10px;
+    padding-bottom:5px;
+    box-shadow: 0px 2px 6px 1px #ccc;
+    padding-top: 8px;
+}
+.featured_img_container{
+    padding: 0px 8px 0px 8px;
+    text-align: center;
+}
+.featured_img_container > img{
+    /* min-width: 70px; */
+    max-width: 162px;
+    min-height: 70px;
+    max-height: 70px;
+    /* margin: 35px; */
+    margin-bottom: 0px;
+    width: auto;
+    margin: 0 auto;
+}
+.featured_main{
+    margin-top: 5px;
+}
+.subcategory_price > .price_cont{
+    width: 50%;
+    display: inline-block;
+    padding: 0px 2px;
+    text-align: right;
+}
+.subcategory_price > .price_cont > p{
+    font-size: 12px;
+    color: #e11f21;
+    font-weight: 600;
+}
+.subcategory_price > .actual_price_cont{
+    width: 50%;
+    display: inline-block;
+    padding: 0px 2px;
+    text-align: right;
+}
+.subcategory_price > .actual_price_cont > p{
+    font-size: 12px;
+    text-align: left;
+    color: #a09e9e;
+    text-decoration: line-through;
+}
+.add_to_cart_btn{
+    padding: 10px 8px;
+    text-align: center;
+}
+.add_to_cart_btn > button{
+    width: 85%;
+    border: none;
+    background: linear-gradient(to right, #e32121, #ff673d);
+    padding: 12px;
+    color: #fff;
+    font-weight: 300;
+    border-radius: 50px;
+    box-shadow: 0px 4px 9px 1px rgba(0, 0, 0, 0.48);
+}
+ion-item{
+    text-align: center;
+}
+// .subcategory_price{
+//     width: 60%;
+//     display: inline-block;
+// }
+.select_variant{
+    width: 40%;
+    display: inline-block;
+}
+@media screen and (max-width: 810px){
+    .featured_div{
+        min-width: 32%;
+        max-width: 33%;
+        display: inline-block;
+        margin: 0px 5px 10px 5px;
+    }
+}
+@media screen and (max-width: 768px){
+    .featured_div{
+        min-width: 31.5%;
+        max-width: 31.5%;
+        display: inline-block;
+        margin: 0px 5px 10px 5px;
+    }
+}
+@media screen and (max-width: 500px){
+    .featured_div{
+        min-width: 47.5%;
+        max-width: 47.5%;
+        display: inline-block;
+        margin: 0px 5px 10px 5px;
+        position: relative;
+    }
+    .subcategory_price > .price_cont > p{
+        font-size: 11px;
+    }
+    .subcategory_price > .actual_price_cont > p{
+        font-size: 11px;
+        
+    }
+    
+} 
+@media screen and (max-width: 410px){
+    .featured_div{
+        min-width: 47%;
+        max-width: 47%;
+        display: inline-block;
+        margin: 0px 5px 10px 5px;
+    }
+    .subcategory_price > .price_cont > p{
+        font-size: 11px;
+    }
+    .subcategory_price > .actual_price_cont > p{
+        font-size: 11px;
+        
+    }
+    
+} 
+@media screen and (max-width: 375px){
+    .featured_div{
+        min-width: 47%;
+        max-width: 47%;
+        display: inline-block;
+        margin: 0px 5px 10px 5px;
+        
+    }
+    .subcategory_price > .price_cont{
+        width: 56%;
+    }
+    .subcategory_price > .actual_price_cont{
+        width: 42%;
+    }
+    .subcategory_price > .actual_price_cont > p {
+        font-size: 9px;
+    }
+    
+} 
+
+@media screen and (max-width: 345px){
+    .featured_div{
+        min-width: 95%;
+        max-width: 95%;
+        display: inline-block;
+        margin: 10px auto;
+        
+    }
+    .featured_main{
+        text-align:center;
+    }
+    .subcategory_price > .price_cont > p{
+        font-size: 12px;
+    }
+    .subcategory_price > .price_cont > p > span{
+        font-size: 14px;
+    }
+    .subcategory_price > .actual_price_cont > p{
+        font-size: 13px;
+        
+    }
+    
+} 
+.basket_limit{
+    font-size: 12px;
+    margin: 5px 0px 5px 0px;
+    text-align: center;
+}
+
+
+
+
+
+.banner_coninr{
+    width: 100%;
+    padding: 17px 10px 0px 10px;
+}
+.banner_off{
+    border: solid 1px red;
+    color: red;
+    width: 65px;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 14px;
+    background-color: #ea6f6f17;    
+}
+.banner_fvr{
+    width: 50%;
+    display: inline-block;
+    text-align: right
+}
+.banner_dis_off{
+    text-align: left;
+    width: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.banner_dis_fvr{
+    text-align: right;
+    width: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 14px;
+    right: 10px;
+}
+.banner_fvr>i{
+    font-size: 20px;
+}

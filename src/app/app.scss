@@ -1,0 +1,21 @@
+.mb_logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+}
+.navbar-fixed li.ps-sticky {
+  background-color: #ff9d3b;
+}
+.navbar-fixed a {
+  padding: 8px 0 !important;
+  color: #fff;
+  border: none;
+}
+.other-menu {
+  margin-top: 80px;
+}

@@ -1,0 +1,38 @@
+
+a:hover, a:focus{
+    text-decoration: none;
+}
+
+ion-grid{
+    padding: 0px 40px 0px 40px;
+}
+.signup_line{
+    text-transform: capitalize;
+    text-align: left;
+    margin-top: 34px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #464444;
+}
+.form > ion-item:last-child > ion-label::after{
+    content:"";
+}
+.form > ion-item > ion-label::after{
+    content:" ";
+    color:white;
+  }
+.sign_btn{
+    padding: 10px;
+    text-align: center;
+}
+
+.error {
+    color: #e7401b;
+    font-weight: 500;
+}
+
+.call{
+    color: #fff;
+}
+

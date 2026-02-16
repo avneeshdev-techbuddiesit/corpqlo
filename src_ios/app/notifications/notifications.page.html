@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Notifications</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="ServiceData?.status == 0">
+        <div style="text-align: center;margin-top: 10%;">Notifications Not Available</div>
+    </div>
+    <div *ngIf="ServiceData?.status == 1">
+        <ion-grid *ngIf="ServiceData?.data.length>0">
+            <ion-row *ngFor="let noti of ServiceData?.data">
+                <ion-col size="12">
+                    <div class="notification_div pb-10 mb-10" [ngClass]="{'read' : noti?.order_status == '0'}">
+                        <div class="order_main pt-10 pb-10">
+                            <div class="order_no inline" *ngIf="noti?.order_status">
+                                <ion-text>Order Number (<span>{{noti?.order_number}}</span>)</ion-text>
+                            </div>
+                            <div class="track_btn inline text-right" [ngClass]="{'r_01' : noti?.order_status == null}">
+                                <!-- <button>track order</button> -->
+                                <!-- <button> {{noti?.date}} </button> -->
+                                <div class="date">
+                                    {{noti?.date}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order_text">
+                            {{noti?.message}}<br>
+                        </div>
+
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+</ion-content>

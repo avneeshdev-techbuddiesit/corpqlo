@@ -1,0 +1,221 @@
+<ion-header class="header_background">
+    <ion-toolbar>
+
+        <ion-back-button slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Recipe Details</ion-title>
+
+        <button id="search-btn" ion-button slot="end" routerLink="/search">
+            <ion-img [src]="'assets/image/icon/search_icon.png'"></ion-img>
+        </button>
+
+        <button id="cart-btn" ion-button slot="end" routerLink="/cart">
+            <ion-img [src]="'assets/image/icon/cart_icon.png'"></ion-img>
+            <ion-badge id="cart-badge">{{CartNotification?.count}}</ion-badge>
+        </button>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row no-padding>
+            <ion-col size="12" no-padding>
+                <div class="recipe_details_main" *ngIf="recipe_data">
+                    <img *ngIf="rec_img" src="{{image_url}}//recipe/banner_recipe/{{recipe_data.recipe_image}}"
+                        alt="blog_details" />
+
+                    <div class="recipe_details_text">
+                        <span>{{recipe_data.recipe_title}}</span>
+                        <div class="posted">
+                            <div class="posted_date">
+                                {{recipe_data.created_at}}
+                            </div>
+                            <div class="posted_team">
+                                Posted By : MB Team
+                            </div>
+                        </div>
+                        <div class="line_bottom"></div>
+                        <div class="cooking_time">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <span>Cooking Time : {{recipe_data.cooking_time}} Min</span>
+                        </div>
+                        <div class="method">
+                            <span>Description</span>
+                        </div>
+                        <div class="sheet_details">
+                            {{recipe_data.description}}
+                        </div>
+                        <div class="method">
+                            <span>Preparation Method</span>
+                        </div>
+                        <div class="sheet_details">
+                            {{recipe_data.prepration_method}}
+                        </div>
+                    </div>
+
+                    <div class="ingredients">
+                        <span>How To Cook</span>
+                    </div>
+                    <div class="sheet_details cookin_details">
+                        {{recipe_data.how_to_cook}}
+                    </div>
+
+
+                    <div class="ingredients">
+                        <span>Ingredients</span>
+                    </div>
+
+
+                    <div class="potatoes" *ngIf="rec_pr">
+                        <div class="potatoes_larg" *ngFor="let rrp1 of rec_pr">
+                            <p> {{rrp1.product_name}}</p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="add_ingredients">
+                        <span>Add Recipe Ingredients</span>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col size="12" size-sm="12" style="margin-top: 16px;" *ngIf="rec_pr">
+                <ion-slides pager="true" [options]="slideOptsTwo" #slideWithNav2>
+
+                    <ion-slide *ngFor="let fpl of recipe_data.recipe_product">
+
+                        <div class="featured_main recipe_main mb-10">
+                            <div class="featured_div new_fea_div">
+                                <div class="featured_img_container"
+                                    (click)="route_sub_category_view(fpl.product_id, fpl.product_name);">
+                                    <img *ngIf="fpl.product_image" src="{{featureImageUrl}}{{fpl.product_image}}">
+                                    <img *ngIf="!fpl.product_image" src="assets/image/mb.png">
+                                </div>
+                                <ion-item style="--border-color: #fff;"
+                                    (click)="route_sub_category_view(fpl.product_id, fpl.product_name);">
+                                    <ion-label style="width: 160px;">
+                                        {{fpl.product_name}}
+                                    </ion-label>
+                                </ion-item>
+                                <div class="subcategory_price"
+                                    (click)="route_sub_category_view(fpl.product_id, fpl.product_name);">
+                                    <div class="price_cont" *ngIf="fpl.price_for_print != fpl.product_price1">
+                                        <p class="price fa fa-inr">
+                                            <span id="price_fills_{{fpl.product_id}}">{{fpl.price_for_print}}</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="actual_price_cont" *ngIf="fpl.price_for_print != fpl.product_price1">
+                                        <p class="actual_price">
+                                            <span id="price_fills_2{{fpl.product_id}}"> {{fpl.product_price1}}</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="price_cont" *ngIf="fpl.price_for_print == fpl.product_price1">
+                                        <p class="price fa fa-inr">
+                                            <span id="price_fills_{{fpl.product_id}}">{{fpl.product_price1}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="select_variant">
+                                    <select class="select_val" id="varient_id_4_{{fpl.product_id}}"
+                                        (change)="route_variant4(fpl.product_id)">
+                                        <option *ngFor="let abcd12 of fpl.varient_data let i = index"
+                                            value="{{abcd12.id}}">
+                                            {{abcd12.product_pec_weight}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div *ngIf="fpl.in_cart_quantity && fpl.is_in_stock=='yes'  && PData.user_id"
+                                    class="prod_quantity text-center after_2{{fpl?.product_id}}" id="">
+
+
+                                    <button (click)="dec2(fpl?.product_id,'4')">&minus;</button>
+                                    <button class="count_2{{fpl?.product_id}}">{{fpl.in_cart_quantity}}</button>
+                                    <button (click)="inc2(fpl?.product_id,'4')">&#43;</button>
+                                </div>
+                                <div *ngIf="!fpl.in_cart_quantity && fpl.is_in_stock=='yes'  && PData.user_id"
+                                    class="prod_quantity text-center after_2{{fpl?.product_id}}" style="display: none;"
+                                    id="">
+
+                                    <button (click)="dec2(fpl?.product_id,'4')">&minus;</button>
+                                    <button class="count_2{{fpl?.product_id}}">{{fpl.in_cart_quantity}}</button>
+                                    <button (click)="inc2(fpl?.product_id,'4')">&#43;</button>
+                                </div>
+                                <div *ngIf="!fpl.in_cart_quantity  && PData.user_id && fpl.is_in_stock=='yes'"
+                                    class="add_to_cart_btn new_2{{fpl?.product_id}}" id=""
+                                    (click)="add_to_cart2(fpl?.product_id,'4')">
+                                    <button><img src="assets/image/cart_icon.png">
+                                        <!--Add To Cart--></button>
+                                </div>
+
+                                <div *ngIf="fpl.in_cart_quantity  && PData.user_id && fpl.is_in_stock=='yes'"
+                                    style="display: none;" class="add_to_cart_btn new_2{{fpl?.product_id}}" id=""
+                                    (click)="add_to_cart2(fpl?.product_id,'4')">
+                                    <button><img src="assets/image/cart_icon.png">
+                                        <!--Add To Cart--></button>
+                                </div>
+
+                                <div *ngIf="!PData.user_id && fpl.is_in_stock=='yes'" class="add_to_cart_btn"
+                                    (click)="add_to_cart2_for_login()">
+                                    <button><img src="assets/image/cart_icon.png">
+                                        <!--Add To Cart--></button>
+                                </div>
+
+                                <div *ngIf="fpl.is_in_stock=='no'" class="add_to_cart_btn">
+                                    <button style="background: rgba(225, 27, 34, 0.61); color: #fff;"><img
+                                            src="assets/image/cart_icon_disabled.png"></button>
+                                </div>
+
+                                <div class="delivery_time">
+                                    <span *ngIf="fpl?.flag?.country_flag"><img
+                                            src={{flagUrl}}{{fpl?.flag?.country_flag}}></span>
+                                    <span *ngIf="!fpl?.flag?.country_flag"><img src="assets/image/mb.png"></span>
+                                    <span *ngIf="fpl?.product_weight_type == 'actual'"><img
+                                            src="assets/image/weight.png"></span>
+                                    <span *ngIf="fpl?.mb_express == 'yes'"><img src="assets/image/delivery.png"></span>
+                                </div>
+
+                                <div class="abs_discount " *ngIf="fpl.offers_data">
+                                    <p
+                                        *ngIf="fpl.offers_data.offers_type=='discount' && fpl.offers_data.discount_type=='percentage'">
+                                        {{fpl.offers_data.discount}} %</p>
+
+                                    <p
+                                        *ngIf="fpl.offers_data.offers_type=='discount' && fpl.offers_data.discount_type=='flat'">
+                                        {{fpl.offers_data.discount}}Flat</p>
+
+                                    <p *ngIf="fpl.offers_data.offers_type=='special_price' ">
+                                        Special Price</p>
+
+                                    <ion-img style="width:45px;" class="discount_offer"
+                                        *ngIf="fpl.offers_data.offers_type=='offer'"
+                                        [src]="'assets/image/icon/offer.png'">
+                                    </ion-img>
+
+                                </div>
+                                <div class="abs_heart" (click)="add_whislist(fpl?.product_id, fpl?.is_in_wishlist,4);">
+
+                                    <ion-icon *ngIf="fpl?.is_in_wishlist == '0'" name="heart-empty"></ion-icon>
+                                    <span *ngIf="fpl?.is_in_wishlist == '1'" class="heart"><i aria-hidden="true"
+                                            class="fa fa-heart"></i>
+                                    </span>
+
+                                </div>
+                                <div *ngIf="fpl.product_nature !='food' " class="eatable"><img
+                                        src="assets/image/non_eatable_icon.png" title="icon"></div>
+                                <div *ngIf="fpl.product_nature=='food'" class="eatable"><img
+                                        src="assets/image/eatables_icon.png" title="icon"></div>
+                                <div *ngIf="fpl.food_type == 'veg'" class="veg"><img src="assets/image/veg.png"
+                                        title="veg"></div>
+                                <div *ngIf="fpl.food_type == 'nonveg'" class="veg"><img src="assets/image/non-veg.png"
+                                        title="nonveg"></div>
+                            </div>
+
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

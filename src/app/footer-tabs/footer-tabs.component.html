@@ -1,0 +1,36 @@
+<ion-tabs selectedIndex="0" class="footer-tabs">
+    <ion-tab-bar [ngClass]="{'footer-tab tab-color': true}" slot="bottom">
+
+        <ion-tab-button (click)="route('/home')" class="">
+            <!-- <ion-img style="height: 37px;outline: none;" [src]="'assets/image/icon/mb.png'"></ion-img> -->
+            <ion-icon name="home"></ion-icon>
+            <ion-label>Home</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="route('/search')" class="">
+            <!-- <ion-icon md="md-search"></ion-icon> -->
+            <ion-img style="height:20px" [src]="'assets/image/icon/search_icon.png'"></ion-img>
+            <ion-label>Search</ion-label>
+        </ion-tab-button>
+        
+        <ion-tab-button (click)="route('/cart')" class="relative">
+            <div style="position: relative;">
+                <!-- <ion-img style="height:20px" [src]="'assets/image/icon/cart_icon.png'"></ion-img> -->
+                <ion-icon class="cart-icon footer-cart-icon" name="cart"></ion-icon>
+                <ion-badge id="cart-badge">{{cart_count}}</ion-badge>
+                <ion-label>Cart</ion-label>
+            </div>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="route_user()" class="">
+            <ion-icon name="contact"></ion-icon>
+            <ion-label>{{is_login}}</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="route('/category')" class="">
+            <ion-img style="height:20px" [src]="'assets/image/icon/cat_bar.png'"></ion-img>
+            
+            <ion-label>Category</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

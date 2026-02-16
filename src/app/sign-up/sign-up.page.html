@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Create Account</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-padding">
+    <ion-grid class="no-padding">
+        <ion-row>
+
+            <!-- <ion-col size="12">
+                <div class="head">
+                    <ion-text>Sign Up</ion-text>
+                </div>
+                <div class="signup_line1">
+                    <ion-text>Enter your details to create new account</ion-text>
+                </div>
+            </ion-col> --Vikas---->
+            <ion-col size="12">
+                <div class="form">
+                    <ion-item>
+                        <!-- <ion-label position="floating">First Name</ion-label> --Vikas---->
+                        <ion-input (ionChange)="ChangeName()" [(ngModel)]="PData.first_name"
+                            [ngModelOptions]="{standalone: true}" placeholder="First Name*" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorName}}</label>
+                    <ion-item>
+                        <!-- <ion-label position="floating">Last Name</ion-label> --Vikas---->
+                        <ion-input (ionChange)="ChangeName2()" [(ngModel)]="PData.last_name"
+                            [ngModelOptions]="{standalone: true}" placeholder="Last Name*" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorLName}}</label>
+                    <ion-item>
+                        <!-- <ion-label position="floating">Email Address</ion-label> --Vikas---->
+                        <ion-input (ionChange)="ChangeEmail()" [(ngModel)]="PData.user_email"
+                            [ngModelOptions]="{standalone: true}" type="email" placeholder="Email Address*" required>
+                        </ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorEmail}}</label>
+                    <ion-item>
+                        <!-- <ion-label position="floating">Mobile Number</ion-label> --Vikas---->
+                        <ion-input type="text" (ionChange)="ChangeMobile()" [(ngModel)]="PData.user_mobile"
+                            [ngModelOptions]="{standalone: true}" placeholder="Mobile Number*" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorMobile}}</label>
+                    <ion-item>
+                        <!-- <ion-label position="floating">Password</ion-label> --Vikas---->
+                        <ion-input type="password" (ionChange)="ChangePassword()" [(ngModel)]="PData.password"
+                            [ngModelOptions]="{standalone: true}" placeholder="Password*" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorPassword}}</label>
+
+                    <ion-item>
+                        <!-- <ion-label position="floating">Confirm Password</ion-label> --Vikas---->
+                        <ion-input type="password" (ionChange)="ChangeCPassword()" [(ngModel)]="PData.cpassword"
+                            [ngModelOptions]="{standalone: true}" placeholder="Confirm Password*" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorCPassword}}</label>
+
+                    <!-- <ion-item>
+                        <ion-label position="floating">Referral code</ion-label>
+                        <ion-input [(ngModel)]="PData.referral_code"></ion-input>
+                    </ion-item> -->
+
+                </div>
+                <div class="check">
+                    <div class="agreement">
+                        <ion-text>By clicking Create Account, you acknowledge you have read and
+                            agreed to our <span><a routerLink="/privacy-policy">Privacy
+                                    Policy</a></span> and <span><a routerLink="/terms-condition">Terms &
+                                    Conditions.</a></span>
+                        </ion-text>
+                    </div>
+                </div>
+                <div class="sign_btn mt-20">
+                    <button type="submit" (click)="Submit()">Sign Up</button>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <!-- <img src="../../assets/image/0015.png" alt=""> -->
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

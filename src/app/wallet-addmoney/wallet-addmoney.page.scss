@@ -1,0 +1,66 @@
+.payment{
+    font-size: 16px;
+    font-weight: 400 !important;
+    color: #1f1f1f !important;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+.paypal{
+    width:100px;
+}
+.paytm{
+    width:100px;
+}
+.btncustom{
+    height: auto !important;
+    margin-bottom: 10px;    
+    width: 100%;
+}
+.addmoney{
+    width: 95%;
+    border-radius: 5px;
+    --background: #6aa510;
+    font-weight: 400;
+}
+.error{
+    color: red;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 8px;
+}
+.title{
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+ion-item{
+    --ion-color-primary: #000;
+}
+.pay_button_color_default
+{
+    background-color: #ccc;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+}
+.pay_button_color
+{
+    background-color: green;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+}
+
+ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    margin: 0 18px;
+}
+
+ion-footer{
+    margin-bottom: 70px;
+}

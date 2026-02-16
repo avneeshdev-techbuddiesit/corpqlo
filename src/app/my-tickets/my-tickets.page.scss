@@ -1,0 +1,132 @@
+.mar-top {
+  margin-top: 24px !important;
+}
+.mar-bottom {
+  margin-top: 30px !important;
+}
+.bg_banner {
+  // background-image: url('../../assets/image/offer/wallet_bg_img.jpg');
+  border-radius: 15px;
+  background-size: 100% 100%;
+  width: 85%;
+  margin: 0 auto;
+  max-width: 330px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-shadow: 0px 15px 24px -4px rgba(0, 0, 0, 0.18);
+}
+.banner_inbtn {
+  width: 28px;
+  height: 24px;
+  padding: 3px 0px 0px 0px;
+  /* background-color: #fb5677; */
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.content_banner {
+  font-weight: 600;
+  margin: 0 auto;
+  padding: 35px 30px;
+}
+.content_banner p:nth-child(1) {
+  font-size: 12px;
+  color: #000;
+  text-transform: uppercase;
+}
+.content_banner a {
+  font-size: 12px;
+  display: block;
+  color: #000;
+  text-decoration: underline;
+}
+.content_banner span {
+  text-transform: capitalize;
+  font-size: 18px;
+}
+.vertical_align {
+  height: calc(92vh - 50px);
+  display: flex;
+  // align-items: center; vikas
+}
+
+// ================================================================
+
+ion-content {
+  --background: #ccc;
+}
+
+.bg_banner.mar-top {
+  background-color: #fff;
+  border-radius: 5px;
+  width: 90%;
+  max-width: none;
+}
+
+.bg_banner.mar-bottom {
+  background-color: #fff;
+  border-radius: 5px;
+  width: 90%;
+  max-width: none;
+}
+
+.content_banner {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+}
+
+.wallet_inline.text-center > a {
+  font-weight: 100;
+  text-decoration: none !important;
+  color: #0984e3 !important;
+  display: block !important;
+  padding: 4px;
+  border-top: 1px solid #ccc;
+}
+
+.wallet_inline.text-center div {
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  align-items: center;
+}
+
+.wallet_inline.text-center div a {
+  border: none !important;
+  background-color: #ff9d3b;
+  color: #000 !important;
+  border-radius: 20px;
+  padding: 5px 10px 4px;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+.wallet_inline.text-center div p {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+.wallet_inline.text-center ion-icon {
+  color: #ff9d3b;
+  font-size: 35px;
+}
+
+.wallet_inline.text-center div p span {
+  text-transform: none !important;
+  font-size: 14px !important;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.sc-ion-searchbar-md-h {
+  width: 90%;
+  margin: 30px auto;
+}
+
+// ================================================================

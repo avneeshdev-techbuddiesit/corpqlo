@@ -1,0 +1,46 @@
+.inline{
+    display:inline-block;
+}
+.category_div{
+    text-align: center;
+    padding: 20px 0px 10px 0px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.2);
+    position:relative;
+}
+.category_div > img{
+    margin: 0 auto;
+    width: auto;
+    min-height: 62px;
+    max-height: 62px;
+}
+.category_div > p{
+    margin-bottom: 0px !important;
+    margin-top: 10px !important;
+    font-weight: 500;
+    font-size: 14px;
+    height: 38px;
+}
+.category_div.added > .abs_check{
+    position: absolute;
+    display:block;
+    top: 0;
+    right: 0;
+    width: 25px;
+}
+.category_div > .abs_check{
+    display:none;
+}
+.update > button{
+    border: none;
+    background: linear-gradient(to right, #e32320, #e8461a);
+    padding: 13px 62px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    color: #fff;
+    text-transform: capitalize;
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.39);
+    font-size: 16px;
+
+}

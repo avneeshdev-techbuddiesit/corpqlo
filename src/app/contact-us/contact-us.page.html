@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">Contact Support</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col size="12">
+                <div class="signup_line">
+                    <!-- <ion-text>Want to drop us a message? Anytime.</ion-text> -->
+                    <ion-text>Need to get in touch with the team? Anytime.</ion-text>
+                </div>
+            </ion-col>
+            <ion-col size="12">
+                <div class="form">
+                    <ion-item>
+                        <ion-label position="floating">First Name</ion-label>
+                        <ion-input (ionChange)="ChangeName()" [(ngModel)]="PData.first_name"
+                            [ngModelOptions]="{standalone: true}" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorName}}</label>
+                    <ion-item>
+                        <ion-label position="floating">Last Name</ion-label>
+                        <ion-input (ionChange)="ChangeName2()" [(ngModel)]="PData.last_name"
+                            [ngModelOptions]="{standalone: true}" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorLName}}</label>
+                    <ion-item>
+                        <ion-label position="floating">Mobile Number</ion-label>
+                        <ion-input type="number" (ionChange)="ChangeMobile()" [(ngModel)]="PData.mobile_number"
+                            [ngModelOptions]="{standalone: true}" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorMobile}}</label>
+                    <ion-item>
+                        <ion-label position="floating">Email Address</ion-label>
+                        <ion-input (ionChange)="ChangeEmail()" [(ngModel)]="PData.email"
+                            [ngModelOptions]="{standalone: true}" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorEmail}}</label>
+                    <ion-item style="--padding-end: 0; margin-bottom: 22.55px;">
+                        <ion-label position="floating">Select Store</ion-label>
+                        <ion-select okText="Okay" cancelText="Dismiss" [(ngModel)]="PData.listStore"
+                            style="--padding-bottom: 15px;">
+                            <ion-select-option *ngFor="let ls of ServiceData3?.stores" value="{{ls.store_id}}">
+                                <!--{{ls.store_name}}--> {{ls.store_address}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Message</ion-label>
+                        <ion-input (ionChange)="ChangeMSg()" [(ngModel)]="PData.message"
+                            [ngModelOptions]="{standalone: true}" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorMsg}}</label>
+                </div>
+                <div class="sign_btn mt-20">
+                    <ion-button class="theme-btn" expand="block" (click)="Submit()">Send</ion-button>
+                </div>
+                <div class="sign_btn">
+                    <ion-button class="theme-btn" expand="block"><a class="call"
+                            href="tel:{{ServiceData3?.stores[0].store_contact}}">Call
+                            Customer Care</a></ion-button>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-footer-tabs></app-footer-tabs>

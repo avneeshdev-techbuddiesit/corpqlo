@@ -1,0 +1,104 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">{{type}} Address</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col size="12" no-padding>
+                <div class="add_text mt-20">
+                    <ion-text>Add address</ion-text>
+                </div>
+                <div class="form">
+                    <ion-item>
+                        <ion-label position="floating">Full Name</ion-label>
+                        <ion-input [(ngModel)]="PData.first_name" pattern="/^[a-zA-Z\s]*$/" (keypress)="keyPressAlbet($event)" [ngModelOptions]="{standalone: true}"
+                            required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorName}}</label>
+                    <ion-item>
+                        <ion-label position="floating">Primary Mobile No.</ion-label>
+                        <ion-input type="tel" pattern="[0-9]{6}"
+                            [(ngModel)]="PData.login_mobile" [ngModelOptions]="{standalone: true}" readonly="true">
+                        </ion-input>
+                    </ion-item>
+                    
+                    <ion-item>
+                        <ion-label position="floating">Mobile No.</ion-label>
+                        <ion-input type="tel" pattern="[0-9]{6}" (ionChange)="ChangeMobile()"
+                            [(ngModel)]="PData.mobile_number" [ngModelOptions]="{standalone: true}" required>
+                        </ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorMobile}}</label> 
+                    
+                    <div (click)="get_my_location()"><img src="assets/image/currentlocation.png" width="10%" >Get My Current Location</div>
+                    
+                    <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="UpdateGooglePlace()" value={{userLocation}}
+                        placeholder="Enter Your Location" ></ion-searchbar> 
+                    <ion-list [hidden]="autocompleteItems.length == 0">
+                        <ion-item class="place-list" *ngFor="let item of autocompleteItems" tappable (click)="SelectGooglePlace(item)">
+                            {{ item.description }}
+                        </ion-item>
+                    </ion-list>
+                    <div class="iframe_div">
+                        <iframe width="100%" id="namedd"
+                            src="https://maps.google.com/maps?q='+PData.coards+'&hl=en&z=14&amp;output=embed"
+                            frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+                    <label class="error">{{Errorlocate}}</label>
+
+                    <ion-item>
+
+                        <ion-label position="floating">Flat/HouseNo./Floor/Building</ion-label>
+                        <ion-input [(ngModel)]="PData.Flat" [ngModelOptions]="{standalone: true}" required></ion-input>
+                    </ion-item>
+
+                    <label class="error">{{ErrorFlat}}</label>
+                    <ion-item>
+                        <ion-label position="floating">Colony/Street/Locality</ion-label>
+                        <ion-input [(ngModel)]="PData.colony" [ngModelOptions]="{standalone: true}" required>
+                        </ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorColony}}</label>
+                    <ion-item>
+                        <ion-label position="floating">Landmark</ion-label>
+                        <ion-input [(ngModel)]="PData.land_mark" [ngModelOptions]="{standalone: true}" required>
+                        </ion-input>
+                    </ion-item>
+                    <label class="error">{{Errorlandmark}}</label>
+                    <ion-item>
+                        <ion-label position="floating">Pincode</ion-label>
+                        <ion-input type="tel" pattern="[0-9]{6}" maxlength="6" [(ngModel)]="PData.pincode"
+                            [ngModelOptions]="{standalone: true}" required></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorPincode}}</label>
+
+                    <ion-item class="dropdown">
+                        <ion-select placeholder="State" [(ngModel)]="PData.state_id"
+                            [ngModelOptions]="{standalone: true}" required>
+                            <ion-select-option *ngFor="let stl of stattelist" value="{{stl.id}}">{{stl.name}}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <label class="error">{{ErrorState}}</label>
+
+                    <ion-item class="dropdown">
+                        <ion-input [(ngModel)]="PData.city" [ngModelOptions]="{standalone: true}" required
+                            placeholder="City"></ion-input>
+                    </ion-item>
+                    <label class="error">{{ErrorCity}}</label>
+
+                    <div class="sign_btn mt-20 mb-10" *ngIf="type=='Edit'">
+                        <ion-button class="theme-btn" expand="block" (click)="edit_address();">Save</ion-button>
+                    </div>
+                    <div class="sign_btn mt-20 mb-10" *ngIf="type=='Add'">
+                        <ion-button class="theme-btn" expand="block" (click)="add_address();">Save</ion-button>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

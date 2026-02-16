@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title color="light">Offer Listing</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <div class="error" *ngIf="!subcat_name"> {{ErrorMsg}} </div>
+        <ion-radio-group>
+            <ion-item *ngFor="let ls of Listing"
+                (click)="change(ls?.cat_name, ls?.category_id, ls?.subcat_name, ls?.parent_id)">
+                <ion-label>{{ls?.subcat_name}}</ion-label>
+                <ion-radio value={{ls?.subcat_name}}></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+    </ion-list>
+</ion-content>
+<ion-footer no-border>
+    <div class="buttons" style="text-align: center;">
+        <ion-button color="light" shaper="round" (click)="close()">Close</ion-button>
+        <ion-button color="primary" shaper="round" (click)="submit()">Submit</ion-button>
+    </div>
+</ion-footer>

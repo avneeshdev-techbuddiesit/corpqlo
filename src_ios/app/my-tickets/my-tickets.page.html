@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button color="light" slot="start" mode="md" defaultHref='home'></ion-back-button>
+        <ion-title color="light">My Tickets</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="">
+    <div class="vertical_align">
+        <div style="width:100%;">
+            <div class="bg_banner mar-top" (click)="orderissue()">
+                <div class="content_banner">
+                    <div class="wallet_inline text-center">
+                        <span>Order Issue</span>
+                        <a>My Tickets</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg_banner mar-bottom" routerLink="/store-issue">
+                <div class="content_banner">
+                    <div class="wallet_inline text-center">
+                        <span>Store Issue</span>
+                        <a>My Tickets</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

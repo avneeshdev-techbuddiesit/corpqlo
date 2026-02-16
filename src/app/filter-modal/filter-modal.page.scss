@@ -1,0 +1,35 @@
+.no-bg {
+    --ion-background-color: transparent;
+}
+.filter-button
+{
+    text-transform: unset;
+    --padding-start: 40px;
+    --padding-end: 40px;
+    font-weight: 400;
+    width: 45%;
+}
+.filter-button-back
+{
+    width: 45%;
+    text-transform: unset;
+}
+.filter-key-container
+{
+    background-color: #eee;
+    // height: 77vh;
+    height: 100%;
+    position: fixed;
+    width: calc( 100% / 3);
+    overflow-y: auto;
+}
+
+.filter-key-container .filter-key-content
+{
+    padding: 10px;
+}
+.filter-key-container .filter-key-content.active
+{
+    background-color: white;
+
+}
